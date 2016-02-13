@@ -3,23 +3,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode t)
  '(current-language-environment "UTF-8")
  '(custom-enabled-themes (quote (wombat)))
+ '(default-input-method "japanese")
  '(display-time-24hr-format t)
  '(display-time-mode t)
  '(menu-bar-mode nil)
+ '(org-startup-truncated nil)
  '(tool-bar-mode nil))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; load-path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-
 ;; disable menu bar and tool bar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -33,7 +28,7 @@
 ;; no sounds
 (setq visible-bell nil)
 
-;; display time in modeline
+;; display time in mode line
 (display-time-mode 1)
 
 ;; no startup message
@@ -55,6 +50,9 @@
 ;; y/n instead of yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; show maching parens
+(show-paren-mode 1)
+
 ;; modes
 
 ;; web-mode
@@ -75,8 +73,18 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook  'my-web-mode-hook-indentation)
+;; auto-pairing
+(setq web-mode-enable-auto-pairing t)
+;; CSS colorization
+(setq web-mode-enable-css-colorization t)
+;; fix for auto tag closing on GNU+Linux
+(setq web-mode-enable-auto-closing t)
 
-;; repos
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+;; daemon specific code
+(when (daemonp)
+  ;; load my erc autoconnect function
+  (load-file "~/.emacs.d/lisp/myerc.el")
+  (my-erc)
+  ;; change the name of the frame
+  (setq frame-title-format "Emacs (server)")
+  )
