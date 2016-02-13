@@ -1,0 +1,7 @@
+DoMiNeLa10's .emacs
+
+This is a modified version of my .emacs file. I removed some system specific things that might not work on other systems.
+
+I inluded a template of my function to auto-connect to irc and auto identify with NickServ.
+
+web-mode.el is not included
