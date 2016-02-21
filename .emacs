@@ -25,6 +25,10 @@
 ;; blinking cursor
 (blink-cursor-mode 1)
 
+;; use C-h like readlne
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+
 ;; no sounds
 (setq visible-bell nil)
 
