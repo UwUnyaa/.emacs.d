@@ -93,9 +93,10 @@
 (require 'impatient-mode)
 ;; a function to launch impatient-mode quicker
 (defun my-impatient-mode()
-  "A function that automatically enables impatient-mode along with httpd server."
+  "A function that automatically enables impatient-mode along with httpd server if it isn't running."
   (interactive)
-  (httpd-start)
+  (when (not (process-status "httpd"))
+  (httpd-start))
   (impatient-mode))
 (defalias 'im 'my-impatient-mode)	;alias for my function
 
