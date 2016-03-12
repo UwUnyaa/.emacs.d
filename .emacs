@@ -81,8 +81,6 @@
 (setq web-mode-enable-auto-pairing t)
 ;; CSS colorization
 (setq web-mode-enable-css-colorization t)
-;; fix for auto tag closing on GNU+Linux
-(setq web-mode-enable-auto-closing t)
 
 ;; impatient-mode
 ;; dependencies
@@ -96,15 +94,17 @@
   "A function that automatically enables impatient-mode along with httpd server if it isn't running."
   (interactive)
   (when (not (process-status "httpd"))
-  (httpd-start))
+    (httpd-start))
   (impatient-mode))
 (defalias 'im 'my-impatient-mode)	;alias for my function
 
 ;; daemon specific code
 (when (daemonp)
-  ;; load my erc autoconnect function
+  ;; load my erc autoconnect function (commented out)
   (load-file "~/.emacs.d/config/myerc.el")
   (my-erc)
   ;; change the name of the frame
   (setq frame-title-format "Emacs (server)")
-  )
+  ;; fix for auto tag closing
+  (setq web-mode-enable-auto-closing t))
+
