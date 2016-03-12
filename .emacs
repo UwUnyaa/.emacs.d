@@ -101,8 +101,8 @@
 ;; daemon specific code
 (when (daemonp)
   ;; load my erc autoconnect function (commented out)
-  (load-file "~/.emacs.d/config/myerc.el")
-  (my-erc)
+  ;(load-file "~/.emacs.d/config/myerc.el")
+  ;(my-erc)
   ;; change the name of the frame
   (setq frame-title-format "Emacs (server)")
   ;; fix for auto tag closing
