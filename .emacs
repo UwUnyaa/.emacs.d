@@ -3,21 +3,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(current-language-environment "UTF-8")
+ '(current-language-environment "UTF-8") ;UTF-8
  '(custom-enabled-themes (quote (wombat)))
  '(default-input-method "japanese")
- '(display-time-24hr-format t)
- '(display-time-mode t)
- '(menu-bar-mode nil)
- '(org-startup-truncated nil)
- '(show-paren-mode t)
+ '(display-time-24hr-format t)		;display time in 24 hour format
+ '(display-time-mode t)			;display time on modeline
+ '(menu-bar-mode nil)			;no menu bar
+ '(show-paren-mode t)			;highlight matching parens
  '(tool-bar-mode nil))
 
 ;; load-path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-;; disable menu bar and tool bar
-(menu-bar-mode -1)
-(tool-bar-mode -1)
 
 ;; no scroll-bar
 (scroll-bar-mode 0)
@@ -32,17 +28,11 @@
 ;; no sounds
 (setq visible-bell nil)
 
-;; display time in mode line
-(display-time-mode 1)
-
 ;; no startup message
 (setq inhibit-startup-message t)
-(setq initial-scratch-message "") ;; empty scratch buffer
+(setq initial-scratch-message "") ;empty scratch buffer
 
-;; don't show line numbers on buffers
-(global-linum-mode -1)
-
-;; frame title
+;; frame title if not started as a daemon
 (setq frame-title-format "Emacs")
 
 ;; autosave every 60 seconds
@@ -54,11 +44,7 @@
 ;; y/n instead of yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; show maching parens
-(show-paren-mode 1)
-
-;; modes
-
+;;; modes
 ;; web-mode
 (require 'web-mode)
 ;; select mode on filetype
@@ -70,7 +56,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;; indentation
+;; indentation (2 spaces per level)
 (defun my-web-mode-hook-indentation ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
@@ -81,12 +67,14 @@
 (setq web-mode-enable-auto-pairing t)
 ;; CSS colorization
 (setq web-mode-enable-css-colorization t)
+;; highlight matching HTML elements
+(setq web-mode-enable-current-element-highlight t)
 
 ;; impatient-mode
 ;; dependencies
 (require 'simple-httpd)
 (require 'htmlize)
-;; impatient-mode and its separate path
+;; impatient-mode and its separate path (because it has a lot of files in it)
 (add-to-list 'load-path "~/.emacs.d/lisp/impatient-mode/")
 (require 'impatient-mode)
 ;; a function to launch impatient-mode quicker
@@ -96,15 +84,26 @@
   (when (not (process-status "httpd"))
     (httpd-start))
   (impatient-mode))
-(defalias 'im 'my-impatient-mode)	;alias for my function
+(defalias 'im 'my-impatient-mode)	;M-x im 
 
 ;; daemon specific code
 (when (daemonp)
   ;; load my erc autoconnect function (commented out)
-  ;(load-file "~/.emacs.d/config/myerc.el")
-  ;(my-erc)
+  ;;(load-file "~/.emacs.d/config/myerc.el")
+  ;; start erc automatically
+  ;;(my-erc)
+  
   ;; change the name of the frame
   (setq frame-title-format "Emacs (server)")
-  ;; fix for auto tag closing
-  (setq web-mode-enable-auto-closing t))
 
+  ;; fix broken web-mode variables (will break emacsclient -t with pasting from clipboard)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-enable-auto-indentation t)
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-opening t)
+  (setq web-mode-enable-auto-quoting t))
+
+;; disable warnings
+(put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
