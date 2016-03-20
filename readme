@@ -1,10 +1,10 @@
 DoMiNeLa10's .emacs
 
-This is a modified version of my .emacs file. I removed some system specific things that might not work on other systems. It is supposed to allow to get a setup very similar to mine after installing.
+This is a modified version of my .emacs file. I removed some system specific things that might not work on other systems (like fonts). It is supposed to allow to get a setup very similar to mine after installing.
 
-I inluded a template of my function to auto-connect to irc and auto identify with NickServ. It launches automatically when Emacs is started as a daemon.
+I inluded a template of my function to auto-connect to irc and auto identify with NickServ.
 
-I included the extensions that I use so you don't have to use them.
+I included the extensions that I use so you don't have to download them yourself.
 Here are links to them:
 https://github.com/skeeto/impatient-mode
 https://github.com/skeeto/emacs-web-server
