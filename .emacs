@@ -24,6 +24,8 @@
 ;; use C-h like readlne
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "C-?") 'help-command) ;new binding for help prefix
+(global-set-key (kbd "M-?") 'mark-paragraph)
 
 ;; no sounds
 (setq visible-bell nil)
