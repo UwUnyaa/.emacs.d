@@ -7,6 +7,7 @@
  '(custom-enabled-themes (quote (wombat)))
  '(default-input-method "japanese")
  '(nxml-slash-auto-complete-flag t)
+ '(read-quoted-char-radix 16)
  '(display-time-24hr-format t)		;display time in 24 hour format
  '(display-time-mode t)			;display time on modeline
  '(menu-bar-mode nil)			;no menu bar
