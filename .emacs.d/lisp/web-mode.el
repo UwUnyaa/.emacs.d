@@ -1159,12 +1159,12 @@ Must be used in conjunction with web-mode-enable-block-face."
 
 (defvar web-mode-file-extensions
   (list
-   '("\.png$" 0 nil)
-   '("\.jpe?g$" 0 nil)
-   '("\.gif$" 0 nil)
-   '("\.svg$" 1 nil)
-   '("\.js$" 2 t)
-   '("\.css$" 3 t))
+   '("\\.png$" 0 nil)
+   '("\\.jpe?g$" 0 nil)
+   '("\\.gif$" 0 nil)
+   '("\\.svg$" 1 nil)
+   '("\\.js$" 2 t)
+   '("\\.css$" 3 t))
   "List of regexps matching filetypes in `web-mode-file-link'. Second value of each list should be the index of list containing matching tags in `web-mode-file-elements', and the third one should be t if the link is supposed to be in head or nil.")
 
 (defvar web-mode-file-elements
@@ -2196,6 +2196,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     (define-key map (kbd "C-c C-s")   'web-mode-snippet-insert)
     ;;C-c C-t : tag
     (define-key map (kbd "C-c C-w")   'web-mode-whitespaces-show)
+    (define-key map (kbd "C-c <C-return>") 'web-mode-break-lines)
 
     map)
   "Keymap for `web-mode'.")
@@ -11931,6 +11932,21 @@ Prompt user if TAG-NAME isn't provided."
            (move-to-column point-column))))
      (when (not matched)		;return an error if filetype is unknown
        (error "Unknown file type")))))
+
+(defun web-mode-break-lines ()
+  "Insert a \"<br/>\" tag where point is or on every line in region if it's active."
+  (interactive)
+  (if (use-region-p)
+      (progn
+	(let ((pos (point))
+	      (end-line (line-number-at-pos (region-end))))
+	(goto-char (region-beginning))
+	(while (<= (line-number-at-pos) end-line)
+	  (end-of-line)
+	  (insert "<br/>")
+	  (forward-line))
+	(goto-char pos)))
+      (insert "<br/>")))
 
 (defun web-mode-reload ()
   "Reload web-mode."
