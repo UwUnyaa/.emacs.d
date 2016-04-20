@@ -11928,7 +11928,7 @@ Prompt user if TAG-NAME isn't provided."
          (when (nth 2 type)
            (forward-line)
            (indent-for-tab-command)
-           (forward-line (+ point-line 1))
+           (forward-line (+ (- point-line (line-number-at-pos)) 1))
            (move-to-column point-column))))
      (when (not matched)		;return an error if filetype is unknown
        (error "Unknown file type")))))
@@ -11937,15 +11937,16 @@ Prompt user if TAG-NAME isn't provided."
   "Insert a \"<br/>\" tag where point is or on every line in region if it's active."
   (interactive)
   (if (use-region-p)
-      (progn
-	(let ((pos (point))
+	(let ((point-line (line-number-at-pos))
+              (point-column (current-column))
 	      (end-line (line-number-at-pos (region-end))))
 	(goto-char (region-beginning))
 	(while (<= (line-number-at-pos) end-line)
 	  (end-of-line)
 	  (insert "<br/>")
 	  (forward-line))
-	(goto-char pos)))
+	(forward-line (- point-line (line-number-at-pos)))
+        (move-to-column point-column))
       (insert "<br/>")))
 
 (defun web-mode-reload ()
