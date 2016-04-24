@@ -16,18 +16,6 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-;; fonts
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
-
-;; browse-url (google chrome)
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome-stable")
-
 ;; load-path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
@@ -124,6 +112,5 @@
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
-
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
