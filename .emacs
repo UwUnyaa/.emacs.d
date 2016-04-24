@@ -3,16 +3,30 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(current-language-environment "UTF-8") ;UTF-8
+ '(blink-cursor-mode t)
+ '(current-language-environment "UTF-8")
  '(custom-enabled-themes (quote (wombat)))
  '(default-input-method "japanese")
+ '(display-time-24hr-format t)
+ '(display-time-mode t)
+ '(indent-tabs-mode nil)
+ '(menu-bar-mode nil)
  '(nxml-slash-auto-complete-flag t)
  '(read-quoted-char-radix 16)
- '(display-time-24hr-format t)		;display time in 24 hour format
- '(display-time-mode t)			;display time on modeline
- '(menu-bar-mode nil)			;no menu bar
- '(show-paren-mode t)			;highlight matching parens
+ '(show-paren-mode t)
  '(tool-bar-mode nil))
+
+;; fonts
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
+
+;; browse-url (google chrome)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome-stable")
 
 ;; load-path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
@@ -99,7 +113,7 @@
   ;; change the name of the frame
   (setq frame-title-format "Emacs (server)")
 
-  ;; fix broken web-mode variables (will break emacsclient -t with pasting from clipboard)
+  ;; fix broken web-mode variables (won't work in emacsclient -t when pasting from clipboard)
   (setq web-mode-enable-css-colorization t)
   (setq web-mode-enable-auto-indentation t)
   (setq web-mode-enable-auto-closing t)
@@ -110,3 +124,6 @@
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
