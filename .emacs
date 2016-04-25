@@ -13,6 +13,7 @@
  '(menu-bar-mode nil)
  '(nxml-slash-auto-complete-flag t)
  '(read-quoted-char-radix 16)
+ '(sentence-end-double-space nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
