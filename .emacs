@@ -92,6 +92,14 @@
   (impatient-mode))
 (defalias 'im 'my-impatient-mode)	;M-x im 
 
+(defun indent-buffer ()
+  "Indent the whole buffer."
+  (interactive)
+  (indent-region (point-min) (point-max))
+  (delete-trailing-whitespace))
+
+(global-set-key (kbd "C-c C-i") 'indent-buffer)
+
 ;; daemon specific code
 (when (daemonp)
   ;; load my erc autoconnect function (commented out)
