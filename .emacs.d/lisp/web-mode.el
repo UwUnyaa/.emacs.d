@@ -1159,12 +1159,12 @@ Must be used in conjunction with web-mode-enable-block-face."
 
 (defvar web-mode-file-extensions
   (list
-   '("\.png$" 0 nil)
-   '("\.jpe?g$" 0 nil)
-   '("\.gif$" 0 nil)
-   '("\.svg$" 1 nil)
-   '("\.js$" 2 t)
-   '("\.css$" 3 t))
+   '("\\.png$" 0 nil)
+   '("\\.jpe?g$" 0 nil)
+   '("\\.gif$" 0 nil)
+   '("\\.svg$" 1 nil)
+   '("\\.js$" 2 t)
+   '("\\.css$" 3 t))
   "List of regexps matching filetypes in `web-mode-file-link'. Second value of each list should be the index of list containing matching tags in `web-mode-file-elements', and the third one should be t if the link is supposed to be in head or nil.")
 
 (defvar web-mode-file-elements
