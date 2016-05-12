@@ -14,14 +14,10 @@
  '(nxml-slash-auto-complete-flag t)
  '(read-quoted-char-radix 16)
  '(sentence-end-double-space nil)
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(show-paren-mode t))
 
 ;; load-path
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-
-;; no scroll-bar
-(scroll-bar-mode 0)
 
 ;; blinking cursor
 (blink-cursor-mode 1)
@@ -44,79 +40,10 @@
 ;; autosave every 60 seconds
 (setq auto-save-timeout 60)
 
-;; aliases
-(defalias 'rs 'replace-string)
-
-;; y/n instead of yes/no
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;;; modes
-;; web-mode
-(require 'web-mode)
-;; select mode on filetype
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;; indentation (2 spaces per level)
-(defun my-web-mode-hook-indentation ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-(add-hook 'web-mode-hook  'my-web-mode-hook-indentation)
-;; auto-pairing
-(setq web-mode-enable-auto-pairing t)
-;; CSS colorization
-(setq web-mode-enable-css-colorization t)
-;; highlight matching HTML elements
-(setq web-mode-enable-current-element-highlight t)
-
-;; impatient-mode
-;; dependencies
-(require 'simple-httpd)
-(require 'htmlize)
-;; impatient-mode and its separate path (because it has a lot of files in it)
-(add-to-list 'load-path "~/.emacs.d/lisp/impatient-mode/")
-(require 'impatient-mode)
-;; a function to launch impatient-mode quicker
-(defun my-impatient-mode()
-  "A function that automatically enables impatient-mode along with httpd server if it isn't running."
-  (interactive)
-  (when (not (process-status "httpd"))
-    (httpd-start))
-  (impatient-mode))
-(defalias 'im 'my-impatient-mode)	;M-x im 
-
-(defun indent-buffer ()
-  "Indent the whole buffer."
-  (interactive)
-  (indent-region (point-min) (point-max))
-  (delete-trailing-whitespace))
-
-(global-set-key (kbd "C-c C-i") 'indent-buffer)
-
-;; daemon specific code
-(when (daemonp)
-  ;; load my erc autoconnect function (commented out)
-  ;;(load-file "~/.emacs.d/config/myerc.el")
-  ;; start erc automatically
-  ;;(my-erc)
-  
-  ;; change the name of the frame
-  (setq frame-title-format "Emacs (server)")
-
-  ;; fix broken web-mode variables (won't work in emacsclient -t when pasting from clipboard)
-  (setq web-mode-enable-css-colorization t)
-  (setq web-mode-enable-auto-indentation t)
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-auto-pairing t)
-  (setq web-mode-enable-auto-opening t)
-  (setq web-mode-enable-auto-quoting t))
+;; load parts of config (order is important)
+(load-file "~/.emacs.d/config/platform-specific.el")
+(load-file "~/.emacs.d/config/extensions.el")
+(load-file "~/.emacs.d/config/defuns.el")
 
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
