@@ -44,6 +44,7 @@
 (load-file "~/.emacs.d/config/platform-specific.el")
 (load-file "~/.emacs.d/config/extensions.el")
 (load-file "~/.emacs.d/config/defuns.el")
+(load-file "~/.emacs.d/config/indentation.el")
 
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
