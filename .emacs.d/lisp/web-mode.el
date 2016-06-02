@@ -1173,7 +1173,7 @@ Must be used in conjunction with web-mode-enable-block-face."
     ("<object data=\"|\" type=\"image/svg+xml\"></object>" . "\\.svg$")
     ("<script type=\"text/javascript\" src=\"|\"></script>" . "\\.js$")
     ("<link rel=\"stylesheet\" type=\"text/css\" href=\"|\" />" . "\\.css$")
-    ("<picture>\n<source=\"image/webp\" srcset=\"|\">\n</picture>" . "\\.webp$"))
+    ("<picture>\n<source=\"image/webp\" srcset=\"|\" />\n</picture>" . "\\.webp$"))
   "List of tags to be used by `web-mode-file-link'.")
 
 (defvar web-mode-file-elements
@@ -1182,7 +1182,7 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("<object data=\"" "\" type=\"image/svg+xml\"></object>")
    '("<script type=\"text/javascript\" src=\"" "\"></script>")
    '("<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />")
-   '("<picture>\n<source=\"image/webp\" srcset=\"" "\">\n</picture>"))
+   '("<picture>\n<source=\"image/webp\" srcset=\"" "\" />\n</picture>"))
   "List of tags to be used by `web-mode-file-link'.")
 
 (defvar web-mode-sql-queries
