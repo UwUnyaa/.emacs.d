@@ -46,6 +46,10 @@
 (load-file "~/.emacs.d/config/defuns.el")
 (load-file "~/.emacs.d/config/indentation.el")
 
+;; load additional config files if they exist
+(my-load-file-if-it-exists "~/.emacs.d/config/local.el")
+(my-load-file-if-it-exists "~/.emacs.d/secret/passwords.el")
+
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
