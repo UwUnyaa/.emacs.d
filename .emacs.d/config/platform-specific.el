@@ -6,11 +6,6 @@
 
 ;; daemon specific code
 (when (daemonp)
-  ;; load my erc autoconnect function (commented out)
-  ;;(load-file "~/.emacs.d/config/myerc.el")
-  ;; start erc automatically
-  ;;(my-erc)
-  
   ;; change the name of the frame
   (setq frame-title-format "Emacs (server)")
 
