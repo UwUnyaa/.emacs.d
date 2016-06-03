@@ -1162,8 +1162,8 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("\\.png$" 0 nil)
    '("\\.jpe?g$" 0 nil)
    '("\\.gif$" 0 nil)
+   '("\\.webp$" 0 nil)
    '("\\.svg$" 1 nil)
-   '("\\.webp$" 4 nil)
    '("\\.js$" 2 t)
    '("\\.css$" 3 t))
   "List of regexps matching filetypes in `web-mode-file-link'. Second value of each list should be the index of list containing matching tags in `web-mode-file-elements', and the third one should be t if the link is supposed to be in head or nil.")
@@ -1172,8 +1172,7 @@ Must be used in conjunction with web-mode-enable-block-face."
   '(("<img src=\"|\" />" . "\\.\\(png\\|jpe?g\\|gif\\)$")
     ("<object data=\"|\" type=\"image/svg+xml\"></object>" . "\\.svg$")
     ("<script type=\"text/javascript\" src=\"|\"></script>" . "\\.js$")
-    ("<link rel=\"stylesheet\" type=\"text/css\" href=\"|\" />" . "\\.css$")
-    ("<picture>\n<source=\"image/webp\" srcset=\"|\" />\n</picture>" . "\\.webp$"))
+    ("<link rel=\"stylesheet\" type=\"text/css\" href=\"|\" />" . "\\.css$"))
   "List of tags to be used by `web-mode-file-link'.")
 
 (defvar web-mode-file-elements
@@ -1181,8 +1180,7 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("<img src=\"" "\" />")
    '("<object data=\"" "\" type=\"image/svg+xml\"></object>")
    '("<script type=\"text/javascript\" src=\"" "\"></script>")
-   '("<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />")
-   '("<picture>\n<source=\"image/webp\" srcset=\"" "\" />\n</picture>"))
+   '("<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />"))
   "List of tags to be used by `web-mode-file-link'.")
 
 (defvar web-mode-sql-queries
