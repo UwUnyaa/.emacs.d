@@ -31,3 +31,5 @@
 (setq org-startup-indented t)
 ;; custom ellipsis
 (setq org-ellipsis " ⤵")
+;; wrap lines
+(setq org-startup-truncated nil)
