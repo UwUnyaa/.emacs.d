@@ -21,3 +21,9 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+;;; org-mode
+;; Make M-h behave just like everywhere else
+(add-hook 'org-mode-hook
+          (lambda ()
+            (define-key org-mode-map (kbd "M-h") 'backward-kill-word)))
