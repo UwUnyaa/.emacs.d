@@ -22,11 +22,16 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;;; org-mode
-;; Make M-h behave just like everywhere else
+;;; Org-mode
 (add-hook 'org-mode-hook
           (lambda ()
-            (define-key org-mode-map (kbd "M-h") 'backward-kill-word)))
+            ;; make M-h behave just like everywhere else
+            (define-key org-mode-map (kbd "M-h") 'backward-kill-word)
+            ;; use meta shift f/b/n/p instead of meta arrow keys
+            (define-key org-mode-map (kbd "M-F") 'org-metaright)
+            (define-key org-mode-map (kbd "M-B") 'org-metaleft)
+            (define-key org-mode-map (kbd "M-P") 'org-metaup)
+            (define-key org-mode-map (kbd "M-N") 'org-metadown)))
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis
