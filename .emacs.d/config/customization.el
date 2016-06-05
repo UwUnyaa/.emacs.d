@@ -38,3 +38,5 @@
 (setq org-ellipsis " ⤵")
 ;; wrap lines
 (setq org-startup-truncated nil)
+;; insert a timestamp when a task is done
+(setq org-log-done 'time)
