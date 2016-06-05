@@ -40,3 +40,5 @@
 (setq org-startup-truncated nil)
 ;; insert a timestamp when a task is done
 (setq org-log-done 'time)
+;; syntax highlighting in source code blocks
+(setq org-src-fontify-natively t)
