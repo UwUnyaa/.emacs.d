@@ -27,3 +27,5 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "M-h") 'backward-kill-word)))
+;; display org-mode buffers with indentation
+(setq org-startup-indented t)
