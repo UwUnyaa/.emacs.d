@@ -1157,31 +1157,14 @@ Must be used in conjunction with web-mode-enable-block-face."
     (cdr (assoc "comment" web-mode-extra-keywords))
     '("FIXME" "TODO" "BUG" "KLUDGE" "WORKAROUND" "OPTIMIZE" "HACK" "REFACTOR" "REVIEW"))))
 
-(defvar web-mode-file-extensions
-  (list
-   '("\\.png$" 0 nil)
-   '("\\.jpe?g$" 0 nil)
-   '("\\.gif$" 0 nil)
-   '("\\.webp$" 0 nil)
-   '("\\.svg$" 1 nil)
-   '("\\.js$" 2 t)
-   '("\\.css$" 3 t))
-  "List of regexps matching filetypes in `web-mode-file-link'. Second value of each list should be the index of list containing matching tags in `web-mode-file-elements', and the third one should be t if the link is supposed to be in head or nil.")
-
 (defvar web-mode-links
-  '(("<img src=\"|\" />" . "\\.\\(png\\|jpe?g\\|gif\\)$")
-    ("<object data=\"|\" type=\"image/svg+xml\"></object>" . "\\.svg$")
-    ("<script type=\"text/javascript\" src=\"|\"></script>" . "\\.js$")
-    ("<link rel=\"stylesheet\" type=\"text/css\" href=\"|\" />" . "\\.css$"))
-  "List of tags to be used by `web-mode-file-link'.")
-
-(defvar web-mode-file-elements
   (list
-   '("<img src=\"" "\" />")
-   '("<object data=\"" "\" type=\"image/svg+xml\"></object>")
-   '("<script type=\"text/javascript\" src=\"" "\"></script>")
-   '("<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />"))
-  "List of tags to be used by `web-mode-file-link'.")
+   '("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"" "\" alt=\"\"/>" nil 3)
+   '("\\.svg$" "<object data=\"" "\" type=\"image/svg+xml\"></object>" nil 0)
+   '("\\.js$" "<script type=\"text/javascript\" src=\"" "\"></script>" t 0)
+   '("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />" t 0)
+   '("\\.html?$" "<a href=\"" "\"></a>" nil 4)) ;add more extensions
+  "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed")
 
 (defvar web-mode-sql-queries
   (regexp-opt
@@ -11984,37 +11967,38 @@ Prompt user if TAG-NAME isn't provided."
     (remove-hook 'change-major-mode-hook 'web-mode-on-exit t)
     ))
 
-(defun web-mode-file-link ()
-  "Insert a link to the file in html document. This function can be extended to support more filetypes by customizing `web-mode-file-extensions' and `web-mode-file-elements'."
+(defun web-mode-file-link (file)
+  "Insert a link to a file in html document. This function can be extended to support more filetypes by customizing `web-mode-file-links'."
   (interactive
-   (let ((type nil)
-         (file (file-relative-name (read-file-name "Link file: ")))
-         (matched nil)
-         (point-line (line-number-at-pos))
-         (point-column (current-column)))
-     (dolist (type web-mode-file-extensions)
-       (when (string-match (nth 0 type) file)
-         (setq matched t)
-         (when (nth 2 type)
-           (goto-char (point-min))
-           (search-forward "</head>")
-           (backward-char 7)
-           (open-line 1))
-         (insert
-          (nth 0 (nth (nth 1 type) web-mode-file-elements))
-          file
-          (nth 1 (nth (nth 1 type) web-mode-file-elements)))
-         (indent-for-tab-command)
-         (when (nth 2 type)
-           ;; fix indentation
-           (forward-line)
-           (indent-for-tab-command)
-           (if (> point-line (- (line-number-at-pos) 2))
-               (forward-line (+ (- point-line (line-number-at-pos)) 1))
-             (forward-line (- point-line (line-number-at-pos))))
-           (move-to-column point-column))))
-     (when (not matched)
-       (error "Unknown file type")))))
+   (list (read-file-name "Link file: ")))
+  (setq file (file-relative-name file))
+  (let ((type nil)
+        (matched nil)
+        (point-line (line-number-at-pos))
+        (point-column (current-column)))
+    (dolist (type web-mode-links)
+      (when (string-match (nth 0 type) file)
+        (setq matched t)
+        (when (nth 3 type)
+          (goto-char (point-min))
+          (search-forward "</head>")
+          (backward-char 7)
+          (open-line 1))
+        (insert (nth 1 type) file (nth 2 type))
+        (indent-for-tab-command)
+        (when (nth 3 type)
+          ;; return point where it was and fix indentation
+          (forward-line)
+          (indent-for-tab-command)
+          (if (> point-line (- (line-number-at-pos) 2))
+              (forward-line (+ (- point-line (line-number-at-pos)) 1))
+            (forward-line (- point-line (line-number-at-pos))))
+          (move-to-column point-column))
+        (when (> (nth 4 type) 0)
+          ;; move point back if needed
+          (backward-char (nth 4 type)))))
+    (when (not matched)
+      (error "Unknown file type"))))
 
 (defun web-mode-break-lines ()
   "Insert a \"<br />\" tag where point is or on every line in region if it's active."
