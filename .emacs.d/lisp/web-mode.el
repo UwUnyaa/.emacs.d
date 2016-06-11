@@ -1164,7 +1164,7 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("\\.js$" "<script type=\"text/javascript\" src=\"" "\"></script>" t 0)
    '("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />" t 0)
    '("\\.html?$" "<a href=\"" "\"></a>" nil 4)) ;add more extensions
-  "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed")
+  "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed.")
 
 (defvar web-mode-sql-queries
   (regexp-opt
