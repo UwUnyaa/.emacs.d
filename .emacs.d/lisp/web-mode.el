@@ -1166,14 +1166,6 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("\\.html?$" "<a href=\"" "\"></a>" nil 4)) ;add more extensions
   "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed")
 
-(defvar web-mode-file-elements
-  (list
-   '("<img src=\"" "\" />")
-   '("<object data=\"" "\" type=\"image/svg+xml\"></object>")
-   '("<script type=\"text/javascript\" src=\"" "\"></script>")
-   '("<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />"))
-  "List of tags to be used by `web-mode-file-link'.")
-
 (defvar web-mode-sql-queries
   (regexp-opt
    '("SELECT" "INSERT" "UPDATE" "DELETE" "select" "insert" "update" "delete")))
@@ -12050,9 +12042,8 @@ Prompt user if TAG-NAME isn't provided."
               (forward-line (+ (- point-line (line-number-at-pos)) 1))
             (forward-line (- point-line (line-number-at-pos))))
           (move-to-column point-column))
-        (when (> (nth 4 type) 0)
           ;; move point back if needed
-          (backward-char (nth 4 type)))))
+          (backward-char (nth 4 type))))
     (when (not matched)
       (error "Unknown file type"))))
 
