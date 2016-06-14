@@ -23,11 +23,6 @@
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
-(defun my-load-file-if-it-exists (file)
-  "Loads a file if it exists. Used to load files that might not exist (like platform-specific settings)."
-  (when (file-exists-p file)
-    (load-file file)))
-
 ;;; custom aliases and keybindings for functions defined in this file
 ;; aliases
 (defalias 'im 'my-impatient-mode)
