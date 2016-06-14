@@ -5,8 +5,8 @@
 | M-h        | global | (backward-kill-word)   | this is supposed to be similar to M-d |
 | C-?        | global | (help-command)         | C-h was overwritten                   |
 | C-x C-h    | global | (mark-paragraph)       | M-h was overwritten                   |
-| C-c TAB    | global | (indent-buffer)        | Just like in web-mode                 |
-| C-c i      | global | (my-impatient-mode)    | Convinience                           |
-| M-h        | org    | (backward-kill-word)   | For consistency                       |
+| C-c TAB    | global | (indent-buffer)        | just like in web-mode                 |
+| C-c i      | global | (my-impatient-mode)    | convinience                           |
+| M-h        | org    | (backward-kill-word)   | for consistency                       |
 | C-x C-h    | org    | (org-mark-element)     | ^                                     |
 | M-F/B/N/P  | org    | (org-meta*)            | I don't like arrow keys               |
