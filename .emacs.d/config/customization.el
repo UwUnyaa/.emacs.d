@@ -7,6 +7,8 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-?") 'help-command) ;new binding for help prefix
+;; Use C-x C-h for marking paragraphs
+(global-set-key (kbd "C-x C-h") 'mark-paragraph)
 ;; no sounds
 (setq visible-bell nil)
 ;; no startup message
@@ -31,7 +33,9 @@
             (define-key org-mode-map (kbd "M-F") 'org-metaright)
             (define-key org-mode-map (kbd "M-B") 'org-metaleft)
             (define-key org-mode-map (kbd "M-P") 'org-metaup)
-            (define-key org-mode-map (kbd "M-N") 'org-metadown)))
+            (define-key org-mode-map (kbd "M-N") 'org-metadown)
+            ;; use C-x C-h for marking paragraphs
+            (define-key org-mode-map (kbd "C-x C-h") 'org-mark-element)))
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis
