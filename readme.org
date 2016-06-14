@@ -1,0 +1,17 @@
+#+TITLE: DoMiNeLa10's .emacs
+
+* About this .emacs
+This is my config for GNU Emacs. I hold my settings specific to my
+Arch instalation in ~.emacs.d/config/local.el~. Extensions come with
+byte compiled files, so they can work faster.
+
+* This config is used on these operating systems:
+- Arch GNU/Linux
+- Android 5.0 with Termux
+- Multiple versions of Windows (using the native build from the GNU FTP)
+
+* Links to extensions included in this config:
+- https://github.com/skeeto/impatient-mode
+- https://github.com/skeeto/emacs-web-server
+- https://melpa.org/#/htmlize
+- https://github.com/fxbois/web-mode [[https://github.com/DoMiNeLa10/web-mode][(my fork)]]
