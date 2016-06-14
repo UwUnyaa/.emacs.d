@@ -1,0 +1,11 @@
+#+TITLE: Custom keybindings in my configuration
+| keybinding | where  | to what                | about that change                     |
+|------------+--------+------------------------+---------------------------------------|
+| C-h        | global | (delete-backward-char) | bash uses this key like that          |
+| M-h        | global | (backward-kill-word)   | this is supposed to be similar to M-d |
+| C-?        | global | (help-command)         | C-h was overwritten                   |
+| C-x C-h    | global | (mark-paragraph)       | M-h was overwritten                   |
+| C-c TAB    | global | (indent-buffer)        | Just like in web-mode                 |
+| C-c i      | global | (my-impatient-mode)    | Convinience                           |
+| M-h        | org    | (backward-kill-word)   | For consistency                       |
+| C-x C-h    | org    | (org-mark-element)     | ^                                     |
