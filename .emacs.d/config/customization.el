@@ -29,13 +29,13 @@
           (lambda ()
             ;; make M-h behave just like everywhere else
             (define-key org-mode-map (kbd "M-h") 'backward-kill-word)
+            ;; use C-x C-h for marking paragraphs
+            (define-key org-mode-map (kbd "C-x C-h") 'org-mark-element)
             ;; use meta shift f/b/n/p instead of meta arrow keys
             (define-key org-mode-map (kbd "M-F") 'org-metaright)
             (define-key org-mode-map (kbd "M-B") 'org-metaleft)
             (define-key org-mode-map (kbd "M-P") 'org-metaup)
-            (define-key org-mode-map (kbd "M-N") 'org-metadown)
-            ;; use C-x C-h for marking paragraphs
-            (define-key org-mode-map (kbd "C-x C-h") 'org-mark-element)))
+            (define-key org-mode-map (kbd "M-N") 'org-metadown)))
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis
