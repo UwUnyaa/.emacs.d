@@ -9,3 +9,4 @@
 | C-c i      | global | (my-impatient-mode)    | Convinience                           |
 | M-h        | org    | (backward-kill-word)   | For consistency                       |
 | C-x C-h    | org    | (org-mark-element)     | ^                                     |
+| M-F/B/N/P  | org    | (org-meta*)            | I don't like arrow keys               |
