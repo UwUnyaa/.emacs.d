@@ -14,12 +14,3 @@
   (interactive)
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
-
-;;; custom aliases and keybindings for functions defined in this file
-;; aliases
-(defalias 'im 'my-impatient-mode)
-(defalias 'rs 'replace-string)
-(defalias 'yes-or-no-p 'y-or-n-p)       ; y/n instead of yes/no
-
-;; keybindings
-(global-set-key (kbd "C-c C-i") 'indent-buffer)

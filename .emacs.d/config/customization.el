@@ -1,19 +1,25 @@
 ;;; This file contains customizations of Emacs and modes that are built into it
 
-;;; Personal customizations
-;; blinking cursor
-(blink-cursor-mode 1)
+;; Custom keybindings
 ;; use C-h like readlne
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-?") 'help-command) ;new binding for help prefix
 ;; Use C-x C-h for marking paragraphs
 (global-set-key (kbd "C-x C-h") 'mark-paragraph)
+;; other keybindings
+(global-set-key (kbd "C-c C-i") 'indent-buffer)
+(global-set-key (kbd "C-c i") 'my-impatient-mode)
+
+;;; Other customizations
 ;; no sounds
 (setq visible-bell nil)
 ;; no startup message
 (setq inhibit-startup-message t)
-(setq initial-scratch-message "") ;empty scratch buffer
+;; empty scratch buffer
+(setq initial-scratch-message nil)
+;; blinking cursor
+(blink-cursor-mode 1)
 ;; frame title
 (setq frame-title-format "Emacs")
 ;; autosave every 60 seconds
@@ -23,6 +29,10 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+;; aliases
+(defalias 'im 'my-impatient-mode)
+(defalias 'rs 'replace-string)
+(defalias 'yes-or-no-p 'y-or-n-p)       ; y/n instead of yes/no
 
 ;;; Org-mode
 (add-hook 'org-mode-hook

@@ -20,10 +20,10 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; load parts of config (order is important)
+(load "~/.emacs.d/config/defuns.el")
 (load "~/.emacs.d/config/customization.el")
 (load "~/.emacs.d/config/platform-specific.el")
 (load "~/.emacs.d/config/extensions.el")
-(load "~/.emacs.d/config/defuns.el")
 (load "~/.emacs.d/config/indentation.el")
 
 ;; load additional config files if they exist
