@@ -45,7 +45,12 @@
             (define-key org-mode-map (kbd "M-F") 'org-metaright)
             (define-key org-mode-map (kbd "M-B") 'org-metaleft)
             (define-key org-mode-map (kbd "M-P") 'org-metaup)
-            (define-key org-mode-map (kbd "M-N") 'org-metadown)))
+            (define-key org-mode-map (kbd "M-N") 'org-metadown)
+            ;; use control meta shift f/b/n/p instead of meta shift arrow keys
+            (define-key org-mode-map (kbd "C-M-S-f") 'org-shiftmetaright)
+            (define-key org-mode-map (kbd "C-M-S-b") 'org-shiftmetaleft)
+            (define-key org-mode-map (kbd "C-M-S-n") 'org-shiftmetadown)
+            (define-key org-mode-map (kbd "C-M-S-p") 'org-shiftmetaup)))
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis
