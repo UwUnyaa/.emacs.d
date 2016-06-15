@@ -1,4 +1,4 @@
-;; web-mode
+;;; web-mode
 (require 'web-mode)
 ;; select mode on filetype
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -21,7 +21,7 @@
                             (setq web-mode-css-indent-offset 2)
                             (setq web-mode-code-indent-offset 2)))
 
-;; impatient-mode
+;;; impatient-mode
 ;; dependencies
 (require 'simple-httpd)
 (require 'htmlize)

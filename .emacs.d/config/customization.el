@@ -1,6 +1,6 @@
 ;;; This file contains customizations of Emacs and modes that are built into it
 
-;; Custom keybindings
+;;; Custom keybindings
 ;; use C-h like readlne
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)

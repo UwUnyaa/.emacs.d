@@ -8,7 +8,7 @@
     (httpd-start))
   (impatient-mode))
 
-;; C-c TAB in almost all modes
+;; C-c TAB from web-mode in almost all modes
 (defun indent-buffer ()
   "Indent the whole buffer."
   (interactive)
