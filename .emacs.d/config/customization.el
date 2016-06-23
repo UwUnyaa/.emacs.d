@@ -22,6 +22,8 @@
 (blink-cursor-mode 1)
 ;; frame title
 (setq frame-title-format "Emacs")
+;; fill-column
+(setq-default fill-column 80)
 ;; autosave every 60 seconds
 (setq auto-save-timeout 60)
 ;; disable warnings
