@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2016 François-Xavier Bois
 
-;; Version: 14.0.10
+;; Version: 14.0.11
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; URL: http://web-mode.org
@@ -21,7 +21,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "14.0.10"
+(defconst web-mode-version "14.0.11"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -831,7 +831,7 @@ Must be used in conjunction with web-mode-enable-block-face."
     ("php"              . "\\.\\(p[hs]p\\|ctp\\|inc\\)\\'")
     ("python"           . "\\.pml\\'")
     ("razor"            . "\\.\\(cs\\|vb\\)html\\'")
-    ("riot"           .  "\\.tag\\'")
+    ("riot"             . "\\.tag\\'")
     ("smarty"           . "\\.tpl\\'")
     ("template-toolkit" . "\\.tt.?\\'")
     ("thymeleaf"        . "\\.thtml\\'")
@@ -2212,7 +2212,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 
 (eval-and-compile
 
-  ;; compatibility with emacs 22
+  ;; compatibility with emacs < 23
   (defun web-mode-string-match-p (regexp string &optional start)
     "Same as `string-match' except it does not change the match data."
     (let ((inhibit-changing-match-data t))
@@ -6801,7 +6801,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
              (reg-col (plist-get ctx :reg-col))
              (token (plist-get ctx :token))
              (options (plist-get ctx :options))
-             (chars (list curr-char prev-char)))
+             (chars (list curr-char prev-char))
+             (tmp nil))
 
         ;;(message "%S" language)
         ;;(message "curr-char=[%c] prev-char=[%c]\n%S" curr-char prev-char ctx)
@@ -7131,38 +7132,6 @@ another auto-completion with different ac-sources (e.g. ac-php)")
            ) ;cond
           )
 
-         ;; TODO : prev-pos : se plasser sur ), remonter sur ( et
-         ;; verifer que ca n'est pas if
-         ((and (member language '("javascript" "jsx" "ejs" "php"))
-               (or (and (eq prev-char ?\))
-                        (string-match-p "^\\(for\\|if\\|while\\)[ ]*(" prev-line)
-                        ;;(progn (message "point=%S" (point)) t)
-                        )
-                   (and (member language '("javascript" "jsx"))
-                        (web-mode-part-is-opener prev-pos reg-beg))
-                   (string-match-p "^else$" prev-line))
-               (not (string-match-p "^\\([{.]\\|->\\)" curr-line)))
-          ;;(message "ici")
-          (cond
-           ((and (eq prev-char ?\))
-                 (string-match-p "^\\(for\\|if\\|while\\)[ ]*(" prev-line))
-            (setq offset (+ prev-indentation web-mode-code-indent-offset))
-            )
-           ((member language '("javascript" "jsx" "ejs"))
-            (setq offset
-                  (+ (car (web-mode-javascript-indentation pos
-                                                           reg-col
-                                                           curr-indentation
-                                                           language
-                                                           reg-beg))
-                     web-mode-code-indent-offset))
-            )
-           (t
-            (setq offset (+ prev-indentation web-mode-code-indent-offset))
-            )
-           )
-          )
-
          ((and (member language '("javascript" "jsx" "ejs"))
                (or (member ?\, chars)
                    (member prev-char '(?\( ?\[))))
@@ -7184,7 +7153,64 @@ another auto-completion with different ac-sources (e.g. ac-php)")
             (goto-char pos)
             (looking-at ",[ \t\n]*")
             (setq offset (- offset (length (match-string-no-properties 0)))))
-           ))
+           ) ;cond
+          )
+
+         ((and (member language '("javascript" "jsx" "ejs"))
+               (or (eq prev-char ?\))
+                   (string-match-p "^else$" prev-line))
+               )
+          ;;(message "js-ici")
+          (cond
+           ((string-match-p "^else$" prev-line)
+            (setq offset (+ prev-indentation web-mode-code-indent-offset))
+            )
+           ((setq tmp (web-mode-part-is-opener prev-pos reg-beg))
+            ;;(message "is-opener")
+            (setq offset (+ tmp web-mode-code-indent-offset))
+            ;;(setq offset (+ prev-indentation web-mode-code-indent-offset))
+            )
+           (t
+            (setq offset
+                  (car (web-mode-javascript-indentation pos
+                                                        reg-col
+                                                        curr-indentation
+                                                        language
+                                                        reg-beg)))
+            ) ;t
+           ) ;cond
+
+          )
+
+         ;; TODO : a retoucher completement car le code js a ete place ci-dessus
+         ;;((and (member language '("javascript" "jsx" "ejs" "php"))
+         ((and (member language '("php"))
+               (or (and (eq prev-char ?\))
+                        (string-match-p "^\\(for\\|if\\|while\\)[ ]*(" prev-line))
+                   (and (member language '("javascript" "jsx" "ejs"))
+                        (web-mode-part-is-opener prev-pos reg-beg))
+                   (string-match-p "^else$" prev-line))
+               (not (string-match-p "^\\([{.]\\|->\\)" curr-line)))
+          ;;(message "ici")
+          (cond
+           ((and (eq prev-char ?\))
+                 (string-match-p "^\\(for\\|if\\|while\\)[ ]*(" prev-line))
+            (setq offset (+ prev-indentation web-mode-code-indent-offset))
+            )
+           ((member language '("javascript" "jsx"))
+            (setq offset
+                  (+ (car (web-mode-javascript-indentation pos
+                                                           reg-col
+                                                           curr-indentation
+                                                           language
+                                                           reg-beg))
+                     web-mode-code-indent-offset))
+            )
+           (t
+            (setq offset (+ prev-indentation web-mode-code-indent-offset))
+            )
+           )
+          )
 
          ((and (member language '("php" "blade")) (string-match-p "^->" curr-line))
           (cond
@@ -7527,11 +7553,14 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 (defun web-mode-part-is-opener (pos reg-beg)
   (save-excursion
     (save-match-data
-      (and pos
-           (web-mode-go (web-mode-part-opening-paren-position pos))
-           (>= (point) reg-beg)
-           ;;(progn (message "%S %S" pos (point)))
-           (looking-back "if[ ]*")))))
+      (if (and pos
+               (web-mode-go (web-mode-part-opening-paren-position pos))
+               (>= (point) reg-beg)
+               ;;(progn (message "%S %S" pos (point)))
+               (looking-back "\\(if\\|for\\|while\\)[ ]*"))
+          (current-indentation)
+        nil)
+      )))
 
 (defun web-mode-part-previous-live-line (reg-beg)
   (unless reg-beg (setq reg-beg (point-min)))
