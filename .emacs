@@ -16,9 +16,6 @@
  '(sentence-end-double-space nil)
  '(show-paren-mode t))
 
-;; load-path
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-
 ;; load parts of config (order is important)
 (load "~/.emacs.d/config/defuns.el")
 (load "~/.emacs.d/config/customization.el")

@@ -1,3 +1,9 @@
+;;; this file contains configuration for extensions that don't come with GNU
+;;; Emacs
+
+;;; load-path
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
 ;;; web-mode
 (require 'web-mode)
 ;; select mode on filetype
