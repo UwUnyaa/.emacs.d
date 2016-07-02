@@ -12116,10 +12116,8 @@ Prompt user if TAG-NAME isn't provided."
 (defun web-mode-file-link (file)
   "Insert a link to a file in html document. This function can be extended to support more filetypes by customizing `web-mode-file-links'."
   (interactive
-   (list (read-file-name "Link file: ")))
-  (setq file (file-relative-name file))
-  (let ((type nil)
-        (matched nil)
+   (list (file-relative-name (read-file-name "Link file: "))))
+  (let ((matched nil)
         (point-line (line-number-at-pos))
         (point-column (current-column)))
     (dolist (type web-mode-links)
