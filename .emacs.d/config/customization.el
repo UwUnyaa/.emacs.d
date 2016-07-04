@@ -57,6 +57,8 @@
 (setq org-startup-indented t)
 ;; custom ellipsis
 (setq org-ellipsis "⤵")
+;; display files without folding them
+(setq org-startup-folded nil)
 ;; wrap lines
 (setq org-startup-truncated nil)
 ;; insert a timestamp when a task is done
