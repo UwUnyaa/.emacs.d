@@ -56,7 +56,7 @@
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis
-(setq org-ellipsis " ⤵")
+(setq org-ellipsis "⤵")
 ;; wrap lines
 (setq org-startup-truncated nil)
 ;; insert a timestamp when a task is done
