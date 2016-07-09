@@ -13,7 +13,8 @@
   (interactive "P")
   (setq httpd-root default-directory)
   (setq httpd-port (if arg arg 8000))
-  (httpd-start))
+  (httpd-start)
+  (message "Started a local http server at port %d in %s" httpd-port httpd-root))
 
 ;; C-c TAB from web-mode in almost all modes
 (defun indent-buffer ()
