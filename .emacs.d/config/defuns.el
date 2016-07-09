@@ -12,7 +12,7 @@
   "Start a local http server in the current directory on port 8000 or the prefix argument."
   (interactive "P")
   (setq httpd-root default-directory)
-  (setq httpd-port (if arg arg 8000))
+  (setq httpd-port (or arg 8000))
   (httpd-start)
   (message "Started a local http server at port %d in %s" httpd-port httpd-root))
 
