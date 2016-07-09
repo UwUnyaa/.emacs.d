@@ -8,6 +8,13 @@
     (httpd-start))
   (impatient-mode))
 
+(defun lhttpd (&optional arg)
+  "Start a local http server in the current directory on port 8000 or the prefix argument."
+  (interactive "P")
+  (setq httpd-root default-directory)
+  (setq httpd-port (if arg arg 8000))
+  (httpd-start))
+
 ;; C-c TAB from web-mode in almost all modes
 (defun indent-buffer ()
   "Indent the whole buffer."

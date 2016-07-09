@@ -10,6 +10,7 @@
 ;; other keybindings
 (global-set-key (kbd "C-c C-i") 'indent-buffer)
 (global-set-key (kbd "C-c i") 'my-impatient-mode)
+(global-set-key (kbd "C-c l") 'lhttpd)
 
 ;;; Other customizations
 ;; no sounds

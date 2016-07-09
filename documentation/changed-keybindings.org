@@ -7,6 +7,7 @@
 | C-x C-h     | global | (mark-paragraph)       | M-h was overwritten                   |
 | C-c TAB     | global | (indent-buffer)        | just like in web-mode                 |
 | C-c i       | global | (my-impatient-mode)    | convinience                           |
+| C-c l       | global | (lhttpd)               | convinience                           |
 | M-h         | org    | (backward-kill-word)   | for consistency                       |
 | C-x C-h     | org    | (org-mark-element)     | ^                                     |
 | M-F/B/N/P   | org    | (org-meta*)            | I don't like arrow keys               |
