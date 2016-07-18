@@ -8,7 +8,7 @@
     (httpd-start))
   (impatient-mode))
 
-(defun lhttpd (&optional arg)
+(defun my-lhttpd (&optional arg)
   "Start a local http server in the current directory on port 8000 or the prefix argument."
   (interactive "P")
   (setq httpd-root default-directory)
