@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2016 François-Xavier Bois
 
-;; Version: 14.0.18
+;; Version: 14.0.19
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; URL: http://web-mode.org
@@ -21,7 +21,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "14.0.18"
+(defconst web-mode-version "14.0.19"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -282,6 +282,13 @@ See web-mode-block-face."
 ;;    web-mode-jsx-depth-4-face)
   "Each jsx depth has is own face."
   :type 'list
+  :group 'web-mode)
+
+(defcustom web-mode-commands-like-expand-region '(web-mode-mark-and-expand
+                                                  er/expand-region
+                                                  mc/mark-next-like-this)
+  "Add it to here if you have some wrapper function for er/expand-region"
+  :type '(repeat function)
   :group 'web-mode)
 
 ;;---- FACES -------------------------------------------------------------------
@@ -1597,8 +1604,9 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("\\_<\\(all\|braille\\|embossed\\|handheld\\|print\\|projection\\|screen\\|speech\\|tty\\|tv\\|and\\|or\\)\\_>"
      1 'web-mode-keyword-face)
    '("[^,]+" 0 'web-mode-css-selector-face)
-   (cons (concat ":\\(" web-mode-css-pseudo-classes "\\)\\(([^)]*)\\)?")
-         '(0 'web-mode-css-pseudo-class-face t t))
+   ;;(cons (concat ":\\(" web-mode-css-pseudo-classes "\\)\\(([^)]*)\\)?")
+   ;;      '(0 'web-mode-css-pseudo-class-face t t))
+   (cons (concat ":\\([ ]*[[:alpha:]][^,{]*\\)") '(0 'web-mode-css-pseudo-class-face t t))
    ))
 
 (defvar web-mode-declaration-font-lock-keywords
@@ -6758,13 +6766,11 @@ another auto-completion with different ac-sources (e.g. ac-php)")
        ((not (member web-mode-content-type '("html" "xml")))
         )
        ((member language '("javascript" "jsx"))
-        (setq reg-col (+ reg-col web-mode-script-padding)))
-       ((member language '("css"))
-        (setq reg-col (+ reg-col web-mode-style-padding)))
-       ((member language '("sql"))
-        (setq reg-col (+ reg-col web-mode-style-padding)))
+        (setq reg-col (if web-mode-script-padding (+ reg-col web-mode-script-padding) 0)))
+       ((member language '("css" "sql"))
+        (setq reg-col (if web-mode-style-padding (+ reg-col web-mode-style-padding) 0)))
        ((not (member language '("html" "xml" "razor")))
-        (setq reg-col (+ reg-col web-mode-block-padding)))
+        (setq reg-col (if web-mode-block-padding (+ reg-col web-mode-block-padding) 0)))
        )
 
       (list :curr-char curr-char
@@ -9571,9 +9577,7 @@ Prompt user if TAG-NAME isn't provided."
     ;;(message "%S: %S %S" this-command web-mode-change-beg web-mode-change-end)
 
     (when (and web-mode-expand-previous-state
-               (not (member this-command '(web-mode-mark-and-expand
-                                           er/expand-region
-                                           mc/mark-next-like-this))))
+               (not (member this-command web-mode-commands-like-expand-region)))
       (when (eq this-command 'keyboard-quit)
         (goto-char web-mode-expand-initial-pos))
       (deactivate-mark)
@@ -9947,6 +9951,7 @@ Prompt user if TAG-NAME isn't provided."
     (web-mode-attribute-beginning)
     (set-mark (point))
     (web-mode-attribute-end)
+    (exchange-point-and-mark)
     (point)
     ))
 
