@@ -1181,6 +1181,12 @@ Must be used in conjunction with web-mode-enable-block-face."
    '("\\.html?$" "<a href=\"" "\"></a>" nil 4)) ;add more extensions
   "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed.")
 
+(defvar web-mode-contained-elements
+  '(("ol" . "li")
+    ("ul" . "li")
+    ("tr" . "td"))
+  "List of elements and elements that are typically contained within them.")
+
 (defvar web-mode-sql-queries
   (regexp-opt
    '("SELECT" "INSERT" "UPDATE" "DELETE" "select" "insert" "update" "delete")))
@@ -2197,6 +2203,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     ;;--------------------------------------------------------------------------
 
     (define-key map (kbd "M-;")       'web-mode-comment-or-uncomment)
+
+    (define-key map (kbd "<M-return>") 'web-mode-element-create-next)
 
     ;;C-c C-a : attribute
     ;;C-c C-b : block
@@ -12156,6 +12164,29 @@ Prompt user if TAG-NAME isn't provided."
           (backward-char (nth 4 type))))
     (when (not matched)
       (error "Unknown file type"))))
+
+(defun web-mode-element-create-next ()
+  "Create another element of the same type after the current one."
+  (interactive)
+  (let* ((element-name (progn (web-mode-element-parent)
+                              (web-mode-element-tag-name)))
+         (contained-element nil)
+         (reg-start 0)
+         (reg-end 0))
+    (setq reg-start (web-mode-element-end))
+    (insert (format "\n<%s>%s</%s>" element-name
+                    (if (setq contained-element
+                              (cdr (assoc element-name web-mode-contained-elements)))
+                        (format "\n<%s></%s>\n" contained-element contained-element)
+                      "")
+                    element-name))
+    (setq reg-end (point))
+    (backward-char (if contained-element
+                       (+ (length element-name) (length contained-element) 7)
+                     (+ (length element-name) 3)))
+    (if contained-element
+        (indent-region reg-start reg-end)
+      (indent-for-tab-command))))
 
 (defun web-mode-break-lines ()
   "Insert a \"<br />\" tag where point is or on every line in region if it's active."
