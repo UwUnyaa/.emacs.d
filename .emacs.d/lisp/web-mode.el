@@ -12168,7 +12168,7 @@ Prompt user if TAG-NAME isn't provided."
 (defun web-mode-element-create-next ()
   "Create another element of the same type after the current one."
   (interactive)
-  (let* ((element-name (progn (web-mode-element-parent)
+  (let ((element-name (progn (web-mode-element-parent)
                               (web-mode-element-tag-name)))
          (contained-element nil)
          (reg-start 0)
