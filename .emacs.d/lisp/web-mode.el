@@ -2204,7 +2204,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 
     (define-key map (kbd "M-;")       'web-mode-comment-or-uncomment)
 
-    (define-key map (kbd "<M-return>") 'web-mode-element-create-next)
+    (define-key map (kbd "M-RET") 'web-mode-element-create-next)
 
     ;;C-c C-a : attribute
     ;;C-c C-b : block
@@ -12184,9 +12184,7 @@ Prompt user if TAG-NAME isn't provided."
     (backward-char (if contained-element
                        (+ (length element-name) (length contained-element) 7)
                      (+ (length element-name) 3)))
-    (if contained-element
-        (indent-region reg-start reg-end)
-      (indent-for-tab-command))))
+        (indent-region reg-start reg-end)))
 
 (defun web-mode-break-lines ()
   "Insert a \"<br />\" tag where point is or on every line in region if it's active."
