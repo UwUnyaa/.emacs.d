@@ -1185,7 +1185,7 @@ Must be used in conjunction with web-mode-enable-block-face."
   '(("ol" . "li")
     ("ul" . "li")
     ("tr" . "td"))
-  "List of elements and elements that are typically contained within them.")
+  "List of elements and elements that are typically contained within them. Used by `web-mode-element-create-next'.")
 
 (defvar web-mode-sql-queries
   (regexp-opt
@@ -12166,13 +12166,13 @@ Prompt user if TAG-NAME isn't provided."
       (error "Unknown file type"))))
 
 (defun web-mode-element-create-next ()
-  "Create another element of the same type after the current one."
+  "Create another element of the same type after the current one. If the created element normally contains another element inside of it, create it too. List of elements that contain other elements inside of them can be found in `web-mode-contained-elements'."
   (interactive)
   (let ((element-name (progn (web-mode-element-parent)
-                              (web-mode-element-tag-name)))
-         (contained-element nil)
-         (reg-start 0)
-         (reg-end 0))
+                             (web-mode-element-tag-name)))
+        (contained-element nil)
+        (reg-start 0)
+        (reg-end 0))
     (setq reg-start (web-mode-element-end))
     (insert (format "\n<%s>%s</%s>" element-name
                     (if (setq contained-element
@@ -12184,7 +12184,7 @@ Prompt user if TAG-NAME isn't provided."
     (backward-char (if contained-element
                        (+ (length element-name) (length contained-element) 7)
                      (+ (length element-name) 3)))
-        (indent-region reg-start reg-end)))
+    (indent-region reg-start reg-end)))
 
 (defun web-mode-break-lines ()
   "Insert a \"<br />\" tag where point is or on every line in region if it's active."
