@@ -4,7 +4,7 @@
 (defun my-impatient-mode()
   "A function that automatically enables impatient-mode along with httpd server if it isn't running."
   (interactive)
-  (when (not (process-status "httpd"))
+  (unless (process-status "httpd")
     (httpd-start))
   (impatient-mode))
 
