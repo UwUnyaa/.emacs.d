@@ -37,6 +37,9 @@
 (defalias 'rs 'replace-string)
 (defalias 'yes-or-no-p 'y-or-n-p)       ; y/n instead of yes/no
 
+;; run eldoc-mode in emacs-lisp-mode
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
 ;; use auto-fill-mode in text-mode and org-mode
 (add-hook 'text-mode-hook 'auto-fill-mode)
 
