@@ -53,7 +53,10 @@
             (define-key org-mode-map (kbd "C-M-S-f") 'org-shiftmetaright)
             (define-key org-mode-map (kbd "C-M-S-b") 'org-shiftmetaleft)
             (define-key org-mode-map (kbd "C-M-S-n") 'org-shiftmetadown)
-            (define-key org-mode-map (kbd "C-M-S-p") 'org-shiftmetaup)))
+            (define-key org-mode-map (kbd "C-M-S-p") 'org-shiftmetaup)
+            ;; move by paragraphs with M-n and M-p
+            (define-key org-mode-map (kbd "M-n") 'org-forward-paragraph)
+            (define-key org-mode-map (kbd "M-p") 'org-backward-paragraph)))
 ;; display org-mode buffers with indentation
 (setq org-startup-indented t)
 ;; custom ellipsis

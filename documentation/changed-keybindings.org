@@ -12,3 +12,4 @@
 | C-x C-h     | org    | (org-mark-element)     | ^                                     |
 | M-F/B/N/P   | org    | (org-meta*)            | I don't like arrow keys               |
 | C-M-F/B/N/P | org    | (org-shiftmeta*)       | ^                                     |
+| M-n/p       | org    | (org-*-paragraph)      | ^                                     |
