@@ -37,6 +37,9 @@
 (defalias 'rs 'replace-string)
 (defalias 'yes-or-no-p 'y-or-n-p)       ; y/n instead of yes/no
 
+;; use auto-fill-mode in text-mode and org-mode
+(add-hook 'text-mode-hook 'auto-fill-mode)
+
 ;;; Org-mode
 (add-hook 'org-mode-hook
           (lambda ()
