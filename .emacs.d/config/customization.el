@@ -24,7 +24,7 @@
 ;; frame title
 (setq frame-title-format "Emacs")
 ;; fill-column
-(setq-default fill-column 80)
+(setq-default fill-column 78)
 ;; autosave every 60 seconds
 (setq auto-save-timeout 60)
 ;; disable warnings
