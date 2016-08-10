@@ -16,3 +16,4 @@ customized keybindings is [[file:documentation/changed-keybindings.org][here]].
 - https://github.com/skeeto/emacs-web-server
 - https://melpa.org/#/htmlize
 - https://github.com/fxbois/web-mode [[https://github.com/DoMiNeLa10/web-mode][(my fork)]]
+- https://github.com/DoMiNeLa10/ox-sfhp

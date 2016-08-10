@@ -36,3 +36,6 @@
 ;; impatient-mode and its separate path (because it has a lot of files in it)
 (add-to-list 'load-path "~/.emacs.d/lisp/impatient-mode/")
 (require 'impatient-mode)
+
+;; ox-sfhp
+(require 'ox-sfhp)
