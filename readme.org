@@ -7,7 +7,7 @@ files, so they can work faster. The table with customized keybindings is [[file:
 
 ** This config is used on these operating systems:
 - Arch GNU/Linux
-- Android 5.0 with Termux
+- Android 5.0 with [[https://termux.com/][Termux]]
 - Multiple versions of Windows (using the native build from the GNU FTP)
 
 ** Links to extensions included in this config:
