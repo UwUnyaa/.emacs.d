@@ -17,19 +17,15 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-;; auto-pairing
-(setq web-mode-enable-auto-pairing t)
-;; CSS colorization
-(setq web-mode-enable-css-colorization t)
-;; auto expanding
-(setq web-mode-enable-auto-expanding t)
-;; highlight matching HTML elements
-(setq web-mode-enable-current-element-highlight t)
+;; customize variables
+(setq web-mode-enable-auto-pairing t               ; auto-pairing
+      web-mode-enable-css-colorization t           ; CSS colorization
+      web-mode-enable-auto-expanding t             ; auto expanding
+      web-mode-enable-current-element-highlight t) ; highlight matching HTML elements
 (add-hook 'web-mode-hook  (lambda ()
-                            ;; custom indentation
-                            (setq web-mode-markup-indent-offset 2)
-                            (setq web-mode-css-indent-offset 2)
-                            (setq web-mode-code-indent-offset 2)))
+                            (setq web-mode-markup-indent-offset 2 ; custom indentation
+                                  web-mode-css-indent-offset 2
+                                  web-mode-code-indent-offset 2)))
 
 ;;; impatient-mode
 ;; dependencies
