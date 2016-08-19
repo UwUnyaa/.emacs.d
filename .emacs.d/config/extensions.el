@@ -21,6 +21,8 @@
 (setq web-mode-enable-auto-pairing t)
 ;; CSS colorization
 (setq web-mode-enable-css-colorization t)
+;; auto expanding
+(setq web-mode-enable-auto-expanding t)
 ;; highlight matching HTML elements
 (setq web-mode-enable-current-element-highlight t)
 (add-hook 'web-mode-hook  (lambda ()
