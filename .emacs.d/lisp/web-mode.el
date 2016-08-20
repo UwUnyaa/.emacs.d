@@ -1172,16 +1172,12 @@ Must be used in conjunction with web-mode-enable-block-face."
     (cdr (assoc "comment" web-mode-extra-keywords))
     '("FIXME" "TODO" "BUG" "KLUDGE" "WORKAROUND" "OPTIMIZE" "HACK" "REFACTOR" "REVIEW"))))
 
-;; (defvar web-mode-element-links
-;;   '((img "<img src=\"%s\" alt=\"\" />" nil
-
 (defvar web-mode-links
-  (list
-   '("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"%s\" alt=\"\" />" nil 4)
-   '("\\.svg$" "<object data=\"%s\" type=\"image/svg+xml\"></object>" nil 0)
-   '("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" t 0)
-   '("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" t 0)
-   '("\\.html?$" "<a href=\"%s\"></a>" nil 4))
+  '(("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"%s\" alt=\"\" />" nil 4)
+    ("\\.svg$" "<object data=\"%s\" type=\"image/svg+xml\"></object>" nil 0)
+    ("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" t 0)
+    ("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" t 0)
+    ("\\.html?$" "<a href=\"%s\"></a>" nil 4))
   "List of elements and extensions for `web-mode-file-link'. It
 consists of a string that contains the regular expression that
 matches the appropriate files, a format string with element that
