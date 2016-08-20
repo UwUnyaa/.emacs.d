@@ -1172,14 +1172,23 @@ Must be used in conjunction with web-mode-enable-block-face."
     (cdr (assoc "comment" web-mode-extra-keywords))
     '("FIXME" "TODO" "BUG" "KLUDGE" "WORKAROUND" "OPTIMIZE" "HACK" "REFACTOR" "REVIEW"))))
 
+;; (defvar web-mode-element-links
+;;   '((img "<img src=\"%s\" alt=\"\" />" nil
+
 (defvar web-mode-links
   (list
-   '("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"" "\" alt=\"\" />" nil 4)
-   '("\\.svg$" "<object data=\"" "\" type=\"image/svg+xml\"></object>" nil 0)
-   '("\\.js$" "<script type=\"text/javascript\" src=\"" "\"></script>" t 0)
-   '("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"" "\" />" t 0)
-   '("\\.html?$" "<a href=\"" "\"></a>" nil 4)) ;add more extensions
-  "List of elements and extensions for `web-mode-file-link'. It consists of a string that contains the regular expression that maches the appropriate files, two strings with element that contains the link - one before the path to the file, and another one after it, a bool that tells if the element belongs in the <head> element, and number of characters to move back if needed.")
+   '("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"%s\" alt=\"\" />" nil 4)
+   '("\\.svg$" "<object data=\"%s\" type=\"image/svg+xml\"></object>" nil 0)
+   '("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" t 0)
+   '("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" t 0)
+   '("\\.html?$" "<a href=\"%s\"></a>" nil 4))
+  "List of elements and extensions for `web-mode-file-link'. It
+consists of a string that contains the regular expression that
+matches the appropriate files, a format string with element that
+contains the link (%s should be put where the path goes,) a bool
+that tells if the element belongs in the <head> element, and
+number of characters to move back if needed (or 0 if point
+shouldn't be moved back.)")
 
 (defvar web-mode-contained-elements
   '(("ol" . "li")
@@ -12146,23 +12155,25 @@ Prompt user if TAG-NAME isn't provided."
    ))
 
 (defun web-mode-file-link (file)
-  "Insert a link to a file in html document. This function can be extended to support more filetypes by customizing `web-mode-links'."
+  "Insert a link to a file in html document. This function can be
+extended to support more filetypes by customizing
+`web-mode-links'."
   (interactive
    (list (file-relative-name (read-file-name "Link file: "))))
   (let ((matched nil)
         (point-line (line-number-at-pos))
         (point-column (current-column)))
     (dolist (type web-mode-links)
-      (when (string-match (nth 0 type) file)
+      (when (string-match (car type) file)
         (setq matched t)
-        (when (nth 3 type)
+        (when (nth 2 type)
           (goto-char (point-min))
           (search-forward "</head>")
           (backward-char 7)
           (open-line 1))
-        (insert (nth 1 type) file (nth 2 type))
+        (insert (format (cadr type) file))
         (indent-for-tab-command)
-        (when (nth 3 type)
+        (when (nth 2 type)
           ;; return point where it was and fix indentation
           (forward-line)
           (indent-for-tab-command)
@@ -12170,13 +12181,17 @@ Prompt user if TAG-NAME isn't provided."
               (forward-line (+ (- point-line (line-number-at-pos)) 1))
             (forward-line (- point-line (line-number-at-pos))))
           (move-to-column point-column))
-          ;; move point back if needed
-          (backward-char (nth 4 type))))
+        ;; move point back if needed
+        (backward-char (nth 3 type))))
     (when (not matched)
-      (error "Unknown file type"))))
+      (user-error "Unknown file type"))))
 
 (defun web-mode-element-create-next ()
-  "Create another element of the same type after the current one. If the created element normally contains another element inside of it, create it too. List of elements that contain other elements inside of them can be found in `web-mode-contained-elements'."
+  "Create another element of the same type after the current one.
+If the created element normally contains another element inside
+of it, create it too. List of elements that contain other
+elements inside of them can be found in
+`web-mode-contained-elements'."
   (interactive)
   (let ((element-name (progn (web-mode-element-parent)
                              (web-mode-element-tag-name)))
