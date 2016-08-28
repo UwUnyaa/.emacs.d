@@ -1,6 +1,6 @@
 ;;; ox-sfhp.el - export from org-mode to a single file HTML presentation
 ;;; -*- coding: utf-8 -*-
-;;; Version: 1.1.0
+;;; Version: 1.2.0
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
 
@@ -26,9 +26,12 @@
 ;;; Variables and constants:
 
 ;;; Constants with code
+(defconst org-sfhp-style-tags
+  '("<style type=\"text/css\">\n" . "</style>\n")
+  "Style tags for ox-sfhp.")
+
 (defconst org-sfhp-style-common
-  "<style type=\"text/css\">
- /* common style, no colors should go in here */
+" /* common style */
  body {
    margin: 0;
    font-family: sans, arial, helvetica;
@@ -146,13 +149,11 @@
  img {
    max-width: 90%;
    margin: 1em;
- }
-</style>\n"
+ }\n"
   "Common style for ox-sfhp")
 
 (defvar org-sfhp-color-themes
-  '(("dark" . "<style type=\"text/css\">
-/* dark theme */
+  '(("dark" . " /* dark theme */
 body {
   background-color: #222;
   color: #AAA;
@@ -176,10 +177,8 @@ button {
 }
 #buttons {
   background-color: #333;
-}
-</style>\n")
-    ("light" . "<style type=\"text/css\">
-/* light theme */
+}\n")
+    ("light" . " /* light theme */
 body {
   background-color: #EEE;
   color: #111;
@@ -206,8 +205,7 @@ button {
 }
 #buttons {
   background-color: #BBB;
-}
-</style>\n"))
+}\n"))
   "Color themes for ox-sfhp.")
 
 (defconst org-sfhp-style-hack-oldie
@@ -225,15 +223,13 @@ button {
   Internet Explorer that don't support position: fixed;")
 
 (defconst org-sfhp-style-hack-polish-quotes
-  "<style type=\"text/css\">
- /* polish quotes */
+  " /* polish quotes */
  blockquote:before {
    content: \"„\" !important;
  }
  blockquote:after {
    content: \"”\" !important;
- }
-</style>\n"
+ }\n"
   "A hack that overrides quotes with polish quotation marks")
 
 (defconst org-sfhp-script
@@ -420,7 +416,8 @@ Explorer in ox-sfhp output.")
   :options-alist
   '((:sfhp-theme "SFHP_THEME" nil "dark" space)
     (:sfhp-background-file "SFHP_BACKGROUND" nil nil space)
-    (:sfhp-background-repeat "SFHP_BACKGROUND_REPEAT" nil nil space)))
+    (:sfhp-background-repeat "SFHP_BACKGROUND_REPEAT" nil nil space)
+    (:sfhp-no-base64 "SFHP_NO_BASE64" nil nil space)))
 
 ;;; wrapping functions (or whatever)
 (defun org-sfhp-wrap-in-tag (type contents info)
@@ -543,7 +540,7 @@ be supressed by using \"decoration\" as the link description."
                      (if in-paragraphp
                          "</p>\n"
                        "")
-                     (org-sfhp-encode-as-base64 file-mime-type file-path)
+                     (org-sfhp-encode-as-base64 file-mime-type file-path info)
                      (cond ((not contents) "Undescribed picture")
                            ((string-equal contents "decoration") "")
                            (t contents))
@@ -558,15 +555,18 @@ be supressed by using \"decoration\" as the link description."
           (t contents))))          ;just insert link text otherwise
 
 ;; encode as base64
-(defun org-sfhp-encode-as-base64 (mime-type file-path)
+(defun org-sfhp-encode-as-base64 (mime-type file-path info)
   "Returns an image as a base64-encoded string along with its
-MIME type. File is assumed to exist."
-  (format "data:%s;base64,%s"
-          mime-type
-          (with-temp-buffer
-            (insert-file-contents-literally file-path)
-            (base64-encode-region (point-min) (point-max) t)
-            (buffer-string))))
+MIME type or a relative path to a file. File is assumed to
+exist."
+  (if (plist-get info :sfhp-no-base64)
+      (file-relative-name file-path)
+    (format "data:%s;base64,%s"
+            mime-type
+            (with-temp-buffer
+              (insert-file-contents-literally file-path)
+              (base64-encode-region (point-min) (point-max) t)
+              (buffer-string)))))
 
 ;; template
 (defun org-sfhp-template (contents info)
@@ -599,40 +599,46 @@ MIME type. File is assumed to exist."
             ;; common code
             org-sfhp-meta
             org-sfhp-script
-            org-sfhp-style-common
 
-            ;; background image
-            (if background-path
-                (if background-mime-type
-                    (concat "<style type=\"text/css\">\n"
-                            "  /* background image */\n"
-                            "  body {\n"
-                            "    background-attachment: fixed;\n"
-                            (if background-repeat
-                                ""
-                              "    background-size: cover;\n")
-                            (format "    background-image: url(\"%s\");\n"
-                                    (org-sfhp-encode-as-base64
-                                     background-mime-type background-path))
-                            "</style>")
-                  (message "ox-sfhp: unknown extension of background image")
-                  "")
-              (when background-file
-                (message "ox-sfhp: specified background image doesn't exist"))
-              "")
+            ;; CSS
+            (car org-sfhp-style-tags)   ; <style> tag
+            org-sfhp-style-common
 
             ;; color theme
             (or (cdr (assoc theme org-sfhp-color-themes))
                 (format "<style type=\"text/css\">\n%s\n</style>\n"
                         theme))         ;include the custom color theme
 
-            ;;; CSS hacks
-            (if org-sfhp-include-oldie-hacks
-                org-sfhp-style-hack-oldie
-              "")
             ;; polish quotes
             (if (string-equal language "pl")
                 org-sfhp-style-hack-polish-quotes
+              "")
+
+            ;; background image
+            (if background-path
+                (if background-mime-type
+                    (concat
+                     "  /* background image */\n"
+                     "  body {\n"
+                     "    background-attachment: fixed;\n"
+                     (if background-repeat
+                         ""
+                       "    background-size: cover;\n")
+                     (format "    background-image: url(\"%s\");\n"
+                             (org-sfhp-encode-as-base64
+                              background-mime-type background-path info))
+                     "  }\n")
+                  (message "ox-sfhp: unknown extension of background image")
+                  "")
+              (when background-file
+                (message "ox-sfhp: specified background image doesn't exist"))
+              "")
+
+            (cdr org-sfhp-style-tags)   ; </style> tag
+
+            ;;; IE hacks
+            (if org-sfhp-include-oldie-hacks
+                org-sfhp-style-hack-oldie
               "")
 
             "</head>\n"
