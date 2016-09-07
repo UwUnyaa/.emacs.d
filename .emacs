@@ -17,11 +17,11 @@
  '(show-paren-mode t))
 
 ;; load parts of config (order is important)
-(load "~/.emacs.d/config/defuns.el")
-(load "~/.emacs.d/config/customization.el")
-(load "~/.emacs.d/config/platform-specific.el")
-(load "~/.emacs.d/config/extensions.el")
-(load "~/.emacs.d/config/indentation.el")
+(load "~/.emacs.d/config/my-defuns.el")
+(load "~/.emacs.d/config/my-customization.el")
+(load "~/.emacs.d/config/my-platform-specific.el")
+(load "~/.emacs.d/config/my-extensions.el")
+(load "~/.emacs.d/config/my-indentation.el")
 
 ;; load additional config files if they exist
-(load "~/.emacs.d/config/local.el" t)
+(load "~/.emacs.d/config/my-local.el" t)
