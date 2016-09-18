@@ -1,7 +1,7 @@
 *~
-.emacs.d/config/my-local.el
-.emacs.d/secret/
-.emacs.d/url/
-.emacs.d/games/
-.emacs.d/image-dired/
-.emacs.d/tramp
+/config/my-local.el
+/secret/
+/url/
+/games/
+/image-dired/
+/tramp
