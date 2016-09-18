@@ -3,7 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(blink-cursor-mode t)
  '(current-language-environment "UTF-8")
  '(custom-enabled-themes (quote (wombat)))
  '(default-input-method "japanese")
@@ -14,7 +13,8 @@
  '(nxml-slash-auto-complete-flag t)
  '(read-quoted-char-radix 16)
  '(sentence-end-double-space nil)
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 
 ;; load parts of config (order is important)
 (load "~/.emacs.d/config/my-defuns.el")
