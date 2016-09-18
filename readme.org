@@ -10,6 +10,24 @@ files, so they can work faster. The table with customized keybindings is [[file:
 - Android 5.0 with [[https://termux.com/][Termux]]
 - Multiple versions of Windows (using the native build from the GNU FTP)
 
+** Installation:
+On unix-like operating systems such as GNU/Linux and on Termux:
+#+BEGIN_EXAMPLE
+cd ~
+git clone https://github.com/DoMiNeLa10/.emacs.d.git
+#+END_EXAMPLE
+You can update this config with =git pull=.
+
+Make sure you don't have a file named =.emacs= in your home directory, because
+it overrides =~/.emacs.d/init.el=.
+
+If you are on Windows NT, copy =.emacs.d= to =%addpata%=. You'll need to set
+up the =HOME= environment variable on older versions of Windows, and copy this
+config there.
+
+If you can't use git for some reason, you can use Github's "download ZIP"
+feature.
+
 ** Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
 - [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure emacs lisp
