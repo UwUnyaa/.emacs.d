@@ -2,8 +2,9 @@
 
 ** About this .emacs
 This is my config for GNU Emacs. I hold my settings specific to my Arch
-installation in ~.emacs.d/config/local.el~. Extensions come with byte compiled
-files, so they can work faster. The table with customized keybindings is [[file:documentation/changed-keybindings.org][here]].
+installation in ~/.emacs.d/config/my-local.el~. Extensions come with byte
+compiled files, so they can work faster. The table with customized keybindings
+is [[file:documentation/changed-keybindings.org][here]].
 
 ** This config is used on these operating systems:
 - Arch GNU/Linux
