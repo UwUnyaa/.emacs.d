@@ -17,7 +17,7 @@
   (message "Started a local http server at port %d in %s" httpd-port httpd-root))
 
 ;; C-c TAB from web-mode in almost all modes
-(defun indent-buffer ()
+(defun my-indent-buffer ()
   "Indent the whole buffer."
   (interactive)
   (indent-region (point-min) (point-max))

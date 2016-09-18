@@ -8,7 +8,7 @@
 ;; Use C-x C-h for marking paragraphs
 (global-set-key (kbd "C-x C-h") 'mark-paragraph)
 ;; other keybindings
-(global-set-key (kbd "C-c C-i") 'indent-buffer)
+(global-set-key (kbd "C-c C-i") 'my-indent-buffer)
 (global-set-key (kbd "C-c i") 'my-impatient-mode)
 (global-set-key (kbd "C-c l") 'my-lhttpd)
 
