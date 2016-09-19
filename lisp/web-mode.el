@@ -12220,26 +12220,34 @@ of it, create it too. List of elements that contain other
 elements inside of them can be found in
 `web-mode-contained-elements'."
   (interactive)
-  (let ((element-name (progn (web-mode-element-parent)
+  (let ((start-point (point))
+        (element-name (progn (web-mode-element-parent)
                              (web-mode-element-tag-name)))
-        (contained-element nil)
-        (reg-start 0)
-        (reg-end 0))
-    (setq reg-start (web-mode-element-end))
-    (insert (format "\n<%s>%s</%s>" element-name
-                    (if (setq contained-element
-                              (cdr (assoc element-name web-mode-contained-elements)))
-                        (format "\n<%s></%s>\n" contained-element contained-element)
-                      "")
-                    element-name))
-    (setq reg-end (point))
-    (backward-char (if contained-element
-                       (+ (length element-name) (length contained-element) 7)
-                     (+ (length element-name) 3)))
-    (indent-region reg-start reg-end)))
+        contained-element reg-start reg-end)
+    (if element-name
+        (progn
+          (setq reg-start (web-mode-element-end))
+          (insert
+           (format "\n<%s>%s</%s>" element-name
+                   (if (setq contained-element
+                             (cdr (assoc
+                                   element-name web-mode-contained-elements)))
+                       (format "\n<%s></%s>\n"
+                               contained-element contained-element)
+                     "")
+                   element-name))
+          (setq reg-end (point))
+          (backward-char (if contained-element
+                             (+ (length element-name)
+                                (length contained-element) 7)
+                           (+ (length element-name) 3)))
+          (indent-region reg-start reg-end))
+      (progn (goto-char start-point)
+             (error "Not inside of a tag")))))
 
 (defun web-mode-break-lines ()
-  "Insert a \"<br />\" tag where point is or on every line in region if it's active."
+  "Insert a \"<br />\" tag where point is or on every line in
+region if it's active."
   (interactive)
   (if (use-region-p)
       (let ((point-line (line-number-at-pos))
