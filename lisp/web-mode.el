@@ -12271,11 +12271,10 @@ properly."
          reg-start reg-end)
     (if element-name
         (progn
-          (setq reg-start (if (string-equal element-name "dt")
-                              (progn (web-mode-element-end)
-                                     (web-mode-element-next)
-                                     (web-mode-element-end))
-                            (web-mode-element-end)))
+          (when (string-equal element-name "dt")
+            (web-mode-element-end)
+            (web-mode-element-next))
+          (setq reg-start (web-mode-element-end))
           (insert
            (cond (in-dl-p "\n<dl>\n<dt></dt>\n<dd></dd>\n</dl>")
                  (in-dt-or-dd-p "\n<dt></dt>\n<dd></dd>")
