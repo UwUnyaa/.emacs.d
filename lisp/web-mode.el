@@ -1087,8 +1087,13 @@ Must be used in conjunction with web-mode-enable-block-face."
                  ("safe"       . "{% safe | %}\n\n{% endsafe %}")))
     ("template-toolkit" . (("if"      . "[% IF | %]\n\n[% END %]")))
     (nil . (("html5" . "<!doctype html>\n<html>\n<head>\n<title></title>\n<meta charset=\"utf-8\" />\n</head>\n<body>\n|\n</body>\n</html>")
-            ("table" . "<table><tbody>\n<tr>\n<td>|</td>\n<td></td>\n</tr>\n</tbody></table>")
-            ("ul"    . "<ul>\n<li>|</li>\n<li></li>\n</ul>")))
+            ("table" . "<table>\n<tr>\n<td>|</td>\n</tr>\n</table>")
+            ("ul" . "<ul>\n<li>|</li>\n</ul>")
+            ("ol" . "<ol>\n<li>|</li>\n</ol>")
+            ("dl" . "<dl>\n<dt>|</dt>\n<dd></dd>\n</dl>")
+            ("script" . "<script type=\"text/javascript\">\n|\n</script>")
+            ("style" . "<style type=\"text/css\">\n|\n</style>")
+            ("viewport" . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />|")))
     ))
 
 (defvar web-mode-engine-token-regexps
@@ -12252,34 +12257,43 @@ extended to support more filetypes by customizing
 (defun web-mode-element-create-next ()
   "Create another element of the same type after the current one.
 If the created element normally contains another element inside
-of it, create it too. List of elements that contain other
-elements inside of them can be found in
-`web-mode-contained-elements'."
+of it, create it too. List of these elements can be found in
+`web-mode-contained-elements'. Detailed lists are also handled
+properly."
   (interactive)
-  (let ((start-point (point))
-        (element-name (progn (web-mode-element-parent)
-                             (web-mode-element-tag-name)))
-        contained-element reg-start reg-end)
+  (let* ((start-point (point))
+         (element-name (progn (web-mode-element-parent)
+                              (web-mode-element-tag-name)))
+         (in-dl-p (string-equal element-name "dl"))
+         (in-dt-or-dd-p (member element-name '("dt" "dd")))
+         (contained-element
+          (cdr (assoc element-name web-mode-contained-elements)))
+         reg-start reg-end)
     (if element-name
         (progn
-          (setq reg-start (web-mode-element-end))
+          (setq reg-start (if (string-equal element-name "dt")
+                              (progn (web-mode-element-end)
+                                     (web-mode-element-next)
+                                     (web-mode-element-end))
+                            (web-mode-element-end)))
           (insert
-           (format "\n<%s>%s</%s>" element-name
-                   (if (setq contained-element
-                             (cdr (assoc
-                                   element-name web-mode-contained-elements)))
-                       (format "\n<%s></%s>\n"
-                               contained-element contained-element)
-                     "")
-                   element-name))
+           (cond (in-dl-p "\n<dl>\n<dt></dt>\n<dd></dd>\n</dl>")
+                 (in-dt-or-dd-p "\n<dt></dt>\n<dd></dd>")
+                 (contained-element
+                  (format "\n<%s>\n<%s></%s>\n</%s>"
+                          element-name contained-element
+                          contained-element element-name))
+                 (t (format "\n<%s></%s>"
+                            element-name element-name))))
           (setq reg-end (point))
-          (backward-char (if contained-element
-                             (+ (length element-name)
-                                (length contained-element) 7)
-                           (+ (length element-name) 3)))
+          (backward-char
+           (cond (in-dl-p 21)
+                 (in-dt-or-dd-p 15)
+                 (contained-element (+(length contained-element)
+                                      (length element-name) 7))
+                 (t (+ (length element-name) 3))))
           (indent-region reg-start reg-end))
-      (progn (goto-char start-point)
-             (error "Not inside of a tag")))))
+      (error "Not inside of a tag"))))
 
 (defun web-mode-break-lines ()
   "Insert a \"<br />\" tag where point is or on every line in
