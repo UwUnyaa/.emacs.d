@@ -1203,6 +1203,15 @@ shouldn't be moved back.)")
     ("tr" . "td"))
   "List of elements and elements that are typically contained within them. Used by `web-mode-element-create-next'.")
 
+(defvar web-mode-link-attributes
+  '(("a" . "href")
+    ("link" . "href")
+    ("script" . "src")
+    ("iframe" . "src")
+    ("img" . "src"))
+  "List of elements and attributes that hold links to files in
+them.")
+
 (defvar web-mode-sql-queries
   (regexp-opt
    '("SELECT" "INSERT" "UPDATE" "DELETE" "select" "insert" "update" "delete")))
@@ -2242,6 +2251,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     (define-key map (kbd "C-c C-n")   'web-mode-navigate)
     (define-key map (kbd "C-c C-r")   'web-mode-reload)
     (define-key map (kbd "C-c C-s")   'web-mode-snippet-insert)
+    (define-key map (kbd "C-c C-o")   'web-mode-follow-link)
     ;;C-c C-t : tag
     (define-key map (kbd "C-c C-w")   'web-mode-whitespaces-show)
 
@@ -8607,6 +8617,46 @@ Prompt user if TAG-NAME isn't provided."
         (replace-match (concat "<" tag-name))
         ))))
 
+(defun web-mode-element-name ()
+  "Returns the name of the element at point."
+  (let ((start-point (point))
+        name-beginning name)
+    (web-mode-element-beginning)
+    (setq name-beginning (1+ (point)))
+    (forward-word)
+    (setq name
+          (buffer-substring-no-properties name-beginning (point)))
+    (goto-char start-point)
+    name))
+
+(defun web-mode-attribute-get (attribute)
+  "Returns the value of the attribute from the element at point.
+This might not work well."
+  (let* ((start-point (point))
+         (element-beg (web-mode-element-beginning))
+         (element-end (web-mode-element-end))
+         quote-type quote-regex attribute-beg attribute-end)
+    (goto-char element-beg)
+    (search-forward (concat attribute "=") element-end)
+    (setq quote-type (char-after))
+    (cond ((= quote-type ?')
+           (setq quote-regex "'[^\\(\\'\\)]*'"))
+          ((= quote-type ?\")
+           (setq quote-regex "\"[^\\(\\\"\\)]*\"")))
+    (if quote-regex
+        (setq attribute-beg (1+ (point)))
+      (setq attribute-beg (point)))
+    (if quote-regex
+        (setq attribute-end (re-search-forward quote-regex element-end t))
+      (forward-word)
+      (setq attribute-end (point)))
+    ;; check if attribute is quoted and the search has failed
+    (when quote-regex
+      (if attribute-end
+          (setq attribute-end (1- attribute-end)) ; remove the quote at the end
+        (error "Unbalanced quotes")))
+    (buffer-substring-no-properties attribute-beg attribute-end)))
+
 (defun web-mode-current-trimmed-line ()
   (web-mode-trim (buffer-substring-no-properties
                   (line-beginning-position)
@@ -12253,6 +12303,29 @@ extended to support more filetypes by customizing
         (backward-char (nth 3 type))))
     (when (not matched)
       (user-error "Unknown file type"))))
+
+(defun web-mode-follow-link (&optional in-browser)
+  "Open a file to a file linked by the element at point. Opens
+the file in a web browser when this function is called with a
+numeric argument. URLs are opened with `erc' or `browse-url' when
+called with a numeric argument."
+  (interactive "P")
+  (let ((link-attribute
+         (cdr (assoc
+               (web-mode-element-name) web-mode-link-attributes)))
+        file-or-link)
+    (unless link-attribute
+      (error "Not in an element that links to anything"))
+    (setq file-or-link (web-mode-attribute-get link-attribute))
+    (if (string-match "^https?://" file-or-link)
+        (if in-browser
+            (browse-url file-or-link)
+          (eww file-or-link))
+      (unless (file-exists-p file-or-link)
+        (error "Linked file doesn't exist"))
+      (if in-browser
+          (browse-url (concat "file://" (expand-file-name file-or-link)))
+        (find-file file-or-link)))))
 
 (defun web-mode-element-create-next ()
   "Create another element of the same type after the current one.
