@@ -1,17 +1,18 @@
 #+TITLE: DoMiNeLa10's .emacs
 
-** About this .emacs
+* About this .emacs
 This is my config for GNU Emacs. I hold my settings specific to my Arch
-installation in ~/.emacs.d/config/my-local.el~. Extensions come with byte
-compiled files, so they can work faster. The table with customized keybindings
-is [[file:documentation/changed-keybindings.org][here]].
+installation in ~/.emacs.d/config/my-local.el~. You can put your own
+customizations there if you want to use my config. Extensions come with byte
+compiled files, so they can work faster. Tables with customized keybindings
+are [[file:documentation/changed-keybindings.org][here]].
 
-** This config is used on these operating systems:
+* This config is used on these operating systems:
 - [[https://www.archlinux.org/][Arch GNU/Linux]]
 - Android 5.0 with [[https://termux.com/][Termux]]
 - Multiple versions of Windows (using the native build from the [[https://www.gnu.org/software/emacs/download.html#windows][GNU FTP]])
 
-** Installation:
+* Installation:
 On unix-like operating systems such as GNU/Linux and on Termux:
 #+BEGIN_EXAMPLE
 cd ~
@@ -26,10 +27,11 @@ If you are on Windows NT, copy =.emacs.d= to =%addpata%=. You'll need to set
 up the =HOME= environment variable on older versions of Windows, and copy this
 config there.
 
-If you can't use git for some reason, you can use Github's "download ZIP"
-feature.
+If you can't use git for some reason, you can use Github's “download ZIP”
+feature. You'll have to rename the folder that will be in the zip file,
+because github puts the name of the branch after the name of the repository.
 
-** Links to extensions included in this config:
+* Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
 - [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure emacs lisp
 - [[https://melpa.org/#/htmlize][htmlize]] :: turns emacs buffers into HTML with syntax highlighting
