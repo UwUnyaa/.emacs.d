@@ -6,13 +6,12 @@
 
 ;; daemon specific code
 (when (daemonp)
-  ;; change the name of the frame
-  (setq frame-title-format "Emacs (server)")
-  ;; fix broken web-mode variables (won't work in emacsclient -t when
-  ;; pasting from clipboard)
-  (setq web-mode-enable-css-colorization t)
-  (setq web-mode-enable-auto-indentation t)
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-enable-auto-pairing t)
-  (setq web-mode-enable-auto-opening t)
-  (setq web-mode-enable-auto-quoting t))
+  (setq frame-title-format "Emacs (server)" ; name of the daemon frame
+        ;; fix broken web-mode variables (won't work in emacsclient -t when
+        ;; pasting from clipboard)
+        web-mode-enable-css-colorization t
+        web-mode-enable-auto-indentation t
+        web-mode-enable-auto-closing t
+        web-mode-enable-auto-pairing t
+        web-mode-enable-auto-opening t
+        web-mode-enable-auto-quoting t))
