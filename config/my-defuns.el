@@ -16,7 +16,8 @@ with httpd server if it isn't running."
   (setq httpd-root default-directory)
   (setq httpd-port (or arg 8000))
   (httpd-start)
-  (message "Started a local http server at port %d in %s" httpd-port httpd-root))
+  (message "Started a local http server at port %d in %s"
+           httpd-port httpd-root))
 
 ;; C-c TAB from web-mode in almost all modes
 (defun my-indent-buffer ()
