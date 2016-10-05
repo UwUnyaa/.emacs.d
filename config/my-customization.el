@@ -13,20 +13,18 @@
 (global-set-key (kbd "C-c l") 'my-lhttpd)
 
 ;;; Other customizations
-;; no sounds
-(setq visible-bell nil)
-;; no startup message
-(setq inhibit-startup-message t)
-;; empty scratch buffer
-(setq initial-scratch-message nil)
+(setq visible-bell nil                  ; no sounds
+      inhibit-startup-message t         ; no startup message
+      initial-scratch-message nil       ; empty scratch buffer
+      frame-title-format "Emacs"        ; frame title
+      auto-save-timeout 60)             ; autosave every 60 seconds
+
 ;; blinking cursor
 (blink-cursor-mode 1)
-;; frame title
-(setq frame-title-format "Emacs")
+
 ;; fill-column
 (setq-default fill-column 78)
-;; autosave every 60 seconds
-(setq auto-save-timeout 60)
+
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -63,15 +61,10 @@
             ;; move by paragraphs with M-n and M-p
             (define-key org-mode-map (kbd "M-n") 'org-forward-paragraph)
             (define-key org-mode-map (kbd "M-p") 'org-backward-paragraph)))
-;; display org-mode buffers with indentation
-(setq org-startup-indented t)
-;; custom ellipsis
-(setq org-ellipsis "⤵")
-;; display files without folding them
-(setq org-startup-folded nil)
-;; wrap lines
-(setq org-startup-truncated nil)
-;; insert a timestamp when a task is done
-(setq org-log-done 'time)
-;; syntax highlighting in source code blocks
-(setq org-src-fontify-natively t)
+;;; other org-mode customization
+(setq org-startup-indented t       ; display org-mode buffers with indentation
+      org-ellipsis "⤵"             ; custom ellipsis
+      org-startup-folded nil       ; display files without folding them
+      org-startup-truncated nil    ; wrap lines
+      org-log-done 'time           ; insert a timestamp when a task is done
+      org-src-fontify-natively t)  ; syntax highlighting in source code blocks
