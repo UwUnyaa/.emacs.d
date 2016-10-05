@@ -8655,6 +8655,7 @@ This might not work well."
       (if attribute-end
           (setq attribute-end (1- attribute-end)) ; remove the quote at the end
         (error "Unbalanced quotes")))
+    (goto-char start-point)
     (buffer-substring-no-properties attribute-beg attribute-end)))
 
 (defun web-mode-current-trimmed-line ()
