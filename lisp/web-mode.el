@@ -12375,7 +12375,7 @@ properly."
       (error "Not inside of a tag"))))
 
 (defun web-mode-break-lines ()
-  "Insert a \"<br />\" tag where point is or on every line in
+  "Insert a \"<br/>\" tag where point is or on every line in
 region if it's active."
   (interactive)
   (if (use-region-p)
@@ -12385,11 +12385,11 @@ region if it's active."
 	(goto-char (region-beginning))
 	(while (<= (line-number-at-pos) end-line)
 	  (end-of-line)
-	  (insert "<br />")
+	  (insert "<br/>")
 	  (forward-line))
 	(forward-line (- point-line (line-number-at-pos)))
         (move-to-column point-column))
-    (insert "<br />")))
+    (insert "<br/>")))
 
 (defun web-mode-reload ()
   "Reload web-mode."
