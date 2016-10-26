@@ -25,3 +25,25 @@ with httpd server if it isn't running."
   (interactive)
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
+
+;; a command to insert block comments in js2-mode
+(defun my-js2-comment-block (&optional beg end)
+  "Inserts a block comment at point or wraps region in a block
+comment."
+  ;; this code is bad, but it's a quick hack for now
+  (interactive
+   (when (use-region-p)
+     (list (region-beginning) (region-end))))
+  (if beg                               ; if region is active
+      (let ((current-point (point)))
+        (goto-char beg)
+        (insert "/* ")
+        (goto-char (+ end 3))
+        (insert " */")
+        (goto-char
+         (+ current-point
+            (if (> beg end)
+                3
+              6))))
+    (insert "/*  */")
+    (backward-char 3)))

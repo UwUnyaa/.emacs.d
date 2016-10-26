@@ -16,7 +16,6 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 ;; customize variables
 (setq web-mode-enable-auto-pairing t               ; auto-pairing
       web-mode-enable-css-colorization t           ; CSS colorization
@@ -37,3 +36,12 @@
 
 ;; ox-sfhp
 (require 'ox-sfhp)
+
+;; js2-mode
+(add-to-list 'load-path "~/.emacs.d/lisp/js2/")
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (define-key js2-mode-map (kbd "C-c C-n") 'js2-next-error)
+            (define-key js2-mode-map (kbd "C-M-;") 'my-js2-comment-block)))
