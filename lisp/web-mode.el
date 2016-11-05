@@ -8714,33 +8714,61 @@ Prompt user if TAG-NAME isn't provided."
     name))
 
 (defun web-mode-attribute-get (attribute)
-  "Returns the value of the attribute from the element at point.
-This might not work well."
+  "Returns the value of attribute ATTRIBUTE from the element at point,
+or nil if it's empty or it doesn't exist."
   (let* ((start-point (point))
          (element-beg (web-mode-element-beginning))
-         (element-end (web-mode-element-end))
-         quote-type quote-regex attribute-beg attribute-end)
+         (element-end (web-mode-tag-end))
+         (attribute-value "")
+         quote-type)
     (goto-char element-beg)
-    (search-forward (concat attribute "=") element-end)
-    (setq quote-type (char-after))
-    (cond ((= quote-type ?')
-           (setq quote-regex "'[^\\(\\'\\)]*'"))
-          ((= quote-type ?\")
-           (setq quote-regex "\"[^\\(\\\"\\)]*\"")))
-    (if quote-regex
-        (setq attribute-beg (1+ (point)))
-      (setq attribute-beg (point)))
-    (if quote-regex
-        (setq attribute-end (re-search-forward quote-regex element-end t))
-      (forward-word)
-      (setq attribute-end (point)))
-    ;; check if attribute is quoted and the search has failed
-    (when quote-regex
-      (if attribute-end
-          (setq attribute-end (1- attribute-end)) ; remove the quote at the end
-        (error "Unbalanced quotes")))
+    (if (search-forward (concat attribute "=") element-end t)
+        (if (member (setq quote-type (char-after)) '(?' ?\"))
+            ;; quoted attribute
+            (progn
+              (while (and (< (progn (forward-char)
+                                    (point))
+                             element-end)
+                          (not (= (char-after) quote-type)))
+                (when (= (char-after) ?\\)
+                  (forward-char))
+                (setq attribute-value
+                      (concat
+                       attribute-value
+                       (char-to-string (char-after)))))
+              (unless (< (1+ (point)) element-end)
+                (error "Unbalanced quotes")))
+
+          ;; unquoted attribute
+          (let* ((attribute-beg (point))
+                 (attribute-end
+                  (search-forward-regexp "\\( \\|/?>\\)" element-end)))
+            ;; trim space or element closing from the value
+            (setq attribute-end
+                  (- attribute-end
+                     (if (string-equal
+                          "/>"
+                          (buffer-substring-no-properties
+                           (- (point) 2) (point)))
+                         2
+                       1)))
+            (setq attribute-value
+                  (buffer-substring-no-properties
+                   attribute-beg attribute-end)))))
+
+    ;; just the attribute value
+    (when (and (string-equal "" attribute-value)
+               (progn
+                 (goto-char element-beg)
+                 (search-forward attribute element-end t)))
+      (setq attribute-value attribute))
+
+    ;; return point where it was
     (goto-char start-point)
-    (buffer-substring-no-properties attribute-beg attribute-end)))
+
+    ;; return nil if attribute doesn't exist or is emtpy
+    (unless (string-equal "" attribute-value)
+      attribute-value)))
 
 (defun web-mode-current-trimmed-line ()
   (web-mode-trim (buffer-substring-no-properties
