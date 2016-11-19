@@ -8798,7 +8798,7 @@ or nil if it's empty or it doesn't exist."
           ;; unquoted attribute
           (let* ((attribute-beg (point))
                  (attribute-end
-                  (search-forward-regexp "\\( \\|/?>\\)" element-end)))
+                  (search-forward-regexp " \\|/?>" element-end)))
             ;; trim space or element closing from the value
             (setq attribute-end
                   (- attribute-end
