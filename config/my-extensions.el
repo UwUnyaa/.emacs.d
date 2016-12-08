@@ -41,7 +41,10 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/js2/")
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(setq js2-strict-trailing-comma-warning nil)
+;; #!/bin/node turns on js2-mode
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
+      js2-skip-preprocessor-directives t)   ; ignores #!/bin/node
 (add-hook 'js2-mode-hook
           (lambda ()
             (define-key js2-mode-map (kbd "C-c C-n") 'js2-next-error)
