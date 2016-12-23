@@ -47,3 +47,22 @@ comment."
               6))))
     (insert "/*  */")
     (backward-char 3)))
+
+;; escapes non-ASCII characters in region
+(defun my-js2-unicode-escape-region (beg end)
+  "Escapes non-ASCII characters as JavaScript unicode escapes.
+Doesn't handle all characters as of now."
+  (interactive "r")
+  (let ((unescaped (buffer-substring-no-properties beg end)))
+    (delete-region beg end)
+    (insert
+     (with-temp-buffer
+       (insert unescaped)
+       (goto-char (point-min))
+       (while (< (point) (point-max))
+         (let ((char (char-after)))
+           (if (> char 127)             ; non-ASCII
+               (progn (delete-char 1)
+                      (insert (format "\\u%04X" char)))
+             (forward-char))))
+       (buffer-substring-no-properties (point-min) (point-max))))))
