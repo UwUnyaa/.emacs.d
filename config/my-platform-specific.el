@@ -15,3 +15,8 @@
         web-mode-enable-auto-pairing t
         web-mode-enable-auto-opening t
         web-mode-enable-auto-quoting t))
+
+;; try configuring fonts
+(when (and (member "DejaVu Sans Mono" (font-family-list))
+           (display-graphic-p))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
