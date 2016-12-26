@@ -4413,11 +4413,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
             (cond
              ((get-text-property (1- (point)) 'block-side)
               (setq continue t))
-             ((looking-back "\\\\+'" reg-beg t)
-              (setq continue (= (mod (- (point) (match-beginning 0)) 2) 0))
-              )
              (t
-              (setq continue nil))
+              (setq continue (web-mode-string-continue-p reg-beg)))
              )
             ) ;while
           (setq token-type 'string))
@@ -4427,10 +4424,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
             (cond
              ((get-text-property (1- (point)) 'block-side)
               (setq continue t))
-             ((looking-back "\\\\+`" reg-beg t)
-              (setq continue (= (mod (- (point) (match-beginning 0)) 2) 0)))
              (t
-              (setq continue nil))
+              (setq continue (web-mode-string-continue-p reg-beg)))
              )
             ) ;while
           (setq token-type 'string))
@@ -4440,10 +4435,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
             (cond
              ((get-text-property (1- (point)) 'block-side)
               (setq continue t))
-             ((looking-back "\\\\+\"" reg-beg t)
-              (setq continue (= (mod (- (point) (match-beginning 0)) 2) 0)))
              (t
-              (setq continue nil))
+              (setq continue (web-mode-string-continue-p reg-beg)))
              ) ;cond
             ) ;while
           (cond
@@ -4555,6 +4548,13 @@ another auto-completion with different ac-sources (e.g. ac-php)")
         ) ;while
 
       )))
+
+(defun web-mode-string-continue-p (reg-beg)
+  "Is `point' preceeded by an odd number of backslashes?"
+  (let* ((p (1- (point))))
+    (while (and (< reg-beg p) (eq ?\\ (char-before p)))
+      (setq p (1- p)))
+    (= (mod (- (point) p) 2) 0)))
 
 (defun web-mode-jsx-skip (reg-end)
   (let ((continue t) (pos nil) (i 0) tag)
