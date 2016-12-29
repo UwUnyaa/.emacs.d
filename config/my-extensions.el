@@ -20,11 +20,12 @@
 (setq web-mode-enable-auto-pairing t               ; auto-pairing
       web-mode-enable-css-colorization t           ; CSS colorization
       web-mode-enable-auto-expanding t             ; auto expanding
-      web-mode-enable-current-element-highlight t) ; highlight matching HTML elements
-(add-hook 'web-mode-hook  (lambda ()
-                            (setq web-mode-markup-indent-offset 2 ; custom indentation
-                                  web-mode-css-indent-offset 2
-                                  web-mode-code-indent-offset 2)))
+      web-mode-enable-current-element-highlight t) ; highlight matching elements
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2 ; custom indentation
+                  web-mode-css-indent-offset 2
+                  web-mode-code-indent-offset 2)))
 
 ;;; impatient-mode
 ;; dependencies
