@@ -66,3 +66,23 @@ Doesn't handle all characters as of now."
                       (insert (format "\\u%04X" char)))
              (forward-char))))
        (buffer-substring-no-properties (point-min) (point-max))))))
+
+(defun my-dired-do-org-export (backend)
+  "Exports marked files or file at point with a backend read from
+a minibuffer. Files without .org extension are ignored. Alist of
+backends is defined in `my-dired-org-export-backends-alist'."
+  (interactive
+   (list (cdr (assoc (completing-read
+                      "Org export format: "
+                      my-dired-org-export-backends-alist)
+                     my-dired-org-export-backends-alist))))
+  (mapc (lambda (file)
+          (with-current-buffer (find-file-noselect file)
+            (funcall backend file)
+            (kill-buffer)))
+        (dired-get-marked-files
+         t nil
+         (lambda (file)              ; filter out files without .org extension
+           (let ((extension (file-name-extension file)))
+             (when extension
+               (string-equal "org" (downcase extension))))))))

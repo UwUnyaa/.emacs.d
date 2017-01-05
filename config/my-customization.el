@@ -68,3 +68,16 @@
       org-startup-truncated nil    ; wrap lines
       org-log-done 'time           ; insert a timestamp when a task is done
       org-src-fontify-natively t)  ; syntax highlighting in source code blocks
+
+;;; dired
+(defvar my-dired-org-export-backends-alist
+  '(("html" . org-html-export-to-html)
+    ("sfhp" . org-sfhp-export-to-file)
+    ("text" . org-ascii-export-to-ascii)
+    ("pdf"  . org-latex-export-to-pdf))
+  "Alist of org export formats and functions used by them. Used
+by `my-dired-do-org-export'.")
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map "E" 'my-dired-do-org-export)))
