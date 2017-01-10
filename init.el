@@ -30,3 +30,8 @@
 
 ;; load additional config files if they exist
 (load "~/.emacs.d/config/my-local.el" t)
+
+;; add local lisp directory to load-path if it exists
+(let ((local-lisp-dir "~/.emacs.d/lisp/local"))
+  (when (file-exists-p local-lisp-dir)
+    (add-to-list 'load-path local-lisp-dir)))
