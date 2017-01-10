@@ -89,7 +89,7 @@ backends is defined in `my-dired-org-export-backends-alist'."
   "Generate autoload files for all directories inside
 \"~/.emacs.d/lisp\"."
   (interactive)
-  (let ((dir  (file-truename "~/.emacs.d/lisp")))
+  (let ((dir (file-truename "~/.emacs.d/lisp")))
     (mapc
      (lambda (dir)
        (let ((generated-autoload-file (concat dir "/autoloads.el")))
