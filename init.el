@@ -32,4 +32,5 @@
 ;; load additional config files if they exist
 (mapc (lambda (file)
         (load file t))
-      '("~/.emacs.d/config/my-local.el"))
+      '("~/.emacs.d/config/my-local.el"
+        "~/.emacs.d/lisp/local/autoloads.el"))
