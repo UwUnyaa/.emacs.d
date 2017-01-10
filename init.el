@@ -26,7 +26,7 @@
 
 ;; load autoload files
 (mapc #'load
-      (directory-files-recursively "~/.emacs.d/lisp" "autoloads\\.el$" t))
+      (directory-files-recursively "~/.emacs.d/lisp" "autoloads\\.el$"))
 
 ;; load additional config files if they exist
 (load "~/.emacs.d/config/my-local.el" t)
