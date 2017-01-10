@@ -1,5 +1,7 @@
 ;; this file should load after extensions
 
+(require 'cl)
+
 (defun my-impatient-mode()
   "A function that automatically enables impatient-mode along
 with httpd server if it isn't running."
@@ -82,3 +84,17 @@ backends is defined in `my-dired-org-export-backends-alist'."
            (let ((extension (file-name-extension file)))
              (when extension
                (string-equal "org" (downcase extension))))))))
+
+(defun my-update-autoloads ()
+  "Generate autoload files for all directories inside
+\"~/.emacs.d/lisp\"."
+  (interactive)
+  (let ((dir  (file-truename "~/.emacs.d/lisp")))
+    (mapc
+     (lambda (dir)
+       (let ((generated-autoload-file (concat dir "/autoloads.el")))
+         (update-directory-autoloads dir)))
+     (cons dir
+           (cl-remove-if-not
+            #'file-directory-p
+            (directory-files-recursively dir "" t))))))
