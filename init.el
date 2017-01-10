@@ -16,17 +16,20 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-;; autoloads
-(load "~/.emacs.d/lisp/autoloads.el")
-(load "~/.emacs.d/lisp/js2/autoloads.el")
-(load "~/.emacs.d/lisp/impatient-mode/autoloads.el")
-
-;; load parts of config (order is important)
-(load "~/.emacs.d/config/my-defuns.el")
-(load "~/.emacs.d/config/my-customization.el")
-(load "~/.emacs.d/config/my-platform-specific.el")
-(load "~/.emacs.d/config/my-extensions.el")
-(load "~/.emacs.d/config/my-indentation.el")
+;; load config files
+(mapc #'load
+      '(;; autoloads
+        "~/.emacs.d/lisp/autoloads.el"
+        "~/.emacs.d/lisp/js2/autoloads.el"
+        "~/.emacs.d/lisp/impatient-mode/autoloads.el"
+        ;; load parts of config (order is important)
+        "~/.emacs.d/config/my-defuns.el"
+        "~/.emacs.d/config/my-customization.el"
+        "~/.emacs.d/config/my-platform-specific.el"
+        "~/.emacs.d/config/my-extensions.el"
+        "~/.emacs.d/config/my-indentation.el"))
 
 ;; load additional config files if they exist
-(load "~/.emacs.d/config/my-local.el" t)
+(mapc (lambda (file)
+        (load file t))
+      '("~/.emacs.d/config/my-local.el"))
