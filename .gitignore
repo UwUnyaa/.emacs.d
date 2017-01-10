@@ -1,5 +1,6 @@
 *~
 /config/my-local.el
+/lisp/local/
 /secret/
 /url/
 /games/
