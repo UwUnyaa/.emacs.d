@@ -16,6 +16,11 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
+;; autoloads
+(load "~/.emacs.d/lisp/autoloads.el")
+(load "~/.emacs.d/lisp/js2/autoloads.el")
+(load "~/.emacs.d/lisp/impatient-mode/autoloads.el")
+
 ;; load parts of config (order is important)
 (load "~/.emacs.d/config/my-defuns.el")
 (load "~/.emacs.d/config/my-customization.el")

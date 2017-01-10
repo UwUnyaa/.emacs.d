@@ -5,7 +5,6 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; web-mode
-(require 'web-mode)
 ;; select mode on filetype
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -28,19 +27,15 @@
                   web-mode-code-indent-offset 2)))
 
 ;;; impatient-mode
-;; dependencies
-(require 'simple-httpd)
-(require 'htmlize)
+;; dependencies: simple-httpd, htmlize
 ;; impatient-mode and its separate path (because it has a lot of files in it)
 (add-to-list 'load-path "~/.emacs.d/lisp/impatient-mode/")
-(require 'impatient-mode)
 
 ;; ox-sfhp
-(require 'ox-sfhp)
+(require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
 ;; js2-mode
 (add-to-list 'load-path "~/.emacs.d/lisp/js2/")
-(require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; #!/bin/node turns on js2-mode
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
