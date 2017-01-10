@@ -1,6 +1,5 @@
 ;; this file should load after extensions
 
-;; a function to launch impatient-mode quicker
 (defun my-impatient-mode()
   "A function that automatically enables impatient-mode along
 with httpd server if it isn't running."
@@ -19,14 +18,12 @@ with httpd server if it isn't running."
   (message "Started a local http server at port %d in %s"
            httpd-port httpd-root))
 
-;; C-c TAB from web-mode in almost all modes
 (defun my-indent-buffer ()
-  "Indent the whole buffer."
+  "Indent the whole buffer like in `web-mode'."
   (interactive)
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
-;; a command to insert block comments in js2-mode
 (defun my-js2-comment-block (&optional beg end)
   "Inserts a block comment at point or wraps region in a block
 comment."
@@ -48,7 +45,6 @@ comment."
     (insert "/*  */")
     (backward-char 3)))
 
-;; escapes non-ASCII characters in region
 (defun my-js2-unicode-escape-region (beg end)
   "Escapes non-ASCII characters as JavaScript unicode escapes.
 Doesn't handle all characters as of now."
