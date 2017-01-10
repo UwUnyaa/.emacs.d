@@ -29,6 +29,4 @@
       (directory-files-recursively "~/.emacs.d/lisp" "autoloads\\.el$" t))
 
 ;; load additional config files if they exist
-(mapc (lambda (file)
-        (load file t))
-      '("~/.emacs.d/config/my-local.el"))
+(load "~/.emacs.d/config/my-local.el" t)
