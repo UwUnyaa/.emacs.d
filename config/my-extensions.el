@@ -1,8 +1,15 @@
 ;;; this file contains configuration for extensions that don't come with GNU
 ;;; Emacs
 
-;;; load-path
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'cl)                   ; cl-remove-if-not
+;; add ~/.emacs.d/lisp and every directory inside of it to load-path
+(let ((dir (file-truename "~/.emacs.d/lisp")))
+  (mapc (lambda (dir)
+          (add-to-list 'load-path dir))
+        (cons dir
+              (cl-remove-if-not
+               #'file-directory-p
+               (directory-files-recursively dir "" t)))))
 
 ;;; web-mode
 ;; select mode on filetype
@@ -29,13 +36,11 @@
 ;;; impatient-mode
 ;; dependencies: simple-httpd, htmlize
 ;; impatient-mode and its separate path (because it has a lot of files in it)
-(add-to-list 'load-path "~/.emacs.d/lisp/impatient-mode/")
 
 ;; ox-sfhp
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
 ;; js2-mode
-(add-to-list 'load-path "~/.emacs.d/lisp/js2/")
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; #!/bin/node turns on js2-mode
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
