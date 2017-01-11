@@ -33,10 +33,6 @@
                   web-mode-css-indent-offset 2
                   web-mode-code-indent-offset 2)))
 
-;;; impatient-mode
-;; dependencies: simple-httpd, htmlize
-;; impatient-mode and its separate path (because it has a lot of files in it)
-
 ;; ox-sfhp
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
