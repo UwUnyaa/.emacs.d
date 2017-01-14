@@ -18,7 +18,7 @@ This config won't work with GNU Emacs 24.
 - Multiple versions of Windows (using the native build from the [[https://www.gnu.org/software/emacs/download.html#windows][GNU FTP]])
 
 * Installation:
-On unix-like operating systems such as GNU/Linux and on Termux:
+On Unix-like operating systems such as GNU/Linux and on Termux:
 #+BEGIN_EXAMPLE
 cd ~
 git clone https://github.com/DoMiNeLa10/.emacs.d.git
@@ -32,9 +32,9 @@ If you are on Windows NT, copy =.emacs.d= to =%appdata%=. You'll need to set
 up the =HOME= environment variable on older versions of Windows, and copy this
 config there.
 
-If you can't use git for some reason, you can use Github's “download ZIP”
+If you can't use git for some reason, you can use GitHub's “download ZIP”
 feature. You'll have to rename the folder that will be in the zip file,
-because github puts the name of the branch after the name of the repository.
+because GitHub puts the name of the branch after the name of the repository.
 
 * Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
