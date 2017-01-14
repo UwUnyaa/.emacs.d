@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2016 François-Xavier Bois
 
-;; Version: 14.0.35
+;; Version: 14.0.36
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; URL: http://web-mode.org
@@ -21,7 +21,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "14.0.35"
+(defconst web-mode-version "14.0.36"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -10034,8 +10034,8 @@ or nil if it's empty or it doesn't exist."
 
     (when (and web-mode-enable-auto-indentation
                (member this-command '(self-insert-command))
-               (member (get-text-property (point) 'part-side) '(javascript))
-               (looking-back "^[ \t]+\\(}\\|\]\\)"))
+               (member (get-text-property (point) 'part-side) '(javascript jsx))
+               (looking-back "^[ \t]+[]})]"))
       (indent-according-to-mode)
       ;;(message "%S" (point))
       (when (and web-mode-change-end (> web-mode-change-end (point-max)))
