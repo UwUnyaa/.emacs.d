@@ -2,9 +2,9 @@
 
 * About this .emacs
 This is my config for GNU Emacs. I hold my settings specific to my Arch
-installation in ~/.emacs.d/config/my-local.el~. You can put your own
+installation in =~/.emacs.d/config/my-local.el=. You can put your own
 customizations there if you want to use my config. Files in
-~/.emacs.d/lisp/local/~ are ignored too. Use =M-x my-update-autoloads= to
+=~/.emacs.d/lisp/local/= are ignored too. Use =M-x my-update-autoloads= to
 build autoload files for them automatically. Extensions come with byte
 compiled files, so they can work faster and they're loaded using autoload
 files so that emacs can start up faster. Tables with customized keybindings
