@@ -10,6 +10,8 @@ compiled files, so they can work faster and they're loaded using autoload
 files so that emacs can start up faster. Tables with customized keybindings
 are [[file:documentation/changed-keybindings.org][here]].
 
+This config won't work with GNU Emacs 24.
+
 * This config is used on these operating systems:
 - [[https://www.archlinux.org/][Arch GNU/Linux]]
 - Android 5.0 with [[https://termux.com/][Termux]]
