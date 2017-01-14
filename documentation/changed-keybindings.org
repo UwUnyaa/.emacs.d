@@ -23,3 +23,10 @@ Global keybindings:
 | =C-M-F/B/N/P= | ~(org-shiftmeta*)~     | ^                       |
 | =M-n/p=       | ~(org-*-paragraph)~    | ^                       |
 
+~js2-mode~:
+| Keybinding | Function                         | Description                                         |
+|------------+----------------------------------+-----------------------------------------------------|
+| =C-M-;=    | ~(my-js2-comment-block)~         | inserts a comment block that looks ~/*like this */~ |
+| =C-c C-u=  | ~(my-js2-unicode-escape-region)~ | escapes non-ASCII characters in region              |
+| =C-c C-n=  | ~(js2-next-error)~               | jumps to the next error                             |
+
