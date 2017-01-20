@@ -85,6 +85,17 @@ work."
   (setq-local js2-include-node-externs t)
   (setq-local js2-include-browser-externs nil))
 
+(defun my-dired-toggle-recursive ()
+  "Toggles the -R switch for ls in `dired'."
+  (interactive)
+  (let ((case-fold-search nil)
+        new-switches)
+    (if (string-match "R" dired-actual-switches)
+        (setq new-switches
+              (replace-regexp-in-string "R" "" dired-actual-switches))
+      (setq new-switches (concat dired-actual-switches "R")))
+    (dired-sort-other new-switches)))
+
 (defun my-dired-do-org-export (backend)
   "Exports marked files or file at point with a backend read from
 a minibuffer. Files without .org extension are ignored. Alist of
