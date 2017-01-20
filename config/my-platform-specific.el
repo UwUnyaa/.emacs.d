@@ -17,8 +17,8 @@
         web-mode-enable-auto-quoting t))
 
 ;; try configuring fonts
-(when (and (member "DejaVu Sans Mono" (font-family-list))
-           (display-graphic-p))
+(when (and (display-graphic-p)
+           (member "DejaVu Sans Mono" (font-family-list)))
   (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
 
 ;; use human readable file sizes in dired if they'll work
