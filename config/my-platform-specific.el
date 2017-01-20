@@ -19,7 +19,7 @@
 ;; try configuring fonts
 (when (and (member "DejaVu Sans Mono" (font-family-list))
            (display-graphic-p))
-    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
 
 ;; use human readable file sizes in dired if they'll work
 (when (or (member system-type '(ms-dos windows-nt))    ; ls in elisp
