@@ -88,7 +88,7 @@ work."
 (defun my-dired-toggle-recursive ()
   "Toggles the -R switch for ls in `dired'."
   (interactive)
-  (let ((case-fold-search nil)
+  (let ((case-fold-search nil)          ; -r isn't the same as -R
         new-switches)
     (if (string-match "R" dired-actual-switches)
         (setq new-switches
