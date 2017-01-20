@@ -82,7 +82,8 @@ work."
 
 (defun my-js2-set-for-node-context ()
   (interactive)
-  (setq-local js2-include-node-externs t))
+  (setq-local js2-include-node-externs t)
+  (setq-local js2-include-browser-externs nil))
 
 (defun my-dired-do-org-export (backend)
   "Exports marked files or file at point with a backend read from
