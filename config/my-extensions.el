@@ -50,4 +50,5 @@
             (define-key js2-mode-map (kbd "C-M-;") 'my-js2-comment-block)
             (define-key js2-mode-map (kbd "C-c C-u")
               'my-js2-unicode-escape-region)
+            (my-js2-check-for-node-context)
             (subword-mode)))

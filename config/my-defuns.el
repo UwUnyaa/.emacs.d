@@ -65,6 +65,25 @@ Doesn't handle all characters as of now."
              (forward-char))))
        (buffer-substring-no-properties (point-min) (point-max))))))
 
+(defun my-js2-check-for-node-context ()
+  "Looks for a shebang in file that points to node.js.
+
+This function should be added to `js2-mode-hook' in order to
+work."
+  (save-excursion
+    (goto-char (point-min))
+    (end-of-line)
+    (when (string-match
+           ;; the binary is called "nodejs" in ubuntu repositories for some
+           ;; reason
+           "^#!.*node\\(?:js\\)?$"
+           (buffer-substring-no-properties (point-min) (point)))
+      (my-js2-set-for-node-context))))
+
+(defun my-js2-set-for-node-context ()
+  (interactive)
+  (setq-local js2-include-node-externs t))
+
 (defun my-dired-do-org-export (backend)
   "Exports marked files or file at point with a backend read from
 a minibuffer. Files without .org extension are ignored. Alist of
