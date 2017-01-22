@@ -77,10 +77,10 @@ A list of contexts should be defined in `my-js2-contexts-list'."
     (let ((desired-context (context-symbol context))
           (contexts-list (mapcar #'context-symbol my-js2-contexts-list)))
       (mapc (lambda (context)
-              (let ((desired-context-p (eq context desired-context)))
-                ;; this is pretty much `setq-local', but that macro doesn't
-                ;; have an equivalent that doesn't quote the symbol
-                (set (make-local-variable context) desired-context-p)))
+              ;; this is pretty much `setq-local', but that macro doesn't have
+              ;; an equivalent that doesn't quote the symbol
+              (set (make-local-variable context)
+                   (eq context desired-context)))
             contexts-list)
       ;; make sure that `js2-mode' parses the file again according to selected
       ;; context
