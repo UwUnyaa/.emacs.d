@@ -86,6 +86,8 @@ A list of contexts should be defined in `my-js2-contexts-list'."
             contexts-list)
       ;; enable desired context
       (set-local desired-context t)
+      ;; make sure that `js2-mode' parses the file again according to selected
+      ;; context
       (js2-reparse))))
 
 ;; A closure would work well for functions like this one, but that would
