@@ -65,25 +65,37 @@ Doesn't handle all characters as of now."
              (forward-char))))
        (buffer-substring-no-properties (point-min) (point-max))))))
 
-(defun my-js2-check-for-node-context ()
-  "Looks for a shebang in file that points to node.js.
+(defun my-js2-change-context (context)
+  "Switches current `js2-mode' buffer to specified context.
 
-This function should be added to `js2-mode-hook' in order to
-work."
-  (save-excursion
-    (goto-char (point-min))
-    (end-of-line)
-    (when (string-match
-           ;; the binary is called "nodejs" in ubuntu repositories for some
-           ;; reason
-           "^#!.*node\\(?:js\\)?$"
-           (buffer-substring-no-properties (point-min) (point)))
-      (my-js2-set-for-node-context))))
+A list of contexts should be defined in `my-js2-contexts-list'."
+  (interactive
+   (list (completing-read "New context: " my-js2-contexts-list)))
+  (cl-flet ((context-symbol
+             (context)
+             (intern (concat "js2-include-" context "-externs")))
+            (set-local                 ; setq local quotes the variable symbol
+             (symbol value)
+             (set (make-local-variable symbol) value)))
+    (let ((desired-context (context-symbol context))
+          (contexts-list (mapcar #'context-symbol my-js2-contexts-list)))
+      ;; disable other contexts
+      (mapc (lambda (context)
+              (unless (eq context desired-context)
+                (set-local context nil)))
+            contexts-list)
+      ;; enable desired context
+      (set-local desired-context t)
+      (js2-reparse))))
 
-(defun my-js2-set-for-node-context ()
+;; A closure would work well for functions like this one, but that would
+;; require a separate file with them, beacuse `lexical-binding' has to be set
+;; for the entire file with code.
+(defun my-js2-node-mode ()
+  "Turns on `js2-mode' and switches it to node context."
   (interactive)
-  (setq-local js2-include-node-externs t)
-  (setq-local js2-include-browser-externs nil))
+  (js2-mode)
+  (my-js2-change-context "node"))
 
 (defun my-dired-toggle-recursive ()
   "Toggles the -R switch for ls in `dired'."

@@ -40,8 +40,8 @@
 
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;; #!/bin/node turns on js2-mode
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+;; #!/bin/node turns on js2-mode with node context
+(add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
@@ -52,5 +52,11 @@
             (define-key js2-mode-map (kbd "C-M-;") 'my-js2-comment-block)
             (define-key js2-mode-map (kbd "C-c C-u")
               'my-js2-unicode-escape-region)
-            (my-js2-check-for-node-context)
             (subword-mode)))
+
+(defvar my-js2-contexts-list
+  '("browser" "node" "rhino")
+  "A list of contexts for `my-js2-change-context'.
+
+Each element of a list should corespond to a symbol that looks
+like `js2-include-SYMBOL-externs'.")
