@@ -25,6 +25,9 @@
 ;; blinking cursor
 (blink-cursor-mode 1)
 
+;; use `ido-mode' for switching buffers only
+(ido-mode 'buffers)
+
 ;; fill-column
 (setq-default fill-column 78)
 
