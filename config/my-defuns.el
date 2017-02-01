@@ -86,15 +86,6 @@ A list of contexts should be defined in `my-js2-contexts-list'."
       ;; context
       (js2-reparse))))
 
-;; A closure would work well for functions like this one, but that would
-;; require a separate file with them, beacuse `lexical-binding' has to be set
-;; for the entire file with code.
-(defun my-js2-node-mode ()
-  "Turns on `js2-mode' and switches it to node context."
-  (interactive)
-  (js2-mode)
-  (my-js2-change-context "node"))
-
 (defun my-dired-toggle-recursive ()
   "Toggles the -R switch for ls in `dired'."
   (interactive)

@@ -60,3 +60,6 @@
 
 Each element of a list should corespond to a symbol that looks
 like `js2-include-SYMBOL-externs'.")
+
+;; define context modes
+(mapc #'my-js2-define-context-mode my-js2-contexts-list)
