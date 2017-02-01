@@ -13,7 +13,7 @@ ommited.
   ;; handle the case when MODE-OR-PAIR is a cons
   (when (consp mode)
     (setq name (cdr mode)
-          mode- (car mode)))
+          mode (car mode)))
   (add-hook (intern (concat (symbol-name mode) "-hook"))
             (lambda ()
               (setq mode-name name))))
