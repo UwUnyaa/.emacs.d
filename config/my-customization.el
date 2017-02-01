@@ -90,3 +90,10 @@ by `my-dired-do-org-export'.")
           (lambda ()
             (define-key dired-mode-map "E" 'my-dired-do-org-export)
             (define-key dired-mode-map "r" 'my-dired-toggle-recursive)))
+
+;; change displayed major mode names
+(mapc #'my-change-mode-name
+      '((js2-mode              . "JS2")
+        (emacs-lisp-mode       . "Elisp")
+        (lisp-interaction-mode . "Elisp interaction")
+        (completion-list-mode  . "Completions")))
