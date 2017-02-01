@@ -12,6 +12,9 @@
 (global-set-key (kbd "C-c i") 'my-impatient-mode)
 (global-set-key (kbd "C-c l") 'my-lhttpd)
 
+;; use `ibuffer' instead of `list-buffers'
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;;; Other customizations
 (setq visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
