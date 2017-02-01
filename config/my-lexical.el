@@ -2,7 +2,7 @@
 
 ;; this file contains code that relies on lexical binding
 
-(defun my-change-mode-name (mode &optional name)
+(defun my-change-major-mode-name (mode &optional name)
   "Changes the displayed major mode name.
 
 MODE-OR-PAIR can be a symbol with the major mode or a cons with
