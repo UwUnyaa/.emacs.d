@@ -44,6 +44,7 @@
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node
+      js2-warn-about-unused-function-arguments t
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
                            "clearInterval"))
 (add-hook 'js2-mode-hook
