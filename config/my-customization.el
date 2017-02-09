@@ -25,6 +25,9 @@
 ;; blinking cursor
 (blink-cursor-mode 1)
 
+;; automatically match pairs
+(electric-pair-mode)
+
 ;; use `ido-mode' for switching buffers only
 (ido-mode 'buffers)
 
