@@ -92,7 +92,7 @@ by `my-dired-do-org-export'.")
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key dired-mode-map "E" 'my-dired-do-org-export)
-            (define-key dired-mode-map "r" 'my-dired-toggle-recursive)))
+            (define-key dired-mode-map "r" (my-dired-toggle-flag "R"))))
 
 ;; change displayed major mode names
 (mapc #'my-change-major-mode-name

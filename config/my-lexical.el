@@ -26,3 +26,15 @@ the name of a context."
           (interactive)
           (js2-mode)
           (my-js2-change-context context))))
+
+(defun my-dired-toggle-flag (flag)
+  "Returns a closure that toggles flag FLAG in dired."
+  (lambda ()
+    (interactive)
+    (let ((case-fold-search nil)
+          new-switches)
+      (if (string-match flag dired-actual-switches)
+          (setq new-switches
+                (replace-regexp-in-string flag "" dired-actual-switches))
+        (setq new-switches (concat dired-actual-switches flag)))
+      (dired-sort-other new-switches))))
