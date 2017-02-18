@@ -87,7 +87,8 @@
   "Alist of org export formats and functions used by them. Used
 by `my-dired-do-org-export'.")
 
-(setq dired-dwim-target t)
+(setq dired-dwim-target t
+      dired-listing-switches "-Al")     ; don't show . and .. in file listings
 
 (add-hook 'dired-mode-hook
           (lambda ()
