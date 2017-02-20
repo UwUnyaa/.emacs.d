@@ -53,6 +53,8 @@
 ;;; Org-mode
 (add-hook 'org-mode-hook
           (lambda ()
+            ;; don't wrap lines
+            (toggle-truncate-lines 1)
             ;; make M-h behave just like everywhere else
             (define-key org-mode-map (kbd "M-h") 'backward-kill-word)
             ;; use C-x C-h for marking paragraphs
