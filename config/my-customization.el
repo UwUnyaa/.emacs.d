@@ -27,6 +27,8 @@
 
 ;; automatically match pairs
 (electric-pair-mode)
+;; make C-h remove pairs like DEL does in `electric-pair-mode'
+(define-key electric-pair-mode-map (kbd "C-h") 'electric-pair-delete-pair)
 
 ;; use `ido-mode' for switching buffers only
 (ido-mode 'buffers)
