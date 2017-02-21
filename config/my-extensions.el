@@ -1,16 +1,6 @@
 ;;; this file contains configuration for extensions that don't come with GNU
 ;;; Emacs
 
-(require 'cl)                   ; cl-remove-if-not
-;; add ~/.emacs.d/lisp and every directory inside of it to load-path
-(let ((dir (file-truename "~/.emacs.d/lisp")))
-  (mapc (lambda (dir)
-          (add-to-list 'load-path dir))
-        (cons dir
-              (cl-remove-if-not
-               #'file-directory-p
-               (directory-files-recursively dir "" t)))))
-
 ;;; web-mode
 ;; select mode on filetype
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))

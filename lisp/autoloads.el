@@ -114,6 +114,30 @@ Start the web server with given `directory' as `httpd-root'.
 
 ;;;***
 
+;;;### (autoloads nil "smart-bind" "smart-bind.el" (22700 48740 647167
+;;;;;;  310000))
+;;; Generated autoloads from smart-bind.el
+
+(autoload 'smart-bind-key "smart-bind" "\
+Binds KEY to FUNCTION in all major modes that redefine it.
+KEY should be specified as a string.
+
+\(fn KEY FUNCTION)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil "smart-rebind" "smart-rebind.el" (22700 48986
+;;;;;;  463857 91000))
+;;; Generated autoloads from smart-rebind.el
+
+(autoload 'smart-rebind-keys "smart-rebind" "\
+Rebinds FROM to TO in all major modes. Both arguments should
+be specified as strings.
+
+\(fn FROM TO)" nil nil)
+
+;;;***
+
 ;;;### (autoloads nil "web-mode" "web-mode.el" (22700 41553 359967
 ;;;;;;  55000))
 ;;; Generated autoloads from web-mode.el
