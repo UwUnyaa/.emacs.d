@@ -16,20 +16,9 @@
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
-(require 'cl)                   ; cl-remove-if-not
-
 ;; load autoload files
 (mapc #'load
       (directory-files-recursively "~/.emacs.d/lisp" "^autoloads\\.el$"))
-
-;; add ~/.emacs.d/lisp and every directory inside of it to load-path
-(let ((dir (file-truename "~/.emacs.d/lisp")))
-  (mapc (lambda (dir)
-          (add-to-list 'load-path dir))
-        (cons dir
-              (cl-remove-if-not
-               #'file-directory-p
-               (directory-files-recursively dir "" t)))))
 
 ;; load config files (order is important)
 (mapc #'load

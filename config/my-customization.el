@@ -1,16 +1,12 @@
 ;;; This file contains customizations of Emacs and modes that are built into it
 
-(require 'smart-bind)
-(require 'smart-rebind)
-
 ;;; Custom keybindings
-(global-set-key (kbd "C-?") #'help-command) ; new binding for help prefix
-;; use C-x C-h for marking paragraphs
-(smart-rebind-keys "M-h" "C-x C-h")
 ;; use C-h like readlne
-(smart-bind-key "C-h" #'delete-backward-char)
-;; use M-h in a similar way to M-d
-(smart-bind-key "M-h" #'backward-kill-word)
+(global-set-key (kbd "C-h") #'delete-backward-char)
+(global-set-key (kbd "M-h") #'backward-kill-word)
+(global-set-key (kbd "C-?") #'help-command) ; new binding for help prefix
+;; Use C-x C-h for marking paragraphs
+(global-set-key (kbd "C-x C-h") #'mark-paragraph)
 ;; other keybindings
 (global-set-key (kbd "C-c C-i") #'my-indent-buffer)
 (global-set-key (kbd "C-c i") #'my-impatient-mode)
