@@ -46,7 +46,7 @@
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node
       js2-warn-about-unused-function-arguments t
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
-                           "clearInterval"))
+                           "clearInterval" "Promise"))
 (add-hook 'js2-mode-hook
           (lambda ()
             (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
