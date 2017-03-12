@@ -12,7 +12,8 @@
                #'file-directory-p
                (directory-files-recursively dir "" t)))))
 
-;;; web-mode
+;;; `web-mode'
+
 ;; select mode on filetype
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -25,22 +26,25 @@
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
+
 ;; customize variables
 (setq web-mode-enable-auto-pairing t               ; auto-pairing
       web-mode-enable-css-colorization t           ; CSS colorization
       web-mode-enable-auto-expanding t             ; auto expanding
       web-mode-enable-current-element-highlight t) ; highlight matching elements
+
 (add-hook 'web-mode-hook
           (lambda ()
             (setq web-mode-markup-indent-offset 2 ; custom indentation
                   web-mode-css-indent-offset 2
                   web-mode-code-indent-offset 2)))
 
-;; ox-sfhp
+;; `ox-sfhp'
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
-;; js2-mode
+;;; `js2-mode'
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; #!/bin/node turns on js2-mode with node context
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
