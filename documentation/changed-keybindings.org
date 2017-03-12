@@ -23,6 +23,12 @@ Global keybindings:
 | =C-M-F/B/N/P= | ~org-shiftmeta*~     | ^                       |
 | =M-n/p=       | ~org-*-paragraph~    | ^                       |
 
+~nxml-mode~:
+| Keybinding | Function             | Description     |
+|------------+----------------------+-----------------|
+| =M-h=      | ~backward-kill-word~ | for consistency |
+| =C-x C-h=  | ~nxml-mark-word~     | ^               |
+
 ~js2-mode~:
 | Keybinding | Function                       | Description                                         |
 |------------+--------------------------------+-----------------------------------------------------|
