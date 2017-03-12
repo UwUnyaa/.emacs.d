@@ -2,6 +2,7 @@
 ;;; Emacs
 
 (require 'cl)                   ; cl-remove-if-not
+
 ;; add ~/.emacs.d/lisp and every directory inside of it to load-path
 (let ((dir (file-truename "~/.emacs.d/lisp")))
   (mapc (lambda (dir)
