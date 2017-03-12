@@ -1,7 +1,7 @@
 #+TITLE: DoMiNeLa10's .emacs
 
 * About this .emacs
-This is my config for GNU Emacs. It won't work with GNU Emacs 24 and older
+This is my config for GNU Emacs. out won't work with GNU Emacs 24 and older
 versions. Tables with customized keybindings are [[file:documentation/changed-keybindings.org][here]].
 
 * Untracked directories for local configuration
@@ -36,6 +36,41 @@ config there.
 If you can't use git for some reason, you can use GitHub's “download ZIP”
 feature. You'll have to rename the folder that will be in the zip file,
 because GitHub puts the name of the branch after the name of the repository.
+
+* Structure of directories in this repo
+** this directory
+- =init.el= :: The first file from this repo that is loaded. It only contains
+     code that loads other files. No customizations should go in there.
+- =README.org= :: This file.
+*** =config=
+- =my-customization.el= :: Contains basic general Emacs customization, and
+     customization for modes that come with it out of the box.
+- =my-defuns.el= :: Definitions of custom functions (in this case ones that
+     use default dynamic scoping.)
+- =my-extensions.el= :: Customization for added extensions.
+- =my-indentation.el= :: Indentation settings.
+- =my-lexical.el= :: Definitions of functions that rely on lexical scoping.
+     Mostly functions that generate closures.
+- =my-local.el= :: Untracked file for installation-specific settings.
+- =my-local-variables.el= :: Defines safe file local variables and their
+     values.
+- =my-platform-specific.el= :: Contains generic settings to make things work
+     on specific operating systems and setups.
+*** =documentation=
+This directory contains =.org= files with additional documentation. More files
+might be added to it in the future.
+
+- =changed-keybindings.org= :: Tables listing changed keybindings.
+*** =lisp=
+This directory contains Emacs lisp source code files, byte-compiled versions
+of them. Some extensions have more than one file, and they go to their own
+directories.
+
+=autoloads.el= is created automatically in every directory with
+=my-update-autoloads=. These files exist to speed up startup of Emacs.
+
+The =local= directory is intentionally untracked. Emacs lisp code can go there
+if needed.
 
 * Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
