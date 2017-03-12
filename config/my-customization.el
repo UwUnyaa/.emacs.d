@@ -29,28 +29,24 @@
       custom-enabled-themes '(wombat)
       default-input-method "japanese"
       display-time-24hr-format t
-      display-time-mode t
-      indent-tabs-mode nil
       nxml-slash-auto-complete-flag t
       read-quoted-char-radix 16
-      sentence-end-double-space nil
-      show-paren-mode t
-      tool-bar-mode nil)
+      sentence-end-double-space nil)
 
-;; blinking cursor
-(blink-cursor-mode 1)
-
-;; disable the menu bar
-(menu-bar-mode -1)
-
-;; automatically match pairs
-(electric-pair-mode)
-
-;; use `ido-mode' for switching buffers only
-(ido-mode 'buffers)
+;; global minor modes
+(blink-cursor-mode)			; blink the cursor
+(display-time-mode)			; display time in mode line
+(show-paren-mode)			; highlight the matching paren
+(electric-pair-mode)			; automatically match parens
+(menu-bar-mode -1)			; don't display the menu bar
+(tool-bar-mode -1)			; don't display the tool bar
+(ido-mode 'buffers)			; switch buffers with `ido-mode'
 
 ;; fill-column
 (setq-default fill-column 78)
+
+;; don't indent with tabs
+(setq-default indent-tabs-mode nil)
 
 ;; disable warnings
 (put 'set-goal-column 'disabled nil)
