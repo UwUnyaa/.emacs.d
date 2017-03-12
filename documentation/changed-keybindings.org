@@ -1,5 +1,5 @@
 #+TITLE: Custom keybindings in my configuration
-Global keybindings:
+* Global keybindings:
 | Keybinding | Function               | Description                             |
 |------------+------------------------+-----------------------------------------|
 | =C-h=      | ~delete-backward-char~ | Bash uses this key like that            |
@@ -7,14 +7,14 @@ Global keybindings:
 | =C-?=      | ~help-command~         | moved =C-h=                             |
 | =C-x C-h=  | ~mark-paragraph~       | moved =M-h=                             |
 
-=C-c= keybindings:
+* =C-c= keybindings:
 | Keybinding | Function            | Description           |
 |------------+---------------------+-----------------------|
 | =C-c TAB=  | ~indent-buffer~     | Just like in web-mode |
 | =C-c i=    | ~my-impatient-mode~ | Convinience           |
 | =C-c l=    | ~lhttpd~            | ^                     |
 
-~org-mode~:
+* ~org-mode~:
 | Keybinding    | Function             | Description             |
 |---------------+----------------------+-------------------------|
 | =M-h=         | ~backward-kill-word~ | for consistency         |
@@ -23,13 +23,13 @@ Global keybindings:
 | =C-M-F/B/N/P= | ~org-shiftmeta*~     | ^                       |
 | =M-n/p=       | ~org-*-paragraph~    | ^                       |
 
-~nxml-mode~:
+* ~nxml-mode~:
 | Keybinding | Function             | Description     |
 |------------+----------------------+-----------------|
 | =M-h=      | ~backward-kill-word~ | for consistency |
 | =C-x C-h=  | ~nxml-mark-word~     | ^               |
 
-~js2-mode~:
+* ~js2-mode~:
 | Keybinding | Function                       | Description                                         |
 |------------+--------------------------------+-----------------------------------------------------|
 | =C-M-;=    | ~my-js2-comment-block~         | inserts a comment block that looks ~/*like this */~ |
