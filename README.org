@@ -16,7 +16,7 @@ you want to use my config. Files in =~/.emacs.d/lisp/local/= are ignored too.
 
 Use =M-x my-update-autoloads= to build autoload files for them automatically.
 Extensions come with byte compiled files, so they can work faster and they're
-loaded using autoload files so that emacs can start up faster.
+loaded using autoload files so that Emacs can start up faster.
 
 * This config is used on these operating systems:
 - [[https://www.archlinux.org/][Arch GNU/Linux]]
