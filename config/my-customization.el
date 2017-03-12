@@ -68,7 +68,7 @@
 ;; use auto-fill-mode in text-mode and org-mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
-;;; Org-mode
+;;; org-mode
 (add-hook 'org-mode-hook
           (lambda ()
             ;; don't wrap lines
