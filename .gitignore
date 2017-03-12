@@ -1,7 +1,11 @@
+# Emacs backup files
 *~
+
+# special directories and files that shouldn't be tracked
 /config/my-local.el
 /lisp/local/
-/secret/
+
+# directories generated automatically by some utilities in Emacs
 /url/
 /games/
 /image-dired/
