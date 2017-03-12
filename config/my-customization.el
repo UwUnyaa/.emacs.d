@@ -57,6 +57,7 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
 ;; aliases
 (defalias 'im 'my-impatient-mode)
 (defalias 'rs 'replace-string)
