@@ -4,6 +4,11 @@
 This is my config for GNU Emacs. out won't work with GNU Emacs 24 and older
 versions. Tables with customized keybindings are [[file:documentation/changed-keybindings.org][here]].
 
+If you want to reuse any of my own code from this repository, feel free to do
+it. I'd appreciate comments linking to my repository before function
+definitions from here, but they're not necessary. I didn't put any license on
+this repository to avoid possible conflicts with extensions.
+
 * Untracked directories for local configuration
 I hold my settings specific to my Arch installation in
 =~/.emacs.d/config/my-local.el=. You can put your own customizations there if
