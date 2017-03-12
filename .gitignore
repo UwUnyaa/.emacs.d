@@ -3,12 +3,12 @@
 
 # special directories and files that shouldn't be tracked
 /config/my-local.el
-/lisp/local/
+/lisp/local
 
 # directories generated automatically by some utilities in Emacs
-/url/
-/games/
-/image-dired/
+/url
+/games
+/image-dired
 /tramp
 /kkcrc
 /network-security.data
