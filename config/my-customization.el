@@ -29,7 +29,6 @@
       custom-enabled-themes '(wombat)
       default-input-method "japanese"
       display-time-24hr-format t
-      nxml-slash-auto-complete-flag t
       read-quoted-char-radix 16
       sentence-end-double-space nil)
 
@@ -112,6 +111,14 @@ by `my-dired-do-org-export'.")
             (define-key dired-mode-map "E" #'my-dired-do-org-export)
             (define-key dired-mode-map "r" (my-dired-toggle-switch "R"))
             (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
+
+;;; `nxml-mode'
+(add-hook 'nxml-mode-hook
+	  (lambda ()
+	    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
+	    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
+
+(setq nxml-slash-auto-complete-flag t)
 
 ;; change displayed major mode names
 (mapc #'my-change-major-mode-name
