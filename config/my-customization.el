@@ -118,7 +118,7 @@ by `my-dired-do-org-export'.")
 	    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
 	    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
 
-(setq nxml-slash-auto-complete-flag t)
+(setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
 ;; change displayed major mode names
 (mapc #'my-change-major-mode-name
