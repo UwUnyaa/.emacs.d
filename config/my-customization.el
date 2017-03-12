@@ -68,7 +68,7 @@
 ;; use auto-fill-mode in text-mode and org-mode
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
-;;; org-mode
+;;; `org-mode'
 (add-hook 'org-mode-hook
           (lambda ()
             ;; don't wrap lines
@@ -98,7 +98,7 @@
       org-log-done 'time           ; insert a timestamp when a task is done
       org-src-fontify-natively t)  ; syntax highlighting in source code blocks
 
-;;; dired
+;;; `dired'
 (defvar my-dired-org-export-backends-alist
   '(("html" . org-html-export-to-html)
     ("sfhp" . org-sfhp-export-to-file)
