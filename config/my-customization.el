@@ -48,10 +48,10 @@
 (setq-default indent-tabs-mode nil)
 
 ;; disable warnings
-(put 'set-goal-column 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+(mapc
+ (lambda (warning)
+   (put warning 'disabled nil))
+ '(set-goal-column narrow-to-region downcase-region upcase-region))
 
 ;; aliases
 (defalias 'im 'my-impatient-mode)
