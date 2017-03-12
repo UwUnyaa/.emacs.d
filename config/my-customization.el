@@ -15,15 +15,33 @@
 ;; use `ibuffer' instead of `list-buffers'
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
+;; load wombat theme
+(load-theme 'wombat t)
+
 ;;; Other customizations
 (setq visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
       initial-scratch-message nil       ; empty scratch buffer
       frame-title-format "Emacs"        ; frame title
-      auto-save-timeout 60)             ; autosave every 60 seconds
+      auto-save-timeout 60              ; autosave every 60 seconds
+      ;; variables that were set by custom-set-variables before
+      current-language-environment "UTF-8"
+      custom-enabled-themes '(wombat)
+      default-input-method "japanese"
+      display-time-24hr-format t
+      display-time-mode t
+      indent-tabs-mode nil
+      nxml-slash-auto-complete-flag t
+      read-quoted-char-radix 16
+      sentence-end-double-space nil
+      show-paren-mode t
+      tool-bar-mode nil)
 
 ;; blinking cursor
 (blink-cursor-mode 1)
+
+;; disable the menu bar
+(menu-bar-mode -1)
 
 ;; automatically match pairs
 (electric-pair-mode)
