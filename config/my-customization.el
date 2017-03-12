@@ -90,7 +90,7 @@
             ;; move by paragraphs with M-n and M-p
             (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
             (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph)))
-;;; other org-mode customization
+
 (setq org-startup-indented t       ; display org-mode buffers with indentation
       org-ellipsis "⤵"             ; custom ellipsis
       org-startup-folded nil       ; display files without folding them
