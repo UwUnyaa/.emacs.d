@@ -67,9 +67,16 @@
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
 ;;; `org-mode'
+(setq org-startup-indented t       ; display org-mode buffers with indentation
+      org-ellipsis "⤵"             ; custom ellipsis
+      org-startup-folded nil       ; display files without folding them
+      org-startup-truncated nil    ; wrap lines
+      org-log-done 'time           ; insert a timestamp when a task is done
+      org-src-fontify-natively t)  ; syntax highlighting in source code blocks
+
+;; don't wrap lines
 (add-hook 'org-mode-hook
           (lambda ()
-            ;; don't wrap lines
             (toggle-truncate-lines 1)))
 
 (eval-after-load 'org
@@ -92,14 +99,10 @@
     (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
     (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph)))
 
-(setq org-startup-indented t       ; display org-mode buffers with indentation
-      org-ellipsis "⤵"             ; custom ellipsis
-      org-startup-folded nil       ; display files without folding them
-      org-startup-truncated nil    ; wrap lines
-      org-log-done 'time           ; insert a timestamp when a task is done
-      org-src-fontify-natively t)  ; syntax highlighting in source code blocks
-
 ;;; `dired'
+(setq dired-dwim-target t
+      dired-listing-switches "-Al")     ; don't show . and .. in file listings
+
 (defvar my-dired-org-export-backends-alist
   '(("html" . org-html-export-to-html)
     ("sfhp" . org-sfhp-export-to-file)
@@ -108,9 +111,6 @@
   "Alist of org export formats and functions used by them. Used
 by `my-dired-do-org-export'.")
 
-(setq dired-dwim-target t
-      dired-listing-switches "-Al")     ; don't show . and .. in file listings
-
 (eval-after-load 'dired
   (lambda ()
     (define-key dired-mode-map "E" #'my-dired-do-org-export)
@@ -118,12 +118,12 @@ by `my-dired-do-org-export'.")
     (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
 
 ;;; `nxml-mode'
+(setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
+
 (eval-after-load 'nxml-mode
   (lambda ()
     (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
     (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
-
-(setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
 ;; change displayed major mode names
 (mapc #'my-change-major-mode-name
