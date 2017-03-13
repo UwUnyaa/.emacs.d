@@ -7,7 +7,6 @@
       '("~/.emacs.d/config/my-defuns.el"
         "~/.emacs.d/config/my-lexical.el"
         "~/.emacs.d/config/my-customization.el"
-        "~/.emacs.d/config/my-platform-specific.el"
         "~/.emacs.d/config/my-extensions.el"
         "~/.emacs.d/config/my-indentation.el"
         "~/.emacs.d/config/my-local-variables.el"))
