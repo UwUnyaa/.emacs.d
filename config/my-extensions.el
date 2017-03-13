@@ -43,6 +43,7 @@
 
 ;; #!/bin/node turns on js2-mode with node context
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
+
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node
       js2-mode-assume-strict t
