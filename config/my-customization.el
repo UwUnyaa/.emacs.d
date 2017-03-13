@@ -120,9 +120,9 @@ by `my-dired-do-org-export'.")
 
 (eval-after-load 'dired
   (lambda ()
-    (define-key dired-mode-map "E" #'my-dired-do-org-export)
-    (define-key dired-mode-map "r" (my-dired-toggle-switch "R"))
-    (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
+    (define-key dired-mode-map (kbd "E") #'my-dired-do-org-export)
+    (define-key dired-mode-map (kbd "r") (my-dired-toggle-switch "R"))
+    (define-key dired-mode-map (kbd "h") (my-dired-toggle-switch "A"))))
 
 ;; use human readable file sizes in if they'll work
 (when (or (member system-type '(ms-dos windows-nt))    ; ls in elisp
