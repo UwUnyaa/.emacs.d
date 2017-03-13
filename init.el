@@ -8,7 +8,6 @@
         "~/.emacs.d/config/my-lexical.el"
         "~/.emacs.d/config/my-customization.el"
         "~/.emacs.d/config/my-extensions.el"
-        "~/.emacs.d/config/my-indentation.el"
         "~/.emacs.d/config/my-local-variables.el"))
 
 ;; load additional config files if they exist
