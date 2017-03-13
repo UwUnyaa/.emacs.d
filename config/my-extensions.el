@@ -13,17 +13,6 @@
                (directory-files-recursively dir "" t)))))
 
 ;;; `web-mode'
-
-;; select mode on filetype
-(mapc
- (lambda (extension)
-   (add-to-list 'auto-mode-alist
-                (cons (format "\\.%s\\'" extension)
-                      'web-mode)))
- '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "html?"
-   "css" "php" "twig"))
-
-;; customize variables
 (setq web-mode-enable-auto-pairing t               ; auto-pairing
       web-mode-enable-css-colorization t           ; CSS colorization
       web-mode-enable-auto-expanding t             ; auto expanding
@@ -33,30 +22,39 @@
       web-mode-css-indent-offset 2
       web-mode-code-indent-offset 2)
 
+(mapc
+ (lambda (extension)
+   (add-to-list 'auto-mode-alist
+                (cons (format "\\.%s\\'" extension)
+                      'web-mode)))
+ '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "html?"
+   "css" "php" "twig"))
+
 ;; `ox-sfhp'
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
 ;;; `js2-mode'
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
+      js2-skip-preprocessor-directives t    ; ignores #!/bin/node
+      js2-mode-assume-strict t
+      js2-warn-about-unused-function-arguments t
+      js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
+                           "clearInterval" "Promise"))
 
 ;; #!/bin/node turns on js2-mode with node context
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 
-(add-hook 'js2-mode-hook #'subword-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (eval-after-load 'js2-mode
   (lambda ()
-    (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
-          js2-skip-preprocessor-directives t    ; ignores #!/bin/node
-          js2-mode-assume-strict t
-          js2-warn-about-unused-function-arguments t
-          js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
-                               "clearInterval" "Promise"))
     ;; keybindings
     (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
     (define-key js2-mode-map (kbd "C-M-;") #'my-js2-comment-block)
     (define-key js2-mode-map (kbd "C-c C-u")
       #'my-js2-unicode-escape-region)))
+
+(add-hook 'js2-mode-hook #'subword-mode)
 
 (defvar my-js2-contexts-list
   '("browser" "node" "rhino")
