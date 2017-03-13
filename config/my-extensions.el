@@ -44,19 +44,21 @@
 ;; #!/bin/node turns on js2-mode with node context
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 
-(setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
-      js2-skip-preprocessor-directives t    ; ignores #!/bin/node
-      js2-mode-assume-strict t
-      js2-warn-about-unused-function-arguments t
-      js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
-                           "clearInterval" "Promise"))
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
-            (define-key js2-mode-map (kbd "C-M-;") #'my-js2-comment-block)
-            (define-key js2-mode-map (kbd "C-c C-u")
-              #'my-js2-unicode-escape-region)
-            (subword-mode)))
+(add-hook 'js2-mode-hook #'subword-mode)
+
+(eval-after-load 'js2-mode
+  (lambda ()
+    (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
+          js2-skip-preprocessor-directives t    ; ignores #!/bin/node
+          js2-mode-assume-strict t
+          js2-warn-about-unused-function-arguments t
+          js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
+                               "clearInterval" "Promise"))
+    ;; keybindings
+    (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
+    (define-key js2-mode-map (kbd "C-M-;") #'my-js2-comment-block)
+    (define-key js2-mode-map (kbd "C-c C-u")
+      #'my-js2-unicode-escape-region)))
 
 (defvar my-js2-contexts-list
   '("browser" "node" "rhino")
