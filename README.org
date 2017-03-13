@@ -47,6 +47,7 @@ because GitHub puts the name of the branch after the name of the repository.
 - =init.el= :: The first file from this repo that is loaded. It only contains
      code that loads other files. No customizations should go in there.
 - =README.org= :: This file.
+
 *** =config=
 - =my-customization.el= :: Contains basic general Emacs customization, and
      customization for modes that come with it out of the box.
@@ -59,11 +60,13 @@ because GitHub puts the name of the branch after the name of the repository.
 - =my-local.el= :: Untracked file for installation-specific settings.
 - =my-local-variables.el= :: Defines safe file local variables and their
      values.
+
 *** =documentation=
 This directory contains =.org= files with additional documentation. More files
 might be added to it in the future.
 
 - =changed-keybindings.org= :: Tables listing changed keybindings.
+
 *** =lisp=
 This directory contains Emacs lisp source code files, byte-compiled versions
 of them. Some extensions have more than one file, and they go to their own
