@@ -44,21 +44,21 @@ because GitHub puts the name of the branch after the name of the repository.
 
 * Structure of directories in this repo
 ** this directory
+- =README.org= :: This file.
 - =init.el= :: The first file from this repo that is loaded. It only contains
      code that loads other files. No customizations should go in there.
-- =README.org= :: This file.
 
 *** =config=
 - =my-customization.el= :: Contains basic general Emacs customization, and
      customization for modes that come with it out of the box.
+- =my-extensions.el= :: Customization for added extensions.
 - =my-defuns.el= :: Definitions of custom functions (in this case ones that
      use default dynamic scoping.)
-- =my-extensions.el= :: Customization for added extensions.
 - =my-defuns-lexical.el= :: Definitions of functions that rely on lexical
      scoping. Mostly functions that generate closures.
-- =my-local.el= :: Untracked file for installation-specific settings.
 - =my-local-variables.el= :: Defines safe file local variables and their
      values.
+- =my-local.el= :: Untracked file for installation-specific settings.
 
 *** =documentation=
 This directory contains =.org= files with additional documentation. More files
