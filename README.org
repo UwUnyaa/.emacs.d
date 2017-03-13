@@ -56,7 +56,7 @@ because GitHub puts the name of the branch after the name of the repository.
      use default dynamic scoping.)
 - =my-defuns-lexical.el= :: Definitions of functions that rely on lexical
      scoping. Mostly functions that generate closures.
-- =my-local-variables.el= :: Defines safe file local variables and their
+- =my-safe-local-variables.el= :: Defines safe file local variables and their
      values.
 - =my-local.el= :: Untracked file for installation-specific settings.
 
