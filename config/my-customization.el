@@ -43,11 +43,9 @@
 (tool-bar-mode -1)			; don't display the tool bar
 (ido-mode 'buffers)			; switch buffers with `ido-mode'
 
-;; fill-column
-(setq-default fill-column 78)
-
-;; don't indent with tabs
-(setq-default indent-tabs-mode nil)
+;; default variables
+(setq-default fill-column 78            ; fill-column
+              indent-tabs-mode nil)     ; don't indent with tabs
 
 ;; disable warnings
 (mapc
