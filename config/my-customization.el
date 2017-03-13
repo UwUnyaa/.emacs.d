@@ -70,24 +70,27 @@
 (add-hook 'org-mode-hook
           (lambda ()
             ;; don't wrap lines
-            (toggle-truncate-lines 1)
-            ;; make M-h behave just like everywhere else
-            (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
-            ;; use C-x C-h for marking paragraphs
-            (define-key org-mode-map (kbd "C-x C-h") #'org-mark-element)
-            ;; use meta shift f/b/n/p instead of meta arrow keys
-            (define-key org-mode-map (kbd "M-F") #'org-metaright)
-            (define-key org-mode-map (kbd "M-B") #'org-metaleft)
-            (define-key org-mode-map (kbd "M-P") #'org-metaup)
-            (define-key org-mode-map (kbd "M-N") #'org-metadown)
-            ;; use control meta shift f/b/n/p instead of meta shift arrow keys
-            (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
-            (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
-            (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
-            (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup)
-            ;; move by paragraphs with M-n and M-p
-            (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
-            (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph)))
+            (toggle-truncate-lines 1)))
+
+(eval-after-load 'org
+  (lambda ()
+    ;; make M-h behave just like everywhere else
+    (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
+    ;; use C-x C-h for marking paragraphs
+    (define-key org-mode-map (kbd "C-x C-h") #'org-mark-element)
+    ;; use meta shift f/b/n/p instead of meta arrow keys
+    (define-key org-mode-map (kbd "M-F") #'org-metaright)
+    (define-key org-mode-map (kbd "M-B") #'org-metaleft)
+    (define-key org-mode-map (kbd "M-P") #'org-metaup)
+    (define-key org-mode-map (kbd "M-N") #'org-metadown)
+    ;; use control meta shift f/b/n/p instead of meta shift arrow keys
+    (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
+    (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
+    (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
+    (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup)
+    ;; move by paragraphs with M-n and M-p
+    (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
+    (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph)))
 
 (setq org-startup-indented t       ; display org-mode buffers with indentation
       org-ellipsis "⤵"             ; custom ellipsis
@@ -108,17 +111,17 @@ by `my-dired-do-org-export'.")
 (setq dired-dwim-target t
       dired-listing-switches "-Al")     ; don't show . and .. in file listings
 
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (define-key dired-mode-map "E" #'my-dired-do-org-export)
-            (define-key dired-mode-map "r" (my-dired-toggle-switch "R"))
-            (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
+(eval-after-load 'dired
+  (lambda ()
+    (define-key dired-mode-map "E" #'my-dired-do-org-export)
+    (define-key dired-mode-map "r" (my-dired-toggle-switch "R"))
+    (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
 
 ;;; `nxml-mode'
-(add-hook 'nxml-mode-hook
-	  (lambda ()
-	    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
-	    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
+(eval-after-load 'nxml-mode
+  (lambda ()
+    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
+    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
 
 (setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
