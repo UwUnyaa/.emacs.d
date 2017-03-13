@@ -54,7 +54,6 @@ because GitHub puts the name of the branch after the name of the repository.
 - =my-defuns.el= :: Definitions of custom functions (in this case ones that
      use default dynamic scoping.)
 - =my-extensions.el= :: Customization for added extensions.
-- =my-indentation.el= :: Indentation settings.
 - =my-lexical.el= :: Definitions of functions that rely on lexical scoping.
      Mostly functions that generate closures.
 - =my-local.el= :: Untracked file for installation-specific settings.
