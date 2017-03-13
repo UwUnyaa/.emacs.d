@@ -47,6 +47,13 @@
 (setq-default fill-column 78            ; fill-column
               indent-tabs-mode nil)     ; don't indent with tabs
 
+;; hide the tool and scroll bars
+(mapc
+ (lambda (feature-sym)
+   (when (featurep feature-sym)
+     (funcall (intern (format "%s-mode" feature-sym)) -1)))
+ '(tool-bar scroll-bar))
+
 ;; disable warnings
 (mapc
  (lambda (warning)
