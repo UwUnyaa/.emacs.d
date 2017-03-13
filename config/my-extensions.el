@@ -22,6 +22,15 @@
       web-mode-css-indent-offset 2
       web-mode-code-indent-offset 2)
 
+;; fix broken web-mode variables when emacs works as a daemon
+(when (daemonp)
+  (setq web-mode-enable-css-colorization t
+        web-mode-enable-auto-indentation t
+        web-mode-enable-auto-closing t
+        web-mode-enable-auto-pairing t
+        web-mode-enable-auto-opening t
+        web-mode-enable-auto-quoting t))
+
 ;; file extensions
 (mapc
  (lambda (extension)
