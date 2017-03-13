@@ -10,12 +10,12 @@ with httpd server if it isn't running."
     (httpd-start))
   (impatient-mode))
 
-(defun my-lhttpd (&optional arg)
+(defun my-lhttpd (&optional port)
   "Start a local http server in the current directory on port
 8000 or the prefix argument."
   (interactive "P")
   (setq httpd-root default-directory
-        httpd-port (or arg 8000))
+        httpd-port (or port 8000))
   (httpd-start)
   (message "Started a local http server at port %d in %s"
            httpd-port httpd-root))
