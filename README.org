@@ -59,8 +59,6 @@ because GitHub puts the name of the branch after the name of the repository.
 - =my-local.el= :: Untracked file for installation-specific settings.
 - =my-local-variables.el= :: Defines safe file local variables and their
      values.
-- =my-platform-specific.el= :: Contains generic settings to make things work
-     on specific operating systems and setups.
 *** =documentation=
 This directory contains =.org= files with additional documentation. More files
 might be added to it in the future.
