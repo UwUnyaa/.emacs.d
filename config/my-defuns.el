@@ -51,19 +51,15 @@ comment."
   "Escapes non-ASCII characters as JavaScript unicode escapes.
 Doesn't handle all characters as of now."
   (interactive "r")
-  (let ((unescaped (buffer-substring-no-properties beg end)))
+  (let ((string (buffer-substring-no-properties beg end)))
     (delete-region beg end)
     (insert
-     (with-temp-buffer
-       (insert unescaped)
-       (goto-char (point-min))
-       (while (< (point) (point-max))
-         (let ((char (char-after)))
-           (if (> char 127)             ; non-ASCII
-               (progn (delete-char 1)
-                      (insert (format "\\u%04X" char)))
-             (forward-char))))
-       (buffer-substring-no-properties (point-min) (point-max))))))
+     (mapconcat
+      (lambda (char)
+        (if (> char 127)                ; non-ASCII
+            (format "\\u%04X" char)
+          (char-to-string char)))
+      string ""))))
 
 (defun my-js2-change-context (context)
   "Switches current `js2-mode' buffer to specified context.
