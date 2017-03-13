@@ -21,6 +21,11 @@
 ;; load wombat theme
 (load-theme 'wombat t)
 
+;; try configuring fonts to my preferences
+(when (and (display-graphic-p)
+           (member "DejaVu Sans Mono" (font-family-list)))
+  (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
+
 ;;; Other customizations
 (setq visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
