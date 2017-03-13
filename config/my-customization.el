@@ -1,5 +1,8 @@
 ;;; This file contains customizations of Emacs and modes that are built into it
 
+;; coding system
+(prefer-coding-system 'utf-8)
+
 ;;; Custom keybindings
 ;; use C-h like readlne
 (global-set-key (kbd "C-h") #'delete-backward-char)
@@ -25,7 +28,6 @@
       frame-title-format "Emacs"        ; frame title
       auto-save-timeout 60              ; autosave every 60 seconds
       ;; variables that were set by custom-set-variables before
-      current-language-environment "UTF-8"
       custom-enabled-themes '(wombat)
       default-input-method "japanese"
       display-time-24hr-format t
