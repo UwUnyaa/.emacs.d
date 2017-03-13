@@ -25,7 +25,9 @@
 (setq visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
       initial-scratch-message nil       ; empty scratch buffer
-      frame-title-format "Emacs"        ; frame title
+      frame-title-format (if (daemonp)  ; frame title
+                             "Emacs (server)"
+                           "Emacs")
       auto-save-timeout 60              ; autosave every 60 seconds
       ;; variables that were set by custom-set-variables before
       custom-enabled-themes '(wombat)
