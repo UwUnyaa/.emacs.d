@@ -117,6 +117,12 @@ by `my-dired-do-org-export'.")
     (define-key dired-mode-map "r" (my-dired-toggle-switch "R"))
     (define-key dired-mode-map "h" (my-dired-toggle-switch "A"))))
 
+;; use human readable file sizes in if they'll work
+(when (or (member system-type '(ms-dos windows-nt))    ; ls in elisp
+          (eq 0 (call-process insert-directory-program ; check if ls -h works
+                              nil nil nil "-h")))
+  (setq dired-listing-switches (concat dired-listing-switches "h")))
+
 ;;; `nxml-mode'
 (setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
