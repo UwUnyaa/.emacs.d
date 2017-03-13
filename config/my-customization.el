@@ -138,7 +138,7 @@ by `my-dired-do-org-export'.")
     (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
     (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
 
-;; change displayed major mode names
+;;; change displayed major mode names
 (mapc #'my-change-major-mode-name
       '((js2-mode              . "JS2")
         (emacs-lisp-mode       . "Elisp")
