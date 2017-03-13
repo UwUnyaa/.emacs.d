@@ -22,6 +22,7 @@
       web-mode-css-indent-offset 2
       web-mode-code-indent-offset 2)
 
+;; file extensions
 (mapc
  (lambda (extension)
    (add-to-list 'auto-mode-alist
@@ -44,6 +45,7 @@
 ;; #!/bin/node turns on js2-mode with node context
 (add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
 
+;; file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (eval-after-load 'js2-mode
