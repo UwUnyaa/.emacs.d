@@ -40,6 +40,8 @@
  '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "html?"
    "css" "php" "twig"))
 
+(add-hook 'web-mode-hook #'subword-mode)
+
 ;; `ox-sfhp'
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
