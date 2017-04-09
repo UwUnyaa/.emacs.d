@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2017 François-Xavier Bois
 
-;; Version: 14.1.11
+;; Version: 14.1.12
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; Package-Requires: ((emacs "23.1"))
@@ -24,7 +24,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "14.1.11"
+(defconst web-mode-version "14.1.12"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -284,17 +284,16 @@ See web-mode-block-face."
   :group 'web-mode)
 
 (defcustom web-mode-jsx-depth-faces nil
-;;  '(web-mode-jsx-depth-1-face
-;;    web-mode-jsx-depth-2-face
-;;    web-mode-jsx-depth-3-face
-;;    web-mode-jsx-depth-4-face)
+  ;;'(web-mode-jsx-depth-1-face
+  ;;  web-mode-jsx-depth-2-face
+  ;;  web-mode-jsx-depth-3-face
+  ;;  web-mode-jsx-depth-4-face)
   "Each jsx depth has is own face."
   :type 'list
   :group 'web-mode)
 
-(defcustom web-mode-commands-like-expand-region '(web-mode-mark-and-expand
-                                                  er/expand-region
-                                                  mc/mark-next-like-this)
+(defcustom web-mode-commands-like-expand-region
+  '(web-mode-mark-and-expand er/expand-region mc/mark-next-like-this)
   "Add it to here if you have some wrapper function for er/expand-region"
   :type '(repeat function)
   :group 'web-mode)
@@ -7418,7 +7417,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
          ((and is_js
                (member ?\. chars)
                (not (string-match-p "^\\.\\.\\." curr-line)))
-          (when debug (message "I22(%S) js-dot" pos))
+          (when debug (message "I22(%S) javascript-calls" pos))
           (let (pair)
             (setq pair (web-mode-javascript-calls-beginning-position pos reg-beg))
             ;;(message "%S" pair)
@@ -7452,7 +7451,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 
          ((and is_js
                (member ?\+ chars))
-          (when debug (message "I23"))
+          (when debug (message "I23(%S) javascript-string" pos))
           ;;(message "js-concat")
           (cond
            ((not (web-mode-javascript-string-beginning pos reg-beg))
@@ -7514,7 +7513,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
          ((and is_js
                (or (member ?\, chars)
                    (member prev-char '(?\( ?\[))))
-          (when debug (message "I26(%S)" pos))
+          (when debug (message "I26(%S) javascript-args" pos))
           (cond
            ((not (web-mode-javascript-args-beginning pos reg-beg))
             (message "no js args beg")
@@ -7594,7 +7593,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
           )
 
          ((and (member language '("php" "blade")) (string-match-p "^->" curr-line))
-          (when debug (message "I29"))
+          (when debug (message "I29(%S) block-calls" pos))
           (cond
            ((not (web-mode-block-calls-beginning pos reg-beg))
             )
@@ -7614,7 +7613,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
            ))
 
          ((member ?\, chars)
-          (when debug (message "I30"))
+          (when debug (message "I30(%S) block-args" pos))
           (cond
            ((not (web-mode-block-args-beginning pos reg-beg))
             ;;(message "ici")
@@ -7631,7 +7630,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
            ))
 
          ((and (string= language "php") (member ?\. chars))
-          (when debug (message "I31"))
+          (when debug (message "I31(%S) block-string" pos))
           (cond
            ((not (web-mode-block-string-beginning pos reg-beg))
             )
@@ -11240,10 +11239,23 @@ or nil if it's empty or it doesn't exist."
         (web-mode-looking-at ".[ \t\n]*" pos)
         (setq pos (+ pos (length (match-string-no-properties 0))))
         )
-       ((web-mode-looking-back "\\_<\\(return\\|echo\\|include\\|print\\)[ \n\t]*" pos)
-        (setq continue nil))
+
+       ((web-mode-looking-at "\\(return\\|echo\\|include\\|print\\)[ \n]" pos)
+        (setq pos (+ pos (length (match-string-no-properties 0)))
+              continue nil))
        (t
-        (setq pos (1- pos)))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?;,`:]\\|\\(return\\|echo\\|include\\|print\\)" reg-beg))
+        (when (not pos)
+          (message "block-string-beginning-position ** search failure **")
+          (setq continue nil
+                pos reg-beg)))
+
+       ;; ((web-mode-looking-back "\\_<\\(return\\|echo\\|include\\|print\\)[ \n\t]*" pos)
+       ;;  (setq continue nil))
+       ;; (t
+       ;;  (setq pos (1- pos)))
+
+
        ) ;cond
       ) ;while
     ;;(message "pos=%S" pos)
@@ -11276,10 +11288,22 @@ or nil if it's empty or it doesn't exist."
         (setq continue nil)
         (web-mode-looking-at ".[ \t\n]*" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))))
-       ((web-mode-looking-back "\\_<\\(return\\|echo\\|include\\|print\\)[ \n\t]*" pos)
-        (setq continue nil))
+
+       ((web-mode-looking-at "\\(return\\|echo\\|include\\|print\\)[ \n]" pos)
+        (setq pos (+ pos (length (match-string-no-properties 0)))
+              continue nil))
        (t
-        (setq pos (1- pos)))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=]\\|\\(return\\|echo\\|include\\|print\\)" reg-beg))
+        (when (not pos)
+          (message "block-statement-beginning-position ** search failure **")
+          (setq continue nil
+                pos reg-beg)))
+
+       ;; ((web-mode-looking-back "\\_<\\(return\\|echo\\|include\\|print\\)[ \n\t]*" pos)
+       ;;  (setq continue nil))
+       ;; (t
+       ;;  (setq pos (1- pos)))
+
        ) ;cond
       ) ;while
     pos))
@@ -11306,11 +11330,27 @@ or nil if it's empty or it doesn't exist."
         (setq continue nil)
         (web-mode-looking-at ".[ \t\n]*" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))))
+
        ((and (string= web-mode-engine "php")
-             (web-mode-looking-back "\\_<\\(extends\\|implements\\)[ \n\t]*" pos))
-        (setq continue nil))
+             (web-mode-looking-at "\\(extends\\|implements\\)[ \n]" pos))
+        (setq pos (+ pos (length (match-string-no-properties 0)))
+              continue nil))
        (t
-        (setq pos (1- pos)))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(]\\|\\(extends\\|implements\\)" reg-beg))
+        (when (not pos)
+          (message "block-args-beginning-position ** search failure **")
+          (setq pos reg-beg
+                continue nil))
+        ) ;t
+
+
+       ;; ((and (string= web-mode-engine "php")
+       ;;       (web-mode-looking-back "\\_<\\(extends\\|implements\\)[ \n\t]*" pos))
+       ;;  (setq continue nil))
+       ;; (t
+       ;;  (setq pos (1- pos)))
+
+
        ) ;cond
       ) ;while
     pos))
@@ -11333,14 +11373,28 @@ or nil if it's empty or it doesn't exist."
         (setq pos (web-mode-block-opening-paren-position pos block-beg))
         (setq pos (1- pos)))
        ((member char '(?\( ?\[ ?\{ ?\} ?\= ?\? ?\: ?\; ?\,))
-        (setq continue nil)
         (web-mode-looking-at ".[ \t\n]*" pos)
-        (setq pos (+ pos (length (match-string-no-properties 0)))))
-       ((web-mode-looking-back "\\(return\\|else\\)[ \n\t]*" pos)
-        (setq ;;pos (point)
+        (setq pos (+ pos (length (match-string-no-properties 0)))
+              continue nil))
+
+
+       ((web-mode-looking-at "\\(return\\|else\\)[ \n]" pos)
+        (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil))
        (t
-        (setq pos (1- pos)))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?:;,]\\|\\(return\\|else\\)" reg-beg))
+        (when (not pos)
+          (message "block-calls-beginning-position ** search failure **")
+          (setq pos reg-beg
+                continue nil))
+        ) ;t
+
+
+       ;;((web-mode-looking-back "\\(return\\|else\\)[ \n\t]*" pos)
+       ;; (setq continue nil))
+       ;;(t
+       ;; (setq pos (1- pos)))
+
        ) ;cond
       ) ;while
     pos))
@@ -11390,11 +11444,11 @@ or nil if it's empty or it doesn't exist."
         (web-mode-looking-at ".[ \t\n]*" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))))
 
-       ((web-mode-looking-at "\\(return\\)[ ]*" pos)
+       ((web-mode-looking-at "\\(return\\)[ \n]" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil))
        (t
-        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?:;,&|]\\|\\(\\_<\\(return\\)[ \n]\\)" reg-beg))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?:;,&|]\\|\\(return\\)" reg-beg))
         (when (not pos)
           (message "javascript-string-beginning-position ** search failure **")
           (setq continue nil
@@ -11481,7 +11535,7 @@ or nil if it's empty or it doesn't exist."
         (setq continue nil
               pos (+ pos (length (match-string-no-properties 0)))))
 
-       ((web-mode-looking-at "\\(return\\)[ ]*" pos)
+       ((web-mode-looking-at "\\(return\\)[ \n]" pos)
         (setq continue nil
               pos (+ pos (length (match-string-no-properties 0)))))
        ((and (eq char ?\:)
@@ -11490,7 +11544,7 @@ or nil if it's empty or it doesn't exist."
         (setq continue nil
               pos (+ pos (length (match-string-no-properties 0)))))
        (t
-        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=:]\\|\\_<\\(return\\)[ \n]" reg-beg))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=:]\\|\\(return\\)" reg-beg))
         (when (not pos)
           (when (not is-jsx) (message "javascript-statement-beginning-position ** search failure **"))
           (setq continue nil
@@ -11559,11 +11613,11 @@ or nil if it's empty or it doesn't exist."
         (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil)
         )
-       ((web-mode-looking-at "\\(var\\|let\\|return\\|const\\)[ ]*" pos)
+       ((web-mode-looking-at "\\(var\\|let\\|return\\|const\\)[ \n]" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil))
        (t
-        (setq pos (web-mode-rsb-position pos "[\]\[}{)(]\\|\\(\\_<\\(var\\|let\\|return\\|const\\)[ \n]\\)" reg-beg))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(]\\|\\(var\\|let\\|return\\|const\\)" reg-beg))
         (when (not pos)
           (message "javascript-args-beginning-position ** search failure **")
           (setq continue nil
@@ -11622,11 +11676,11 @@ or nil if it's empty or it doesn't exist."
         (web-mode-looking-at ".[ \t\n]*" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil))
-       ((web-mode-looking-at "\\(return\\|else\\)[ \n]*" pos)
+       ((web-mode-looking-at "\\(return\\|else\\)[ \n]" pos)
         (setq pos (+ pos (length (match-string-no-properties 0)))
               continue nil))
        (t
-        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?:;,&|>.]\\|\\(\\_<\\(return\\|else\\)[ \n]\\)" reg-beg))
+        (setq pos (web-mode-rsb-position pos "[\]\[}{)(=?:;,&|>.]\\|\\(return\\|else\\)" reg-beg))
         (when (not pos)
           (message "javascript-calls-beginning-position ** search failure **")
           (setq pos reg-beg
