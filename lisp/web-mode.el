@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2017 François-Xavier Bois
 
-;; Version: 14.1.20
+;; Version: 14.1.21
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; Package-Requires: ((emacs "23.1"))
@@ -24,7 +24,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "14.1.20"
+(defconst web-mode-version "14.1.21"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -4853,11 +4853,15 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 (defun web-mode-jsx-is-html (&optional pos)
   (interactive)
   (unless pos (setq pos (point)))
-  (let ((depth (get-text-property pos 'jsx-depth)))
+  (let (ret (depth (get-text-property pos 'jsx-depth)))
     (cond
      ((or (null depth) (<= pos 2))
       (setq pos nil))
      ((and (= depth 1) (get-text-property pos 'jsx-beg))
+      (setq pos nil))
+     ((get-text-property pos 'tag-end)
+      (setq pos nil))
+     ((get-text-property pos 'tag-attr-beg)
       (setq pos nil))
      ((get-text-property pos 'jsx-beg)
       (setq pos (null (get-text-property pos 'tag-beg))))
@@ -4868,6 +4872,17 @@ another auto-completion with different ac-sources (e.g. ac-php)")
      ) ;cond
     ;;(message "is-html: %S (depth=%S)" pos depth)
     pos))
+
+(defun web-mode-jsx-is-expr (&optional pos)
+  (cond
+   ((and (get-text-property pos 'jsx-beg)
+         (not (get-text-property pos 'tag-beg)))
+    nil)
+   (t
+    (setq pos (web-mode-jsx-depth-beginning-position pos))
+    (null (get-text-property pos 'tag-beg)))
+   ) ;cond
+  )
 
 (defun web-mode-jsx-depth-beginning-position (&optional pos target-depth)
   (interactive)
@@ -7120,6 +7135,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
 
         ;;(message "%S" language)
         ;;(message "curr-char=[%c] prev-char=[%c]\n%S" curr-char prev-char ctx)
+        ;;(message "options=%S" options)
 
         (cond
 
@@ -7244,8 +7260,12 @@ another auto-completion with different ac-sources (e.g. ac-php)")
          ((and (member language '("html" "xml" "javascript" "jsx"))
                (get-text-property pos 'tag-type)
                (not (get-text-property pos 'tag-beg))
-               (or (not (string= language "jsx"))
-                   (string= options "is-html")))
+               ;;(or (not (string= language "jsx"))
+               ;;    (string= options "is-html"))
+               (not (and (string= language "jsx")
+                         (or (string= options "is-html")
+                             (web-mode-jsx-is-expr pos))))
+               )
           (when debug (message "I190(%S) attr-indent" pos))
           (cond
            ((and (get-text-property pos 'tag-attr)
@@ -7274,7 +7294,6 @@ another auto-completion with different ac-sources (e.g. ac-php)")
            ((string-match-p "^/?>" curr-line)
             (setq offset (current-column)))
            (web-mode-attr-indent-offset
-
             (setq offset (+ (current-column) web-mode-attr-indent-offset)))
            ((looking-at-p (concat web-mode-start-tag-regexp "[ ]*\n"))
             (setq offset (+ (current-column) (or web-mode-attr-indent-offset web-mode-code-indent-offset))))
