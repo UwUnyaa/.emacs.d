@@ -3,6 +3,30 @@
 ;;; Code:
 
 
+;;;### (autoloads nil "d-mode" "d-mode.el" (22828 22899 515802 248000))
+;;; Generated autoloads from d-mode.el
+ (add-to-list 'auto-mode-alist '("\\.d[i]?\\'" . d-mode))
+
+(defvar d-mode-hook nil "\
+*Hook called by `d-mode'.")
+
+(custom-autoload 'd-mode-hook "d-mode" t)
+
+(autoload 'd-mode "d-mode" "\
+Major mode for editing code written in the D Programming Language.
+
+See http://dlang.org for more information about the D language.
+
+The hook `c-mode-common-hook' is run with no args at mode
+initialization, then `d-mode-hook'.
+
+Key bindings:
+\\{d-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads nil "htmlize" "htmlize.el" (22494 47061 979543
 ;;;;;;  286000))
 ;;; Generated autoloads from htmlize.el
