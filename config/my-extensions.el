@@ -13,9 +13,9 @@
               (directory-files-recursively dir "" t)))))
 
 ;;; `web-mode'
-(setq web-mode-enable-auto-pairing t               ; auto-pairing
-      web-mode-enable-css-colorization t           ; CSS colorization
-      web-mode-enable-auto-expanding t             ; auto expanding
+(setq web-mode-enable-auto-pairing t              ; auto-pairing
+      web-mode-enable-css-colorization t          ; CSS colorization
+      web-mode-enable-auto-expanding t            ; auto expanding
       web-mode-enable-current-element-highlight t ; highlight matching elements
       ;; custom indentation
       web-mode-markup-indent-offset 2
