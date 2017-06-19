@@ -42,6 +42,11 @@
 
 ;; use `my-web-skewer-html-mode' for HTML files
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . my-web-skewer-html-mode))
+;; monkey patch `skewer-html-compute-tag-ancestry' to work with `web-mode'
+(eval-after-load 'skewer-html
+  (lambda ()
+    (advice-add #'skewer-html-compute-tag-ancestry
+                :filter-return #'my-web-skewer-html-compute-tag-ancestry)))
 
 ;; same thing for CSS
 (add-to-list 'auto-mode-alist '("\\.css\\'" . my-web-skewer-css-mode))

@@ -132,3 +132,14 @@ interaction with CSS."
   (web-mode)
   (skewer-mode)
   (skewer-css-mode))
+
+(defun my-web-skewer-html-compute-tag-ancestry (ancestry)
+  "And advice function for `skewer-html-compute-tag-ancestry' to
+make it work with `web-mode'."
+  (let ((head (assoc "head" ancestry))
+        (body (assoc "body" ancestry)))
+    (when (and head body)
+      (setq ancestry (remove head ancestry)))
+    (cl-remove-if (lambda (pair)
+                    (string-equal "" (car pair)))
+                  ancestry)))
