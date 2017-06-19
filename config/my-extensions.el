@@ -37,8 +37,14 @@
    (add-to-list 'auto-mode-alist
                 (cons (format "\\.%s\\'" extension)
                       'web-mode)))
- '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "html?"
-   "css" "php" "twig"))
+ '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "php"
+   "twig"))
+
+;; use `my-web-skewer-html-mode' for HTML files
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . my-web-skewer-html-mode))
+
+;; same thing for CSS
+(add-to-list 'auto-mode-alist '("\\.css\\'" . my-web-skewer-css-mode))
 
 (add-hook 'web-mode-hook #'subword-mode)
 
@@ -53,8 +59,16 @@
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
                            "clearInterval" "Promise"))
 
-;; #!/bin/node turns on js2-mode with node context
-(add-to-list 'interpreter-mode-alist '("node" . my-js2-node-mode))
+;; hook `skewer-mode' to `js2-mode'
+(add-hook 'js2-mode-hook #'skewer-mode)
+
+;; #!/bin/node turns on js2-mode with node context (and disables
+;; `skewer-mode', because it has no use for node.js)
+(add-to-list 'interpreter-mode-alist
+             '("node" . (lambda ()
+                          (my-js2-node-mode)
+                          (when skewer-mode
+                            (skewer-mode -1)))))
 
 ;; file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))

@@ -115,3 +115,18 @@ backends is defined in `my-dired-org-export-backends-alist'."
            (cl-remove-if-not
             #'file-directory-p
             (directory-files-recursively dir "" t))))))
+
+;;; skewer and web modes
+(defun my-web-skewer-html-mode ()
+  "A mode that starts `web-mode' along with `skewer-html-mode' for
+interaction with HTML."
+  (interactive)
+  (web-mode)
+  (skewer-html-mode))
+
+(defun my-web-skewer-css-mode ()
+  "A mode that starts `web-mode' along with `skewer-css-mode' for
+interaction with CSS."
+  (interactive)
+  (web-mode)
+  (skewer-css-mode))
