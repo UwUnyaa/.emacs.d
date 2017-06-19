@@ -122,6 +122,7 @@ backends is defined in `my-dired-org-export-backends-alist'."
 interaction with HTML."
   (interactive)
   (web-mode)
+  (skewer-mode)
   (skewer-html-mode))
 
 (defun my-web-skewer-css-mode ()
@@ -129,4 +130,5 @@ interaction with HTML."
 interaction with CSS."
   (interactive)
   (web-mode)
+  (skewer-mode)
   (skewer-css-mode))
