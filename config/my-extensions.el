@@ -63,6 +63,8 @@
       js2-warn-about-unused-function-arguments t
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
                            "clearInterval" "Promise"))
+;; JS2 indentation
+(setq js-switch-indent-offset 2)
 
 ;; hook `skewer-mode' to `js2-mode'
 (add-hook 'js2-mode-hook #'skewer-mode)
