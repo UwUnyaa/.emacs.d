@@ -132,15 +132,3 @@ interaction with CSS."
   (web-mode)
   (skewer-mode)
   (skewer-css-mode))
-
-(defun my-skewer-html-eval-tag-wrapper (old-fun &rest args)
-  "Runs `skewer-html-eval-tag' in a temporary buffer
-with `html-mode' to avoid compatibility problems."
-  (let ((buffer-point (point))
-        (buffer-content
-         (buffer-substring-no-properties (point-min) (point-max))))
-    (with-temp-buffer
-      (insert buffer-content)
-      (goto-char buffer-point)
-      (html-mode)
-      (apply old-fun args))))
