@@ -152,4 +152,5 @@ by `my-dired-do-org-export'.")
 (add-to-list 'auto-mode-alist
              '("\\.json\\'" . (lambda ()
                                 (javascript-mode)
-                                (json-pretty-print (point-min) (point-max)))))
+                                (json-pretty-print (point-min) (point-max))
+                                (goto-char (point-min)))))
