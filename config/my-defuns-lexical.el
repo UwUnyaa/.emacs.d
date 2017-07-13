@@ -27,7 +27,7 @@ the name of a context."
           (js2-mode)
           (my-js2-change-context context))))
 
-(defun my-dired-toggle-switch (switch)
+(defun my-dired-switch-toggler (switch)
   "Returns a closure that toggles switch SWITCH in dired."
   (lambda ()
     (interactive)
