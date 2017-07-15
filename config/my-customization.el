@@ -147,6 +147,3 @@ by `my-dired-do-org-export'.")
         (emacs-lisp-mode       . "Elisp")
         (lisp-interaction-mode . "Elisp interaction")
         (completion-list-mode  . "Completions")))
-
-;; pretty print json files when they're opened
-(add-to-list 'auto-mode-alist '("\\.json\\'" . my-json-mode))

@@ -132,10 +132,3 @@ interaction with CSS."
   (web-mode)
   (skewer-mode)
   (skewer-css-mode))
-
-;;; custom derived modes
-(define-derived-mode my-json-mode javascript-mode "JSON"
-  "A simple mode for JSON editing."
-  (json-pretty-print-buffer)
-  (goto-char (point-min))
-  (set-buffer-modified-p nil))
