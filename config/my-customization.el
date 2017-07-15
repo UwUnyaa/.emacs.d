@@ -149,5 +149,4 @@ by `my-dired-do-org-export'.")
         (completion-list-mode  . "Completions")))
 
 ;; pretty print json files when they're opened
-(add-to-list 'auto-mode-alist
-             '("\\.json\\'" . my-json-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . my-json-mode))
