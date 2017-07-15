@@ -2,7 +2,7 @@
 
 (require 'cl)
 
-(defun my-impatient-mode()
+(defun my-impatient-mode ()
   "A function that automatically enables impatient-mode along
 with httpd server if it isn't running."
   (interactive)
