@@ -93,6 +93,19 @@ HTMLize dired-marked files.
 
 ;;;***
 
+;;;### (autoloads nil "json-mode" "json-mode.el" (22890 31813 11857
+;;;;;;  485000))
+;;; Generated autoloads from json-mode.el
+
+(autoload 'json-mode "json-mode" "\
+A simple mode for JSON editing.
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+
+;;;***
+
 ;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (22512 63540 642668
 ;;;;;;  115000))
 ;;; Generated autoloads from ox-sfhp.el
