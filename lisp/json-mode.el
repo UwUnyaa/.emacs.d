@@ -1,5 +1,5 @@
 ;;; json-mode.el --- basic JSON editing mode -*- lexical-binding: t; coding: utf-8 -*-
-;;; Version: 0.1.0
+;;; Version: 0.2.0
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
 
@@ -23,7 +23,8 @@
 ;; This file defines a major mode for editing JSON files. It provides an
 ;; option to pretty print JSON files when they're opened and provides a way to
 ;; fold Array and Object literals (bound to C-c C-f by default
-;; (`json-mode-fold'.))
+;; (`json-mode-fold'.)) The entire buffer can be unfolded quickly with the
+;; command bound to C-c C-u (`json-mode-unfold-all'.)
 
 ;; Content can be pretty printed (with a command bound to C-c C-p by default
 ;; (`json-mode-pretty-print-buffer')) and minified (with a command bound to
@@ -56,6 +57,7 @@
 (defvar json-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-f") #'json-mode-fold)
+    (define-key map (kbd "C-c C-u") #'json-mode-unfold-all)
     (define-key map (kbd "C-c C-m") #'json-mode-minify-buffer)
     (define-key map (kbd "C-c C-p") #'json-mode-pretty-print-buffer)
     (define-key map (kbd "C-c C-v") #'json-mode-validate-buffer)
@@ -109,7 +111,7 @@ Array."
         (while (not (json-mode-before-object-or-array-p))
           (forward-sexp 1)
           ;; skip label colons
-          (when (json-mode-after-string-end-p)
+          (when (json-mode-at-string-end-p)
             (json-mode-skip-label-colon)))
       (scan-error))
     (if (json-mode-before-object-or-array-p)
@@ -125,6 +127,11 @@ Array."
               (mapc #'delete-overlay overlays)
             (json-mode-hide-region beg end)))
       (user-error "Nothing to hide or show"))))
+
+(defun json-mode-unfold-all ()
+  "Unfolds the entire buffer."
+  (interactive)
+  (delete-all-overlays))
 
 (defun json-mode-validate-buffer ()
   (interactive)
@@ -142,7 +149,7 @@ Array."
   (and (eq (json-mode-face-before-point) nil)
        (eq (face-at-point) 'font-lock-string-face)))
 
-(defun json-mode-after-string-end-p ()
+(defun json-mode-at-string-end-p ()
   (and (eq (json-mode-face-before-point) 'font-lock-string-face)
        (eq (face-at-point) nil)))
 
