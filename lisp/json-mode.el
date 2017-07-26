@@ -1,5 +1,5 @@
 ;;; json-mode.el --- basic JSON editing mode -*- lexical-binding: t; coding: utf-8 -*-
-;;; Version: 0.2.1
+;;; Version: 0.2.2
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
 
@@ -87,9 +87,10 @@ Jumps to the beginning of it. Ignores errors."
   (interactive)
   (unless (json-mode-buffer-valid-p)
     (user-error "Invalid JSON"))
-  (goto-char (point-max))
-  (while (/= 1 (line-number-at-pos))    ; this respects narrowing
-    (delete-indentation)))
+  (let ((json-encoding-pretty-print nil)
+        (json-object-type 'alist)
+        (buffer-text (delete-and-extract-region (point-min) (point-max))))
+    (insert (json-encode (json-read-from-string buffer-text)))))
 
 (defun json-mode-fold ()
   "Folds or unfolds the Array or Object literal after point

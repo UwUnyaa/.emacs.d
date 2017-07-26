@@ -93,8 +93,8 @@ HTMLize dired-marked files.
 
 ;;;***
 
-;;;### (autoloads nil "json-mode" "json-mode.el" (22902 36035 29912
-;;;;;;  17000))
+;;;### (autoloads nil "json-mode" "json-mode.el" (22904 58685 86437
+;;;;;;  660000))
 ;;; Generated autoloads from json-mode.el
 
 (autoload 'json-mode "json-mode" "\
