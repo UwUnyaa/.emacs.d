@@ -84,10 +84,18 @@
       org-log-done 'time           ; insert a timestamp when a task is done
       org-src-fontify-natively t)  ; syntax highlighting in source code blocks
 
-;; don't wrap lines
+;; my mode hook
 (add-hook 'org-mode-hook
           (lambda ()
-            (toggle-truncate-lines 1)))
+            (toggle-truncate-lines 1)       ; don't wrap lines
+            (setq-local electric-pair-pairs ; add pairs for standard emphasis
+                        `(,@electric-pair-pairs
+                          (?= . ?=)
+                          (?~ . ?~)
+                          (?* . ?*)
+                          (?/ . ?/)
+                          (?_ . ?_)
+                          (?+ . ?+)))))
 
 (eval-after-load 'org
   (lambda ()
