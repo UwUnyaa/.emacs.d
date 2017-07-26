@@ -106,15 +106,19 @@ backends is defined in `my-dired-org-export-backends-alist'."
   "Generate autoload files for all directories inside
 \"~/.emacs.d/lisp\"."
   (interactive)
-  (let ((dir (file-truename "~/.emacs.d/lisp")))
+  (let ((topdir (file-truename "~/.emacs.d/lisp")))
     (mapc
      (lambda (dir)
-       (let ((generated-autoload-file (concat dir "/autoloads.el")))
-         (update-directory-autoloads dir)))
-     (cons dir
+       (let* ((generated-autoload-file (concat dir "/autoloads.el"))
+              (autoload-buffer-existed-p
+               (get-file-buffer generated-autoload-file)))
+         (update-directory-autoloads dir)
+         (unless autoload-buffer-existed-p
+           (kill-buffer (get-file-buffer generated-autoload-file)))))
+     (cons topdir
            (cl-remove-if-not
             #'file-directory-p
-            (directory-files-recursively dir "" t))))))
+            (directory-files-recursively topdir "" t))))))
 
 ;;; skewer and web modes
 (defun my-web-skewer-html-mode ()
