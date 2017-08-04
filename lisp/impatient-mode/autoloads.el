@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "impatient-mode" "impatient-mode.el" (22494
-;;;;;;  47061 979543 286000))
+;;;### (autoloads nil "impatient-mode" "impatient-mode.el" (22912
+;;;;;;  23242 262678 161000))
 ;;; Generated autoloads from impatient-mode.el
 
 (autoload 'impatient-mode "impatient-mode" "\

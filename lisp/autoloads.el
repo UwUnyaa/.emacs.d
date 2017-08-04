@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "d-mode" "d-mode.el" (22828 22899 515802 248000))
+;;;### (autoloads nil "d-mode" "d-mode.el" (22912 23242 256011 495000))
 ;;; Generated autoloads from d-mode.el
  (add-to-list 'auto-mode-alist '("\\.d[i]?\\'" . d-mode))
 
@@ -27,8 +27,8 @@ Key bindings:
 
 ;;;***
 
-;;;### (autoloads nil "htmlize" "htmlize.el" (22494 47061 979543
-;;;;;;  286000))
+;;;### (autoloads nil "htmlize" "htmlize.el" (22912 23242 259344
+;;;;;;  827000))
 ;;; Generated autoloads from htmlize.el
 
 (autoload 'htmlize-buffer "htmlize" "\
@@ -93,8 +93,8 @@ HTMLize dired-marked files.
 
 ;;;***
 
-;;;### (autoloads nil "json-mode" "json-mode.el" (22904 58685 86437
-;;;;;;  660000))
+;;;### (autoloads nil "json-mode" "json-mode.el" (22912 23242 272678
+;;;;;;  161000))
 ;;; Generated autoloads from json-mode.el
 
 (autoload 'json-mode "json-mode" "\
@@ -106,8 +106,8 @@ A simple mode for JSON editing.
 
 ;;;***
 
-;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (22512 63540 642668
-;;;;;;  115000))
+;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (22912 23242 272678
+;;;;;;  161000))
 ;;; Generated autoloads from ox-sfhp.el
 
 (autoload 'org-sfhp-export-to-buffer "ox-sfhp" "\
@@ -128,8 +128,8 @@ and open it.
 
 ;;;***
 
-;;;### (autoloads nil "simple-httpd" "simple-httpd.el" (22494 47061
-;;;;;;  982876 602000))
+;;;### (autoloads nil "simple-httpd" "simple-httpd.el" (22912 23242
+;;;;;;  272678 161000))
 ;;; Generated autoloads from simple-httpd.el
 
 (autoload 'httpd-start "simple-httpd" "\
@@ -151,8 +151,8 @@ Start the web server with given `directory' as `httpd-root'.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode" "web-mode.el" (22882 33291 551027
-;;;;;;  512000))
+;;;### (autoloads nil "web-mode" "web-mode.el" (22912 23242 279344
+;;;;;;  827000))
 ;;; Generated autoloads from web-mode.el
 
 (autoload 'web-mode "web-mode" "\
