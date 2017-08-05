@@ -46,8 +46,6 @@
 ;; same thing for CSS
 (add-to-list 'auto-mode-alist '("\\.css\\'" . my-web-skewer-css-mode))
 
-(add-hook 'web-mode-hook #'subword-mode)
-
 ;; `ox-sfhp'
 (require 'ox-sfhp)                ; code defining the backend isn't autoloaded
 
@@ -82,8 +80,6 @@
     (define-key js2-mode-map (kbd "C-M-;") #'my-js2-comment-block)
     (define-key js2-mode-map (kbd "C-c C-u") #'my-js2-unicode-escape-region)))
 
-(add-hook 'js2-mode-hook #'subword-mode)
-
 (defvar my-js2-contexts-list
   '("browser" "node" "rhino")
   "A list of contexts for `my-js2-change-context'.
@@ -93,6 +89,3 @@ like `js2-include-SYMBOL-externs'.")
 
 ;; define context modes
 (mapc #'my-js2-define-context-mode my-js2-contexts-list)
-
-;; `d-mode'
-(add-hook 'd-mode-hook #'subword-mode)

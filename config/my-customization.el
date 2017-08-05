@@ -47,6 +47,7 @@
 (show-paren-mode)			; highlight the matching paren
 (electric-pair-mode)			; automatically match parens
 (ido-mode 'buffers)			; switch buffers with `ido-mode'
+(global-subword-mode)                   ; use subword-mode everywhere
 
 ;; hide the tool, scroll and menu bars
 (mapc
