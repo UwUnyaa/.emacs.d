@@ -151,8 +151,8 @@ Start the web server with given `directory' as `httpd-root'.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode" "web-mode.el" (22949 2255 961455
-;;;;;;  726000))
+;;;### (autoloads nil "web-mode" "web-mode.el" (22950 34984 712451
+;;;;;;  645000))
 ;;; Generated autoloads from web-mode.el
 
 (autoload 'web-mode "web-mode" "\
