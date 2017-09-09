@@ -3,7 +3,7 @@
 
 ;; Copyright 2011-2017 François-Xavier Bois
 
-;; Version: 15.0.10
+;; Version: 15.0.11
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; Package-Requires: ((emacs "23.1"))
@@ -24,7 +24,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "15.0.10"
+(defconst web-mode-version "15.0.11"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -1127,13 +1127,8 @@ Must be used in conjunction with web-mode-enable-block-face."
                  ("safe"       . "{% safe | %}\n\n{% endsafe %}")))
     ("template-toolkit" . (("if"      . "[% IF | %]\n\n[% END %]")))
     (nil . (("html5" . "<!doctype html>\n<html>\n<head>\n<title></title>\n<meta charset=\"utf-8\" />\n</head>\n<body>\n|\n</body>\n</html>")
-            ("table" . "<table>\n<tr>\n<td>|</td>\n</tr>\n</table>")
-            ("ul" . "<ul>\n<li>|</li>\n</ul>")
-            ("ol" . "<ol>\n<li>|</li>\n</ol>")
-            ("dl" . "<dl>\n<dt>|</dt>\n<dd></dd>\n</dl>")
-            ("script" . "<script type=\"text/javascript\">\n|\n</script>")
-            ("style" . "<style type=\"text/css\">\n|\n</style>")
-            ("viewport" . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />|")))
+            ("table" . "<table><tbody>\n<tr>\n<td>|</td>\n<td></td>\n</tr>\n</tbody></table>")
+            ("ul"    . "<ul>\n<li>|</li>\n<li></li>\n</ul>")))
     ))
 
 (defvar web-mode-engine-token-regexps
@@ -1230,7 +1225,7 @@ Must be used in conjunction with web-mode-enable-block-face."
 (defvar web-mode-links
   '(("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"%s\" alt=\"\" />" nil 4)
     ("\\.svg$" "<object data=\"%s\" type=\"image/svg+xml\"></object>" nil 0)
-    ("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" nil 0)
+    ("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" t 0)
     ("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" t 0)
     ("\\.html?$" "<a href=\"%s\"></a>" nil 4))
   "List of elements and extensions for `web-mode-file-link'. It
@@ -1240,21 +1235,6 @@ contains the link (%s should be put where the path goes,) a bool
 that tells if the element belongs in the <head> element, and
 number of characters to move back if needed (or 0 if point
 shouldn't be moved back.)")
-
-(defvar web-mode-contained-elements
-  '(("ol" . "li")
-    ("ul" . "li")
-    ("tr" . "td"))
-  "List of elements and elements that are typically contained within them. Used by `web-mode-element-create-next'.")
-
-(defvar web-mode-link-attributes
-  '(("a" . "href")
-    ("link" . "href")
-    ("script" . "src")
-    ("iframe" . "src")
-    ("img" . "src"))
-  "List of elements and attributes that hold links to files in
-them.")
 
 (defvar web-mode-sql-queries
   (regexp-opt
@@ -2321,8 +2301,6 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     ;;(define-key map (kbd "M-q")       'fill-paragraph)
     (define-key map (kbd "M-;")       'web-mode-comment-or-uncomment)
 
-    (define-key map (kbd "M-RET") 'web-mode-element-create-next)
-
     ;;C-c C-a : attribute
     ;;C-c C-b : block
     ;;C-c C-d : dom
@@ -2336,11 +2314,8 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     (define-key map (kbd "C-c C-n")   'web-mode-navigate)
     (define-key map (kbd "C-c C-r")   'web-mode-reload)
     (define-key map (kbd "C-c C-s")   'web-mode-snippet-insert)
-    (define-key map (kbd "C-c C-o")   'web-mode-follow-link)
     ;;C-c C-t : tag
     (define-key map (kbd "C-c C-w")   'web-mode-whitespaces-show)
-
-    (define-key map (kbd "C-c <C-return>") 'web-mode-break-lines)
 
     map)
   "Keymap for `web-mode'.")
@@ -9152,75 +9127,6 @@ Prompt user if TAG-NAME isn't provided."
         (replace-match (concat "<" tag-name))
         ))))
 
-(defun web-mode-element-name ()
-  "Returns the name of the element at point."
-  (let ((start-point (point))
-        name-beginning name)
-    (web-mode-element-beginning)
-    (setq name-beginning (1+ (point)))
-    (forward-word)
-    (setq name
-          (buffer-substring-no-properties name-beginning (point)))
-    (goto-char start-point)
-    name))
-
-(defun web-mode-attribute-get (attribute)
-  "Returns the value of attribute ATTRIBUTE from the element at point,
-or nil if it's empty or it doesn't exist."
-  (let* ((start-point (point))
-         (element-beg (web-mode-element-beginning))
-         (element-end (web-mode-tag-end))
-         (attribute-value "")
-         quote-type)
-    (goto-char element-beg)
-    (if (search-forward (concat attribute "=") element-end t)
-        (if (member (setq quote-type (char-after)) '(?' ?\"))
-            ;; quoted attribute
-            (progn
-              (while (and (< (progn (forward-char)
-                                    (point))
-                             element-end)
-                          (not (= (char-after) quote-type)))
-                (when (= (char-after) ?\\)
-                  (forward-char))
-                (setq attribute-value
-                      (concat
-                       attribute-value
-                       (char-to-string (char-after)))))
-              (unless (< (1+ (point)) element-end)
-                (error "Unbalanced quotes")))
-
-          ;; unquoted attribute
-          (let* ((attribute-beg (point))
-                 (attribute-end
-                  (search-forward-regexp " \\|/?>" element-end)))
-            ;; trim space or element closing from the value
-            (setq attribute-end
-                  (- attribute-end
-                     (if (string-equal
-                          "/>"
-                          (buffer-substring-no-properties
-                           (- (point) 2) (point)))
-                         2
-                       1)))
-            (setq attribute-value
-                  (buffer-substring-no-properties
-                   attribute-beg attribute-end)))))
-
-    ;; just the attribute value
-    (when (and (string-equal "" attribute-value)
-               (progn
-                 (goto-char element-beg)
-                 (search-forward attribute element-end t)))
-      (setq attribute-value attribute))
-
-    ;; return point where it was
-    (goto-char start-point)
-
-    ;; return nil if attribute doesn't exist or is emtpy
-    (unless (string-equal "" attribute-value)
-      attribute-value)))
-
 (defun web-mode-current-trimmed-line ()
   (web-mode-trim (buffer-substring-no-properties
                   (line-beginning-position)
@@ -10250,7 +10156,7 @@ or nil if it's empty or it doesn't exist."
         (if (= web-mode-auto-quote-style 2)
             (insert "''")
           (insert "\"\""))
-        (if (looking-at-p "[ \n]")
+        (if (looking-at-p "[ \n>]")
             (backward-char)
           (insert " ")
           (backward-char 2)
@@ -13047,86 +12953,6 @@ extended to support more filetypes by customizing
         (backward-char (nth 3 type))))
     (when (not matched)
       (user-error "Unknown file type"))))
-
-(defun web-mode-follow-link (&optional in-browser)
-  "Open a file to a file linked by the element at point. Opens
-the file in a web browser when this function is called with a
-numeric argument. URLs are opened with `erc' or `browse-url' when
-called with a numeric argument."
-  (interactive "P")
-  (let ((link-attribute
-         (cdr (assoc
-               (web-mode-element-name) web-mode-link-attributes)))
-        file-or-link)
-    (unless link-attribute
-      (error "Not in an element that links to anything"))
-    (setq file-or-link (web-mode-attribute-get link-attribute))
-    (if (string-match "^https?://" file-or-link)
-        (if in-browser
-            (browse-url file-or-link)
-          (eww file-or-link))
-      (unless (file-exists-p file-or-link)
-        (error "Linked file doesn't exist"))
-      (if in-browser
-          (browse-url (concat "file://" (expand-file-name file-or-link)))
-        (find-file file-or-link)))))
-
-(defun web-mode-element-create-next ()
-  "Create another element of the same type after the current one.
-If the created element normally contains another element inside
-of it, create it too. List of these elements can be found in
-`web-mode-contained-elements'. Detailed lists are also handled
-properly."
-  (interactive)
-  (let* ((start-point (point))
-         (element-name (progn (web-mode-element-parent)
-                              (web-mode-element-tag-name)))
-         (in-dl-p (string-equal element-name "dl"))
-         (in-dt-or-dd-p (member element-name '("dt" "dd")))
-         (contained-element
-          (cdr (assoc element-name web-mode-contained-elements)))
-         reg-start reg-end)
-    (if element-name
-        (progn
-          (when (string-equal element-name "dt")
-            (web-mode-element-end)
-            (web-mode-element-next))
-          (setq reg-start (web-mode-element-end))
-          (insert
-           (cond (in-dl-p "\n<dl>\n<dt></dt>\n<dd></dd>\n</dl>")
-                 (in-dt-or-dd-p "\n<dt></dt>\n<dd></dd>")
-                 (contained-element
-                  (format "\n<%s>\n<%s></%s>\n</%s>"
-                          element-name contained-element
-                          contained-element element-name))
-                 (t (format "\n<%s></%s>"
-                            element-name element-name))))
-          (setq reg-end (point))
-          (backward-char
-           (cond (in-dl-p 21)
-                 (in-dt-or-dd-p 15)
-                 (contained-element (+(length contained-element)
-                                      (length element-name) 7))
-                 (t (+ (length element-name) 3))))
-          (indent-region reg-start reg-end))
-      (error "Not inside of a tag"))))
-
-(defun web-mode-break-lines ()
-  "Insert a \"<br/>\" tag where point is or on every line in
-region if it's active."
-  (interactive)
-  (if (use-region-p)
-      (let ((point-line (line-number-at-pos))
-            (point-column (current-column))
-            (end-line (line-number-at-pos (region-end))))
-	(goto-char (region-beginning))
-	(while (<= (line-number-at-pos) end-line)
-	  (end-of-line)
-	  (insert "<br/>")
-	  (forward-line))
-	(forward-line (- point-line (line-number-at-pos)))
-        (move-to-column point-column))
-    (insert "<br/>")))
 
 (defun web-mode-reload ()
   "Reload web-mode."

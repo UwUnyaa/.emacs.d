@@ -151,14 +151,32 @@ Start the web server with given `directory' as `httpd-root'.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode" "web-mode.el" (22951 44226 568800
-;;;;;;  491000))
+;;;### (autoloads nil "web-mode" "web-mode.el" (22963 54948 543781
+;;;;;;  984000))
 ;;; Generated autoloads from web-mode.el
 
 (autoload 'web-mode "web-mode" "\
 Major mode for editing web templates.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (22963 60101
+;;;;;;  190466 48000))
+;;; Generated autoloads from web-mode-plus.el
+
+(autoload 'web-mode-plus-bind-keys "web-mode-plus" "\
+Sets default keybindings for `web-mode-plus'. This function
+should be run after `web-mode' is loaded.
+
+\(fn)" t nil)
+
+(autoload 'web-mode-plus-set-html-snippets "web-mode-plus" "\
+Replaces snippets for HTML with ones that work better with
+`web-mode-plus-element-create-next'.
+
+\(fn)" nil nil)
 
 ;;;***
 

@@ -31,6 +31,13 @@
         web-mode-enable-auto-opening t
         web-mode-enable-auto-quoting t))
 
+;; set up `web-mode-plus'
+(eval-after-load 'web-mode
+  (lambda ()
+    (web-mode-plus-bind-keys)
+    (web-mode-plus-set-html-snippets)))
+
+
 ;; file extensions
 (mapc
  (lambda (extension)
