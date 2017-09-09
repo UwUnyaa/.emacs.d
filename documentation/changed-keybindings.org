@@ -12,22 +12,22 @@
 |------------+---------------------+-----------------------|
 | =C-c TAB=  | ~indent-buffer~     | Just like in web-mode |
 | =C-c i=    | ~my-impatient-mode~ | Convinience           |
-| =C-c l=    | ~lhttpd~            | ^                     |
+| =C-c l=    | ~lhttpd~            | ↑                     |
 
 * ~org-mode~:
 | Keybinding    | Function             | Description             |
 |---------------+----------------------+-------------------------|
 | =M-h=         | ~backward-kill-word~ | for consistency         |
-| =C-x C-h=     | ~org-mark-element~   | ^                       |
+| =C-x C-h=     | ~org-mark-element~   | ↑                       |
 | =M-F/B/N/P=   | ~org-meta*~          | I don't like arrow keys |
-| =C-M-F/B/N/P= | ~org-shiftmeta*~     | ^                       |
-| =M-n/p=       | ~org-*-paragraph~    | ^                       |
+| =C-M-F/B/N/P= | ~org-shiftmeta*~     | ↑                       |
+| =M-n/p=       | ~org-*-paragraph~    | ↑                       |
 
 * ~nxml-mode~:
 | Keybinding | Function             | Description     |
 |------------+----------------------+-----------------|
 | =M-h=      | ~backward-kill-word~ | for consistency |
-| =C-x C-h=  | ~nxml-mark-word~     | ^               |
+| =C-x C-h=  | ~nxml-mark-word~     | ↑               |
 
 * ~js2-mode~:
 | Keybinding | Function                       | Description                                          |
