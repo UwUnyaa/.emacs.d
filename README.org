@@ -81,7 +81,12 @@ if needed.
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
 - [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure Emacs lisp
 - [[https://melpa.org/#/htmlize][htmlize]] :: turns Emacs buffers into HTML with syntax highlighting
-- [[https://github.com/fxbois/web-mode][web-mode]] [[https://github.com/DoMiNeLa10/web-mode][(my fork)]] :: major mode for editing HTML files with syntax
-     highlighting for inline CSS and JavaScript
+- [[https://github.com/fxbois/web-mode][web-mode]] :: major mode for editing HTML files with syntax highlighting for
+              inline CSS and JavaScript
+- [[https://github.com/DoMiNeLa10/web-mode-plus][web-mode-plus]] :: set of additional commands for ~web-mode~ that didn't get
+                   merged into upstream
+- [[https://github.com/skeeto/skewer-mode][skewer]] :: live interaction with JavaScript, HTML and CSS
 - [[https://github.com/DoMiNeLa10/ox-sfhp][ox-sfhp]] :: exports org-mode files to simple single file HTML presentations
 - [[https://github.com/mooz/js2-mode][js2-mode]] :: improved JavaScript major mode
+- [[https://github.com/DoMiNeLa10/json-mode][json-mode]] :: a basic mode for JSON edditing with (flaky) minification,
+               pretty printing and folding by me
