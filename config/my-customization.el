@@ -150,6 +150,10 @@ by `my-dired-do-org-export'.")
     (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
     (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
 
+;;; `c-mode'
+(setq c-default-style "k&r"
+      c-basic-offset 2)
+
 ;;; change displayed major mode names
 (mapc #'my-change-major-mode-name
       '((js2-mode              . "JS2")
