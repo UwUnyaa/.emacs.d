@@ -34,6 +34,7 @@
                              "Emacs (server)"
                            "Emacs")
       auto-save-timeout 60              ; autosave every 60 seconds
+      ido-default-buffer-method 'selected-window
       ;; variables that were set by custom-set-variables before
       custom-enabled-themes '(wombat)
       default-input-method "japanese"
