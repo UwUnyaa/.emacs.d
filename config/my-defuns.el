@@ -82,6 +82,11 @@ A list of contexts should be defined in `my-js2-contexts-list'."
       ;; context
       (js2-reparse))))
 
+(defun my-ox-require-backends ()
+  "Makes sure all ox backends defined in `my-ox-backends' are
+loaded."
+  (mapc #'require my-ox-backends))
+
 (defun my-dired-do-org-export (backend)
   "Exports marked files or file at point with a backend read from
 a minibuffer. Files without .org extension are ignored. Alist of

@@ -86,6 +86,10 @@
       org-log-done 'time           ; insert a timestamp when a task is done
       org-src-fontify-natively t)  ; syntax highlighting in source code blocks
 
+(defvar my-ox-backends '(ox-md ox-sfhp)
+  "List of org export backends to be loaded by
+`my-ox-require-backends'.")
+
 ;; my mode hook
 (add-hook 'org-mode-hook
           (lambda ()
@@ -101,6 +105,7 @@
 
 (eval-after-load 'org
   (lambda ()
+    (my-ox-require-backends)
     ;; make M-h behave just like everywhere else
     (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
     ;; use C-x C-h for marking paragraphs
@@ -133,6 +138,7 @@ by `my-dired-do-org-export'.")
 
 (eval-after-load 'dired
   (lambda ()
+    (my-ox-require-backends)
     (define-key dired-mode-map (kbd "E") #'my-dired-do-org-export)
     (define-key dired-mode-map (kbd "r") (my-dired-switch-toggler "R"))
     (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))))

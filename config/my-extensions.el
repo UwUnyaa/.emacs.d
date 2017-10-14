@@ -53,9 +53,6 @@
 ;; same thing for CSS
 (add-to-list 'auto-mode-alist '("\\.css\\'" . my-web-skewer-css-mode))
 
-;; `ox-sfhp'
-(require 'ox-sfhp)                ; code defining the backend isn't autoloaded
-
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node
