@@ -105,7 +105,8 @@ backends is defined in `my-dired-org-export-backends-alist'."
          (lambda (file)              ; filter out files without .org extension
            (let ((extension (file-name-extension file)))
              (when extension
-               (string-equal "org" (downcase extension))))))))
+               (string-equal "org" (downcase extension)))))))
+  (revert-buffer))
 
 (defun my-update-autoloads ()
   "Generate autoload files for all directories inside
