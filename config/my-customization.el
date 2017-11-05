@@ -130,10 +130,11 @@
       dired-listing-switches "-Al")     ; don't show . and .. in file listings
 
 (defvar my-dired-org-export-backends-alist
-  '(("html" . org-html-export-to-html)
-    ("sfhp" . org-sfhp-export-to-file)
-    ("text" . org-ascii-export-to-ascii)
-    ("pdf"  . org-latex-export-to-pdf))
+  '(("html"     . org-html-export-to-html)
+    ("sfhp"     . org-sfhp-export-to-file)
+    ("text"     . org-ascii-export-to-ascii)
+    ("pdf"      . org-latex-export-to-pdf)
+    ("markdown" . org-md-export-to-markdown))
   "Alist of org export formats and functions used by them. Used
 by `my-dired-do-org-export'.")
 
