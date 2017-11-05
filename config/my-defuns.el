@@ -98,7 +98,7 @@ backends is defined in `my-dired-org-export-backends-alist'."
                      my-dired-org-export-backends-alist))))
   (mapc (lambda (file)
           (with-current-buffer (find-file-noselect file)
-            (funcall backend file)
+            (funcall backend)
             (kill-buffer)))
         (dired-get-marked-files
          t nil
