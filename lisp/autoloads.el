@@ -106,7 +106,7 @@ A simple mode for JSON editing.
 
 ;;;***
 
-;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (23047 8255 160687 566000))
+;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (23047 8777 480689 334000))
 ;;; Generated autoloads from ox-sfhp.el
 
 (autoload 'org-sfhp-export-to-buffer "ox-sfhp" "\
