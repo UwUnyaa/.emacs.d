@@ -1,5 +1,5 @@
+;;; -*- lexical-binding:t; coding: utf-8 -*-
 ;;; ox-sfhp.el - export from org-mode to a single file HTML presentation
-;;; -*- coding: utf-8 -*-
 ;;; Version: 1.2.1
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
@@ -31,7 +31,7 @@
   "Style tags for ox-sfhp.")
 
 (defconst org-sfhp-style-common
-" /* common style */
+  " /* common style */
  body {
    margin: 0;
    font-family: sans, arial, helvetica;
@@ -342,90 +342,58 @@ button {
   "List of protected HTML characters and how they should be escaped.")
 
 (defconst org-sfhp-tags
-  '((bold . "b")
-    (italic . "i")
-    (underline . "u")
+  '((bold           . "b")
+    (italic         . "i")
+    (underline      . "u")
     (strike-through . "s")
-    (superscript . "sup")
-    (subscript . "sub")
-    (quote-block . "blockquote"))
-  "List of HTML tags. Used by ox-sfhp.")
+    (superscript    . "sup")
+    (subscript      . "sub")
+    (quote-block    . "blockquote"))
+  "List of HTML tags.")
 
 (defconst org-sfhp-list-types
-  '((ordered . "ol")
-    (unordered . "ul")
+  '((ordered     . "ol")
+    (unordered   . "ul")
     (descriptive . "dl"))
-  "List of types of lists and tags that contain them. Used by ox-sfhp.")
+  "List of types of lists and tags that contain them.")
 
 (defconst org-sfhp-special-paragraphs
   '(item quote-block)
   "List of paragraph parent elements that should be treated differently.")
 
 (defconst org-sfhp-mime-types
-  '(("png" . "image/png")
-    ("jpg" . "image/jpeg")
+  '(("png"  . "image/png")
+    ("jpg"  . "image/jpeg")
     ("jpeg" . "image/jpeg")
     ("webp" . "image/webp")
-    ("bmp" . "image/bmp")
-    ("gif" . "image/gif"))
+    ("bmp"  . "image/bmp")
+    ("gif"  . "image/gif"))
   "List of image file types and their MIME types.")
 
-;;; Variables
-(defvar org-sfhp-indent-output (fboundp 'web-mode)
+;;; User customizable variables
+(defgroup org-export-sfhp '()
+  "Options for exporting Org mode files to single file HTML
+presentations."
+  :tag "Org export SFHP"
+  :group 'org-export)
+
+(defcustom org-sfhp-indent-output (fboundp 'web-mode)
   "When non-nil, ox-sfhp's output is indented. Indenting
 shouldn't be done when `web-mode' isn't installed, because it can
-break source code blocks and other things.")
+break source code blocks and other things."
+  :group 'org-export-sfhp
+  :type 'boolean)
 
-(defvar org-sfhp-include-oldie-hacks t
+(defcustom org-sfhp-include-oldie-hacks t
   "When non-nil, inlude a CSS hack for old versions of Internet
-Explorer in ox-sfhp output.")
-
-;; backend
-(org-export-define-backend 'sfhp
-  '((bold . org-sfhp-wrap-in-tag)
-    (italic . org-sfhp-wrap-in-tag)
-    (underline . org-sfhp-wrap-in-tag)
-    (verbatim . org-sfhp-monospace)
-    (strike-through . org-sfhp-wrap-in-tag)
-    (subscript . org-sfhp-wrap-in-tag)
-    (superscript . org-sfhp-wrap-in-tag)
-    (code . org-sfhp-monospace)
-    (example-block . org-sfhp-monospace-block)
-    (headline . org-sfhp-headline)
-    (horizontal-rule . org-sfhp-horizontal-rule)
-    (line-break . org-sfhp-line-break)
-    (link . org-sfhp-link)
-    (paragraph . org-sfhp-paragraph)
-    (src-block . org-sfhp-src-block)
-    (plain-list . org-sfhp-plain-list)
-    (item . org-sfhp-item)
-    (quote-block . org-sfhp-wrap-in-tag)
-    (section . org-sfhp-section)
-    (table . org-sfhp-table)
-    (table-cell . org-sfhp-table-cell)
-    (table-row . org-sfhp-table-row)
-    (template . org-sfhp-template)
-    (plain-text . org-sfhp-escape-html-chars))
-  :export-block "SFHP"
-  :filters-alist '((:filter-final-output . org-sfhp-final-filter))
-  :menu-entry
-  '(?p "Export to a single file HTML presentation"
-       ((?b "As a buffer" org-sfhp-export-to-buffer)
-        (?f "As a file" org-sfhp-export-to-file)
-        (?o "As a file and open" org-sfhp-export-to-file-and-open)))
-  :options-alist
-  '((:sfhp-theme "SFHP_THEME" nil "dark" space)
-    (:sfhp-background-file "SFHP_BACKGROUND" nil nil space)
-    (:sfhp-background-repeat "SFHP_BACKGROUND_REPEAT" nil nil space)
-    (:sfhp-no-base64 "SFHP_NO_BASE64" nil nil space)))
+Explorer in ox-sfhp output."
+  :group 'org-export-sfhp
+  :type 'boolean)
 
 ;;; wrapping functions (or whatever)
-(defun org-sfhp-wrap-in-tag (type contents info)
-  "Wraps contents in a HTML tag. Used by ox-sfhp."
-  (let ((tag (cdr (assoc (car type) org-sfhp-tags))))
-    (if tag
-        (format "<%s>%s</%s>" tag contents tag)
-      contents)))
+(defun org-sfhp-tag-wrapper (tag)
+  (lambda (types contents info)
+    (format "<%s>%s</%s>" tag contents tag)))
 
 (defun org-sfhp-monospace (type contents info)
   "Returns HTML with inline monospace text."
@@ -479,7 +447,7 @@ Explorer in ox-sfhp output.")
                              (org-export-get-parent type))
        'descriptive)                    ; when a list is descriptive
       (format "<dt>%s</dt>\n<dd>\n%s</dd>"
-              (car (org-element-property :tag type)) ; returns a list, so I car it
+              (org-export-data (org-element-property :tag type) info)
               contents)
     (format "<li>\n%s</li>" contents)))
 
@@ -526,8 +494,8 @@ Explorer in ox-sfhp output.")
 ;; link
 (defun org-sfhp-link (type contents info)
   "Returns an image encoded as base64, a link to a website or
-just text from the link. Used by ox-sfhp. Alt text for image can
-be supressed by using \"decoration\" as the link description."
+just text from the link. Alt text for image can be supressed by
+using \"decoration\" as the link description."
   (let* ((linked-type (org-element-property :type type))
          (file-path (org-element-property :path type))
          (raw-link (org-element-property :raw-link type))
@@ -655,7 +623,7 @@ exist."
 ;; plain text
 ;; this function is pretty much like org-html-encode-plain-text in ox-html
 (defun org-sfhp-escape-html-chars (text &optional info)
-  "Escapes characters used by HTML. Used by ox-sfhp."
+  "Escapes characters used by HTML."
   (mapc (lambda (pair)
           (setq text (replace-regexp-in-string (car pair) (cdr pair) text t t)))
         org-sfhp-protected-characters)
@@ -665,6 +633,43 @@ exist."
   (if (fboundp 'web-mode)
       (web-mode)                        ; web-mode is better at indenting
     (set-auto-mode t)))
+
+;; backend
+(org-export-define-backend 'sfhp
+  (eval-when-compile
+    `((verbatim        . org-sfhp-monospace)
+      (code            . org-sfhp-monospace)
+      (example-block   . org-sfhp-monospace-block)
+      (headline        . org-sfhp-headline)
+      (horizontal-rule . org-sfhp-horizontal-rule)
+      (line-break      . org-sfhp-line-break)
+      (link            . org-sfhp-link)
+      (paragraph       . org-sfhp-paragraph)
+      (src-block       . org-sfhp-src-block)
+      (plain-list      . org-sfhp-plain-list)
+      (item            . org-sfhp-item)
+      (section         . org-sfhp-section)
+      (table           . org-sfhp-table)
+      (table-cell      . org-sfhp-table-cell)
+      (table-row       . org-sfhp-table-row)
+      (template        . org-sfhp-template)
+      (plain-text      . org-sfhp-escape-html-chars)
+      ,@(mapcar
+         (lambda (pair)
+           `(,(car pair) . ,(org-sfhp-tag-wrapper (cdr pair))))
+         org-sfhp-tags)))
+  :export-block "SFHP"
+  :filters-alist '((:filter-final-output . org-sfhp-final-filter))
+  :menu-entry
+  '(?p "Export to a single file HTML presentation"
+       ((?P "As a buffer" org-sfhp-export-to-buffer)
+        (?p "As a file" org-sfhp-export-to-file)
+        (?o "As a file and open" org-sfhp-export-to-file-and-open)))
+  :options-alist
+  '((:sfhp-theme "SFHP_THEME" nil "dark" space)
+    (:sfhp-background-file "SFHP_BACKGROUND" nil nil space)
+    (:sfhp-background-repeat "SFHP_BACKGROUND_REPEAT" nil nil space)
+    (:sfhp-no-base64 "SFHP_NO_BASE64" nil nil space)))
 
 ;;; export functions
 ;;;###autoload
