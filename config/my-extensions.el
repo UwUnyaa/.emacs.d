@@ -37,7 +37,6 @@
     (web-mode-plus-bind-keys)
     (web-mode-plus-set-html-snippets)))
 
-
 ;; file extensions
 (mapc
  (lambda (extension)
