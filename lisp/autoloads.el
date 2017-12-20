@@ -162,8 +162,8 @@ Major mode for editing web templates.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (23098 22474
-;;;;;;  776675 253000))
+;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (23098 25304
+;;;;;;  86671 312000))
 ;;; Generated autoloads from web-mode-plus.el
 
 (autoload 'web-mode-plus-bind-keys "web-mode-plus" "\
