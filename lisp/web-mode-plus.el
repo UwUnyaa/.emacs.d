@@ -33,8 +33,8 @@
   '(("ol" . "li")
     ("ul" . "li")
     ("tr" . "td"))
-  "List of elements and elements that are typically contained
-within them. Used by `web-mode-plus-element-create-next'.")
+  "List of elements and elements they typically contain.
+Used by `web-mode-plus-element-create-next'.")
 
 (defvar web-mode-plus-link-attributes
   '(("a"      . "href")
@@ -42,8 +42,7 @@ within them. Used by `web-mode-plus-element-create-next'.")
     ("script" . "src")
     ("iframe" . "src")
     ("img"    . "src"))
-  "List of elements and attributes that hold links to files in
-them.")
+  "List of elements and attributes that hold links.")
 
 (defvar web-mode-plus-html-snippets
   '(("html5" . "<!doctype html>\n<html>\n<head>\n<title></title>\n<meta charset=\"utf-8\" />\n</head>\n<body>\n|\n</body>\n</html>")
@@ -55,12 +54,12 @@ them.")
     ("style" . "<style type=\"text/css\">\n|\n</style>")
     ("viewport" . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />|")))
 
-;;; Defuns:
+;;; Code:
 
 ;;;###autoload
 (defun web-mode-plus-bind-keys ()
-  "Sets default keybindings for `web-mode-plus'. This function
-should be run after `web-mode' is loaded."
+  "Set default keybindings for `web-mode-plus'.
+This function should be run after `web-mode' is loaded."
   (interactive)
   (define-key web-mode-map (kbd "M-RET") #'web-mode-plus-element-create-next)
   (define-key web-mode-map (kbd "C-c C-o") #'web-mode-plus-follow-link)
@@ -68,13 +67,12 @@ should be run after `web-mode' is loaded."
 
 ;;;###autoload
 (defun web-mode-plus-set-html-snippets ()
-  "Replaces snippets for HTML with ones that work better with
-`web-mode-plus-element-create-next'."
+  "Replace HTML snippets with ones optimized for `web-mode-plus'."
   (setf (alist-get nil web-mode-engines-snippets)
         web-mode-plus-html-snippets))
 
 (defun web-mode-plus-element-name ()
-  "Returns the name of the element at point."
+  "Return the name of the element at point."
   (let ((start-point (point))
         name-beginning name)
     (web-mode-element-beginning)
@@ -86,8 +84,8 @@ should be run after `web-mode' is loaded."
     name))
 
 (defun web-mode-plus-attribute-get (attribute)
-  "Returns the value of attribute ATTRIBUTE from the element at point,
-or nil if it's empty or it doesn't exist."
+  "Return value of attribute ATTRIBUTE from the element at point or nil.
+Nil is also returned if attribute is empty or doesn't exist."
   (let* ((start-point (point))
          (element-beg (web-mode-element-beginning))
          (element-end (web-mode-tag-end))
@@ -143,10 +141,9 @@ or nil if it's empty or it doesn't exist."
       attribute-value)))
 
 (defun web-mode-plus-follow-link (&optional in-browser)
-  "Open a file to a file linked by the element at point. Opens
-the file in a web browser when this function is called with a
-numeric argument. URLs are opened with `erc' or `browse-url' when
-called with a numeric argument."
+  "Open a file to a file linked by the element at point.
+Opens the file in a web browser (`eww' or `browse-url') when this function is
+called with a numeric argument or IN-BROWSER is set."
   (interactive "P")
   (let ((link-attribute
          (cdr (assoc
@@ -206,8 +203,7 @@ properly."
       (error "Not inside of a tag"))))
 
 (defun web-mode-plus-break-lines ()
-  "Insert a \"<br/>\" tag where point is or on every line in
-region if it's active."
+  "Insert a \"<br/>\" tag at point or on every line in region."
   (interactive)
   (if (use-region-p)
       (let ((point-line (line-number-at-pos))
@@ -223,3 +219,4 @@ region if it's active."
     (insert "<br/>")))
 
 (provide 'web-mode-plus)
+;;; web-mode-plus.el ends here

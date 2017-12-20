@@ -1,5 +1,5 @@
+;;; ox-sfhp.el --- export from org-mode to a single file HTML presentation
 ;;; -*- lexical-binding:t; coding: utf-8 -*-
-;;; ox-sfhp.el - export from org-mode to a single file HTML presentation
 ;;; Version: 1.2.1
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
@@ -21,7 +21,7 @@
 
 ;;; Dependencies:
 (require 'ox)
-;; this exporter can use web-mode if it's installed to indent documents
+;; this exporter can use `web-mode' if it's installed to indent documents
 
 ;;; Variables and constants:
 
@@ -631,7 +631,7 @@ exist."
 
 (defun org-sfhp-run-appropriate-mode ()
   (if (fboundp 'web-mode)
-      (web-mode)                        ; web-mode is better at indenting
+      (web-mode)                        ; `web-mode' is better at indenting
     (set-auto-mode t)))
 
 ;; backend

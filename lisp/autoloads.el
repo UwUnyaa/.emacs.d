@@ -93,8 +93,8 @@ HTMLize dired-marked files.
 
 ;;;***
 
-;;;### (autoloads nil "json-mode" "json-mode.el" (22912 23242 272678
-;;;;;;  161000))
+;;;### (autoloads nil "json-mode" "json-mode.el" (23098 23941 90000
+;;;;;;  51000))
 ;;; Generated autoloads from json-mode.el
 
 (autoload 'json-mode "json-mode" "\
@@ -106,7 +106,8 @@ A simple mode for JSON editing.
 
 ;;;***
 
-;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (23047 8777 480689 334000))
+;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (23098 15020 564588
+;;;;;;  956000))
 ;;; Generated autoloads from ox-sfhp.el
 
 (autoload 'org-sfhp-export-to-buffer "ox-sfhp" "\
@@ -161,19 +162,18 @@ Major mode for editing web templates.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (22963 60101
-;;;;;;  190466 48000))
+;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (23098 22474
+;;;;;;  776675 253000))
 ;;; Generated autoloads from web-mode-plus.el
 
 (autoload 'web-mode-plus-bind-keys "web-mode-plus" "\
-Sets default keybindings for `web-mode-plus'. This function
-should be run after `web-mode' is loaded.
+Set default keybindings for `web-mode-plus'.
+This function should be run after `web-mode' is loaded.
 
 \(fn)" t nil)
 
 (autoload 'web-mode-plus-set-html-snippets "web-mode-plus" "\
-Replaces snippets for HTML with ones that work better with
-`web-mode-plus-element-create-next'.
+Replace HTML snippets with ones optimized for `web-mode-plus'.
 
 \(fn)" nil nil)
 
