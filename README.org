@@ -1,7 +1,7 @@
 #+TITLE: DoMiNeLa10's .emacs
 
 * About this .emacs
-This is my config for GNU Emacs. out won't work with GNU Emacs 24 and older
+This is my config for GNU Emacs. It won't work with GNU Emacs 24 and older
 versions. Tables with customized keybindings are [[file:documentation/changed-keybindings.org][here]].
 
 If you want to reuse any of my own code from this repository, feel free to do
