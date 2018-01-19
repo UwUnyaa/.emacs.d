@@ -147,7 +147,7 @@ by `my-dired-do-org-export'.")
     (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))))
 
 ;; use human readable file sizes in if they'll work
-(when (or (member system-type '(ms-dos windows-nt))    ; ls in elisp
+(when (or (member system-type '(ms-dos windows-nt haiku)) ; ls in elisp
           (eq 0 (call-process insert-directory-program ; check if ls -h works
                               nil nil nil "-h")))
   (setq dired-listing-switches (concat dired-listing-switches "h")))
