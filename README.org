@@ -22,6 +22,7 @@ loaded using autoload files so that Emacs can start up faster.
 - [[https://www.archlinux.org/][Arch GNU/Linux]]
 - Android 5.0 with [[https://termux.com/][Termux]] (wasn't tested in a while)
 - Multiple versions of Windows (using the native build from the [[https://www.gnu.org/software/emacs/download.html#windows][GNU FTP]])
+- [[https://www.haiku-os.org/][Haiku]]
 
 * Installation:
 On Unix-like operating systems such as GNU/Linux and on Termux:
