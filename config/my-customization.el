@@ -158,7 +158,8 @@ by `my-dired-do-org-export'.")
 (eval-after-load 'nxml-mode
   (lambda ()
     (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
-    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)))
+    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
+    (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer)))
 
 ;;; `c-mode'
 (setq c-default-style "k&r"
