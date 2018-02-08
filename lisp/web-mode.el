@@ -2390,6 +2390,16 @@ another auto-completion with different ac-sources (e.g. ac-php)")
     (defmacro setq-local (var val)
     `(set (make-local-variable ',var) ,val)))
 
+  ;; compatability with emacs < 24.4
+  (defun web-mode-string-suffix-p (suffix string)
+    "Return t if STRING ends with SUFFIX."
+      (and (string-match (rx-to-string `(: ,suffix eos) t)
+                         string)
+           t))
+
+  (unless (fboundp 'string-suffix-p)
+    (fset 'string-suffix-p (symbol-function 'web-mode-string-suffix-p)))
+
   ) ;eval-and-compile
 
 ;;---- MAJOR MODE --------------------------------------------------------------
@@ -7243,6 +7253,12 @@ another auto-completion with different ac-sources (e.g. ac-php)")
          ((string= token "string")
           (when debug (message "I120(%S) string" pos))
           (cond
+           ((web-mode-is-token-end pos)
+            (if (get-text-property pos 'block-side)
+                (web-mode-block-token-beginning)
+              (web-mode-part-token-beginning))
+            (setq offset (current-indentation))
+            )
            ((and web-mode-enable-sql-detection
                  (web-mode-block-token-starts-with (concat "[ \n]*" web-mode-sql-queries)))
             (save-excursion
@@ -7268,6 +7284,10 @@ another auto-completion with different ac-sources (e.g. ac-php)")
            ((and is_js
                  (web-mode-is-ql-string pos "graphql"))
             (setq offset (web-mode-relayql-indentation pos "graphql"))
+            )
+           ((and is_js
+                 (web-mode-is-styled-component-string pos))
+            (setq offset (web-mode-styled-component-indentation pos))
             )
            ((and is_js
                  (web-mode-is-html-string pos))
@@ -7958,6 +7978,15 @@ another auto-completion with different ac-sources (e.g. ac-php)")
       ) ;t
      ) ;cond
     offset)))
+
+(defun web-mode-styled-component-indentation (pos)
+  (save-excursion
+    (let (offset)
+      (goto-char pos)
+      (web-mode-part-token-beginning)
+      (setq offset (+ web-mode-css-indent-offset (current-indentation)))
+      ) ;let
+  ))
 
 (defun web-mode-relayql-indentation (pos &optional prefix)
   (unless prefix (setq prefix "relayql"))
@@ -9209,7 +9238,7 @@ Prompt user if TAG-NAME isn't provided."
                 (> (length tag-name) 0)))
       (message "element-insert ** failure **"))
      ((web-mode-element-is-void tag-name)
-      (insert (concat "<" tag-name "/>"))
+      (insert (concat "<" (replace-regexp-in-string "/" "" tag-name) "/>"))
       )
      (mark-active
       (let ((beg (region-beginning)) (end (region-end)))
@@ -9254,6 +9283,26 @@ Prompt user if TAG-NAME isn't provided."
 
 (defun web-mode-trim (string)
   (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" "" string)))
+
+(defun web-mode-is-token-end (pos)
+  (let (block-token part-token)
+    (setq block-token (get-text-property pos 'block-token))
+    (setq part-token (get-text-property pos 'part-token))
+    (cond
+     ((not (or block-token part-token))
+      nil)
+     ((>= (1+ pos) (point-max))
+      t)
+     ((and block-token
+           (not (string= (get-text-property (1+ pos) 'block-token) block-token)))
+      t)
+     ((and part-token
+           (not (string= (get-text-property (1+ pos) 'part-token) part-token)))
+      t)
+     (t
+      nil)
+     ) ;cond
+   ))
 
 (defun web-mode-block-is-token-line ()
   (save-excursion
@@ -9331,6 +9380,8 @@ Prompt user if TAG-NAME isn't provided."
     t)
    ((and tag (member tag '("div" "li" "a" "p" "h1" "h2" "h3" "ul" "span" "article" "section" "td" "tr")))
     nil)
+   ((and tag (string-suffix-p "/" tag))
+    t)
    ((and tag (string= web-mode-content-type "jsx"))
     (member (downcase tag) '("img" "br" "hr")))
    (tag
@@ -9500,12 +9551,14 @@ Prompt user if TAG-NAME isn't provided."
   (interactive)
   (let (ctx)
     (setq ctx (web-mode-comment-context))
-    (if (null ctx) nil
-      ;; (message "ctx=%S" ctx)
+    (cond
+     ((null ctx)
+      (newline 1))
+     (t
       (newline 1)
       (indent-line-to (plist-get ctx :col))
-      (insert (concat (plist-get ctx :prefix) ""))
-      ) ;if
+      (insert (concat (plist-get ctx :prefix) "")))
+     ) ;cond
     ))
 
 (defun web-mode-comment-context (&optional pos)
@@ -11929,6 +11982,18 @@ Prompt user if TAG-NAME isn't provided."
       ) ;while
     ;;(message "pos=%S dot-pos=%S" pos dot-pos)
     (if (null pos) pos (cons pos dot-pos))
+    ))
+
+(defun web-mode-is-styled-component-string (pos)
+  (let (beg)
+    (cond
+     ((and (setq beg (web-mode-part-token-beginning-position pos))
+           (web-mode-looking-at-p "`" beg)
+           (web-mode-looking-back "styled[[:alnum:].]+" beg))
+      beg)
+     (t
+      nil)
+     ) ;cond
     ))
 
 ;; Relay.QL , gql, graphql
