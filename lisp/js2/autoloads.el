@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (22983
-;;;;;;  58014 583774 692000))
+;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (23191
+;;;;;;  48823 118236 350000))
 ;;; Generated autoloads from js2-imenu-extras.el
 
 (autoload 'js2-imenu-extras-setup "js2-imenu-extras" "\
@@ -19,8 +19,8 @@ Toggle Imenu support for frameworks and structural patterns.
 
 ;;;***
 
-;;;### (autoloads nil "js2-mode" "js2-mode.el" (22983 58014 583774
-;;;;;;  692000))
+;;;### (autoloads nil "js2-mode" "js2-mode.el" (23191 48823 122236
+;;;;;;  350000))
 ;;; Generated autoloads from js2-mode.el
 
 (autoload 'js2-highlight-unused-variables-mode "js2-mode" "\
@@ -55,8 +55,8 @@ variables (`sgml-basic-offset' et al) locally, like so:
 
 ;;;***
 
-;;;### (autoloads nil nil ("js2-old-indent.el") (22983 58014 583774
-;;;;;;  692000))
+;;;### (autoloads nil nil ("js2-old-indent.el") (23191 48823 122236
+;;;;;;  350000))
 
 ;;;***
 
