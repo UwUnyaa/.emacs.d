@@ -1,5 +1,5 @@
 ;;; web-mode.el --- major mode for editing web templates
-;;; -*- coding: utf-8 -*-
+;;; -*- coding: utf-8; lexical-binding: t; -*-
 
 ;; Copyright 2011-2018 François-Xavier Bois
 
@@ -2530,7 +2530,12 @@ another auto-completion with different ac-sources (e.g. ac-php)")
   (if (fboundp 'prog-mode)
       (put 'web-mode 'derived-mode-parent 'prog-mode))
 
-  ;;(web-mode-trace "end")
+  (cond
+   ((not (buffer-file-name))
+    )
+   ((string-match-p "web-mode-benchmark.html" (buffer-file-name))
+    (web-mode-trace "end"))
+   ) ;cond
 
   )
 
@@ -13024,8 +13029,8 @@ Prompt user if TAG-NAME isn't provided."
       (web-mode-buffer-indent)
       (setq sig2 (md5 (current-buffer)))
       (setq success (string= sig1 sig2))
-      (setq out (concat (if success "ok" "ko") " : " (file-name-nondirectory file)))
-      (message out)
+      (setq out (concat (if success "ok" "ko") " : " (file-name-nondirectory file) "\n"))
+      (princ out)
       (setq err (concat (file-name-directory file) "_err." (file-name-nondirectory file)))
       (if success
           (when (file-readable-p err)
@@ -13289,7 +13294,7 @@ extended to support more filetypes by customizing
 
 (defun web-mode-trace (msg)
   (let (sub)
-    ;;      (when (null web-mode-time) (setq web-mode-time (current-time)))
+    (when (null web-mode-time) (setq web-mode-time (current-time)))
     (setq sub (time-subtract (current-time) web-mode-time))
     (when nil
       (save-excursion
