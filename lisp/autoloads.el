@@ -106,8 +106,7 @@ A simple mode for JSON editing.
 
 ;;;***
 
-;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (23098 15020 564588
-;;;;;;  956000))
+;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (0 0 0 0))
 ;;; Generated autoloads from ox-sfhp.el
 
 (autoload 'org-sfhp-export-to-buffer "ox-sfhp" "\
@@ -125,6 +124,8 @@ Export current buffer to a single file HTML presentation file
 and open it.
 
 \(fn &optional ASYNC SUBTREEP VISIBLE-ONLY BODY-ONLY EXT-PLIST)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-sfhp" '("org-sfhp-")))
 
 ;;;***
 

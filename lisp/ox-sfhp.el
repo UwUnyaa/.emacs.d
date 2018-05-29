@@ -1,6 +1,6 @@
 ;;; ox-sfhp.el --- export from org-mode to a single file HTML presentation
 ;;; -*- lexical-binding:t; coding: utf-8 -*-
-;;; Version: 1.2.1
+;;; Version: 1.2.2
 
 ;; Author: DoMiNeLa10 (https://github.com/DoMiNeLa10)
 
@@ -658,7 +658,6 @@ exist."
          (lambda (pair)
            `(,(car pair) . ,(org-sfhp-tag-wrapper (cdr pair))))
          org-sfhp-tags)))
-  :export-block "SFHP"
   :filters-alist '((:filter-final-output . org-sfhp-final-filter))
   :menu-entry
   '(?p "Export to a single file HTML presentation"
