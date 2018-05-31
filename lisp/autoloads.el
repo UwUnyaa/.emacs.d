@@ -152,14 +152,15 @@ Start the web server with given `directory' as `httpd-root'.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode" "web-mode.el" (23301 12090 530359
-;;;;;;  984000))
+;;;### (autoloads nil "web-mode" "web-mode.el" (0 0 0 0))
 ;;; Generated autoloads from web-mode.el
 
 (autoload 'web-mode "web-mode" "\
 Major mode for editing web templates.
 
 \(fn)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "web-mode" '("web-mode-")))
 
 ;;;***
 
