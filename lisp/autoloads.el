@@ -181,6 +181,24 @@ Replace HTML snippets with ones optimized for `web-mode-plus'.
 
 ;;;***
 
+;;;### (autoloads nil "yaml-mode" "yaml-mode.el" (0 0 0 0))
+;;; Generated autoloads from yaml-mode.el
+
+(let ((loads (get 'yaml 'custom-loads))) (if (member '"yaml-mode" loads) nil (put 'yaml 'custom-loads (cons '"yaml-mode" loads))))
+
+(autoload 'yaml-mode "yaml-mode" "\
+Simple mode to edit YAML.
+
+\\{yaml-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "yaml-mode" '("yaml-")))
+
+;;;***
+
 (provide 'autoloads)
 ;; Local Variables:
 ;; version-control: never

@@ -92,3 +92,10 @@ like `js2-include-SYMBOL-externs'.")
 
 ;; define context modes
 (mapc #'my-js2-define-context-mode my-js2-contexts-list)
+
+;;; `yaml-mode'
+(eval-after-load 'yaml-mode
+  (lambda ()
+    (define-key yaml-mode-map (kbd "RET") #'newline-and-indent)))
+
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
