@@ -89,5 +89,8 @@ if needed.
 - [[https://github.com/skeeto/skewer-mode][skewer]] :: live interaction with JavaScript, HTML and CSS
 - [[https://github.com/DoMiNeLa10/ox-sfhp][ox-sfhp]] :: exports org-mode files to simple single file HTML presentations
 - [[https://github.com/mooz/js2-mode][js2-mode]] :: improved JavaScript major mode
+- [[https://github.com/felipeochoa/rjsx-mode][rjsx-mode]] :: improved JSX syntax highligting for ~js2-mode~
+- [[https://github.com/haskell/haskell-mode][haskell-mode]] :: major mode for Haskell
+- [[https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode][d-mode]] :: major mode for D
 - [[https://github.com/DoMiNeLa10/json-mode][json-mode]] :: a basic mode for JSON editing with (flaky) minification,
                pretty printing and folding by me
