@@ -58,7 +58,7 @@
       js2-mode-assume-strict t
       js2-warn-about-unused-function-arguments t
       js2-global-externs '("setTimeout" "clearTimeout" "setInterval"
-                           "clearInterval" "Promise"))
+                           "clearInterval" "Promise" "fetch"))
 ;; JS2 indentation
 (setq js-switch-indent-offset 2)
 
