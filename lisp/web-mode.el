@@ -8074,20 +8074,26 @@ another auto-completion with different ac-sources (e.g. ac-php)")
   (save-excursion
     (let (beg (continue t) end level map offset regexp tag val void)
       (goto-char pos)
+      ;;(message "%S" pos)
       (setq beg (web-mode-part-token-beginning-position pos))
       (cond
        ((eq (char-after pos) ?\`)
         (setq offset (web-mode-indentation-at-pos beg)))
        ((web-mode-looking-back "`[ \n\t]*" pos)
         (setq offset (+ (web-mode-indentation-at-pos beg) web-mode-markup-indent-offset)))
-       ((looking-at "</\\([a-zA-Z]+\\)")
+       ((looking-at "</?\\([a-zA-Z]+\\)")
         (setq tag (match-string-no-properties 1)
               regexp (concat "</?" tag)
               level -1)
         (while (and continue (re-search-backward regexp beg t))
-          (if (eq (aref (match-string-no-properties 0) 1) ?\/)
-              (setq level (1- level))
-          (setq level (1+ level)))
+          (save-excursion
+            )
+          (cond
+           ((eq (aref (match-string-no-properties 0) 1) ?\/)
+            (setq level (1- level)))
+           (t
+            (setq level (1+ level)))
+           ) ;cond
           (when (= level 0)
             (setq continue nil
                   offset (current-indentation)))
@@ -8115,7 +8121,7 @@ another auto-completion with different ac-sources (e.g. ac-php)")
             (setq void t))
            (t
             (save-excursion
-              (when (and (search-forward ">" pos t) (eq (char-before) ?\/))
+              (when (and (search-forward ">" pos t) (eq (char-before (1- (point))) ?\/))
                 (setq void t))
               ) ;save-excursion
             ) ;t
