@@ -134,11 +134,3 @@ interaction with HTML."
   (web-mode)
   (skewer-mode)
   (skewer-html-mode))
-
-(defun my-web-skewer-css-mode ()
-  "A mode that starts `web-mode' along with `skewer-css-mode' for
-interaction with CSS."
-  (interactive)
-  (web-mode)
-  (skewer-mode)
-  (skewer-css-mode))

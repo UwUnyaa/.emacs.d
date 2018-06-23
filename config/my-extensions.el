@@ -49,9 +49,6 @@
 ;; use `my-web-skewer-html-mode' for HTML files
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . my-web-skewer-html-mode))
 
-;; same thing for CSS
-(add-to-list 'auto-mode-alist '("\\.css\\'" . my-web-skewer-css-mode))
-
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
       js2-skip-preprocessor-directives t    ; ignores #!/bin/node

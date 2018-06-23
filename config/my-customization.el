@@ -172,3 +172,11 @@ by `my-dired-do-org-export'.")
         (emacs-lisp-mode       . "Elisp")
         (lisp-interaction-mode . "Elisp interaction")
         (completion-list-mode  . "Completions")))
+
+;;; `css-mode', `scss-mode'
+(add-hook 'css-mode-hook
+          (lambda ()
+            ;; avoid enabling `skewer-css-mode' in transpiled languages
+            (when (eq major-mode 'css-mode)
+              (skewer-mode)
+              (skewer-css-mode))))
