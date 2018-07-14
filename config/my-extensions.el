@@ -44,7 +44,9 @@
     (web-mode-plus-set-html-snippets)
     ;; bind HTML hierarchy motion
     (define-key web-mode-map (kbd "C-M-u") #'web-mode-element-parent)
-    (define-key web-mode-map (kbd "C-M-d") #'web-mode-element-child)))
+    (define-key web-mode-map (kbd "C-M-d") #'web-mode-element-child)
+    (define-key web-mode-map (kbd "C-M-n") #'web-mode-element-next)
+    (define-key web-mode-map (kbd "C-M-p") #'web-mode-element-previous)))
 
 ;; file extensions
 (mapc
