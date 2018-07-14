@@ -19,8 +19,7 @@ Toggle Imenu support for frameworks and structural patterns.
 
 ;;;***
 
-;;;### (autoloads nil "js2-mode" "js2-mode.el" (23191 48823 122236
-;;;;;;  350000))
+;;;### (autoloads nil "js2-mode" "js2-mode.el" (0 0 0 0))
 ;;; Generated autoloads from js2-mode.el
 
 (autoload 'js2-highlight-unused-variables-mode "js2-mode" "\
@@ -53,10 +52,15 @@ variables (`sgml-basic-offset' et al) locally, like so:
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-mode" '("js2-")))
+
 ;;;***
 
-;;;### (autoloads nil nil ("js2-old-indent.el") (23191 48823 122236
-;;;;;;  350000))
+;;;### (autoloads nil "js2-old-indent" "js2-old-indent.el" (0 0 0
+;;;;;;  0))
+;;; Generated autoloads from js2-old-indent.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-old-indent" '("js2-")))
 
 ;;;***
 

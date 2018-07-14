@@ -3,14 +3,16 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "impatient-mode" "impatient-mode.el" (22912
-;;;;;;  23242 262678 161000))
+;;;### (autoloads nil "impatient-mode" "impatient-mode.el" (0 0 0
+;;;;;;  0))
 ;;; Generated autoloads from impatient-mode.el
 
 (autoload 'impatient-mode "impatient-mode" "\
 Serves the buffer live over HTTP.
 
 \(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "impatient-mode" '("httpd/imp" "imp")))
 
 ;;;***
 

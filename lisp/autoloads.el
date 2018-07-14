@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "d-mode" "d-mode.el" (22912 23242 256011 495000))
+;;;### (autoloads nil "d-mode" "d-mode.el" (0 0 0 0))
 ;;; Generated autoloads from d-mode.el
  (add-to-list 'auto-mode-alist '("\\.d[i]?\\'" . d-mode))
 
@@ -25,10 +25,11 @@ Key bindings:
 
 \(fn)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "d-mode" '("doxygen-font-lock-" "d-")))
+
 ;;;***
 
-;;;### (autoloads nil "htmlize" "htmlize.el" (22912 23242 259344
-;;;;;;  827000))
+;;;### (autoloads nil "htmlize" "htmlize.el" (0 0 0 0))
 ;;; Generated autoloads from htmlize.el
 
 (autoload 'htmlize-buffer "htmlize" "\
@@ -91,10 +92,11 @@ HTMLize dired-marked files.
 
 \(fn ARG &optional TARGET-DIRECTORY)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "htmlize" '("htmlize-")))
+
 ;;;***
 
-;;;### (autoloads nil "json-mode" "json-mode.el" (23098 25530 436672
-;;;;;;  87000))
+;;;### (autoloads nil "json-mode" "json-mode.el" (0 0 0 0))
 ;;; Generated autoloads from json-mode.el
 
 (autoload 'json-mode "json-mode" "\
@@ -103,6 +105,8 @@ A simple mode for JSON editing.
 \(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "json-mode" '("json-mode-")))
 
 ;;;***
 
@@ -129,8 +133,7 @@ and open it.
 
 ;;;***
 
-;;;### (autoloads nil "simple-httpd" "simple-httpd.el" (22912 23242
-;;;;;;  272678 161000))
+;;;### (autoloads nil "simple-httpd" "simple-httpd.el" (0 0 0 0))
 ;;; Generated autoloads from simple-httpd.el
 
 (autoload 'httpd-start "simple-httpd" "\
@@ -150,6 +153,8 @@ Start the web server with given `directory' as `httpd-root'.
 
 \(fn DIRECTORY)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "simple-httpd" '("httpd" "defservlet" "with-httpd-buffer")))
+
 ;;;***
 
 ;;;### (autoloads nil "web-mode" "web-mode.el" (0 0 0 0))
@@ -164,8 +169,7 @@ Major mode for editing web templates.
 
 ;;;***
 
-;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (23098 25304
-;;;;;;  86671 312000))
+;;;### (autoloads nil "web-mode-plus" "web-mode-plus.el" (0 0 0 0))
 ;;; Generated autoloads from web-mode-plus.el
 
 (autoload 'web-mode-plus-bind-keys "web-mode-plus" "\
@@ -178,6 +182,8 @@ This function should be run after `web-mode' is loaded.
 Replace HTML snippets with ones optimized for `web-mode-plus'.
 
 \(fn)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "web-mode-plus" '("web-mode-plus-")))
 
 ;;;***
 
