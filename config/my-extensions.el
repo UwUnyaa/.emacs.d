@@ -37,11 +37,14 @@
         web-mode-enable-auto-opening t
         web-mode-enable-auto-quoting t))
 
-;; set up `web-mode-plus'
 (eval-after-load 'web-mode
   (lambda ()
+    ;; set up `web-mode-plus'
     (web-mode-plus-bind-keys)
-    (web-mode-plus-set-html-snippets)))
+    (web-mode-plus-set-html-snippets)
+    ;; bind HTML hierarchy motion
+    (define-key web-mode-map (kbd "C-M-u") #'web-mode-element-parent)
+    (define-key web-mode-map (kbd "C-M-d") #'web-mode-element-child)))
 
 ;; file extensions
 (mapc
