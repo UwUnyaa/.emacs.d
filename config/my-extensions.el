@@ -17,6 +17,12 @@
       web-mode-enable-css-colorization t          ; CSS colorization
       web-mode-enable-auto-expanding t            ; auto expanding
       web-mode-enable-current-element-highlight t ; highlight matching element
+      web-mode-links
+      '(("\\.\\(png\\|jpe?g\\|gif\\|webp\\)$" "<img src=\"%s\" alt=\"\" />" nil 4)
+        ("\\.svg$" "<object data=\"%s\" type=\"image/svg+xml\"></object>" nil 0)
+        ("\\.js$" "<script type=\"text/javascript\" src=\"%s\"></script>" nil 0)
+        ("\\.css$" "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />" t 0)
+        ("\\.html?$" "<a href=\"%s\"></a>" nil 4))
       ;; custom indentation
       web-mode-markup-indent-offset 2
       web-mode-css-indent-offset 2
