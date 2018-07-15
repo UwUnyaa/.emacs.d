@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (23191
-;;;;;;  48823 118236 350000))
+;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (0
+;;;;;;  0 0 0))
 ;;; Generated autoloads from js2-imenu-extras.el
 
 (autoload 'js2-imenu-extras-setup "js2-imenu-extras" "\
@@ -16,6 +16,8 @@
 Toggle Imenu support for frameworks and structural patterns.
 
 \(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-imenu-extras" '("js2-imenu-")))
 
 ;;;***
 
