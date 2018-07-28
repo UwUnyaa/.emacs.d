@@ -10,7 +10,7 @@
 * =C-c= keybindings:
 | Keybinding | Function             | Description           |
 |------------+----------------------+-----------------------|
-| =C-c TAB=  | ~indent-buffer~      | Just like in web-mode |
+| =C-c TAB=  | ~my-indent-buffer~   | Just like in web-mode |
 | =C-c i=    | ~my-impatient-mode~  | Convenience           |
 | =C-c f=    | ~find-file-at-point~ | Convenience           |
 | =C-c l=    | ~lhttpd~             | ↑                     |
