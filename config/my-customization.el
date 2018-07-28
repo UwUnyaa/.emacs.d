@@ -14,6 +14,7 @@
 (global-set-key (kbd "C-c C-i") #'my-indent-buffer)
 (global-set-key (kbd "C-c i") #'my-impatient-mode)
 (global-set-key (kbd "C-c l") #'my-lhttpd)
+(global-set-key (kbd "C-c f") #'find-file-at-point)
 
 ;; use `ibuffer' instead of `list-buffers'
 (global-set-key (kbd "C-x C-b") #'ibuffer)
