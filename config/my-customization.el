@@ -35,6 +35,7 @@
                              "Emacs (server)"
                            "Emacs")
       auto-save-timeout 60              ; autosave every 60 seconds
+      frame-resize-pixelwise t          ; resize graphical frames by pixels
       ido-default-buffer-method 'selected-window
       ;; variables that were set by custom-set-variables before
       custom-enabled-themes '(wombat)
