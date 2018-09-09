@@ -29,6 +29,26 @@ Key bindings:
 
 ;;;***
 
+;;;### (autoloads nil "glsl-mode" "glsl-mode.el" (0 0 0 0))
+;;; Generated autoloads from glsl-mode.el
+
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+
+(add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode))
+
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+
+(autoload 'glsl-mode "glsl-mode" "\
+Major mode for editing OpenGLSL shader files.
+
+\(fn)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "glsl-mode" '(#("gl-version" 0 2 (fontified nil face font-lock-function-name-face) 2 10 (fontified nil face font-lock-variable-name-face)) #("glsl-" 0 2 (fontified nil face font-lock-function-name-face) 2 5 (fontified nil face font-lock-function-name-face)))))
+
+;;;***
+
 ;;;### (autoloads nil "htmlize" "htmlize.el" (0 0 0 0))
 ;;; Generated autoloads from htmlize.el
 
