@@ -827,9 +827,6 @@ Interaction modes:
       Interact with per-project GHCi processes through a REPL and
       directory-aware sessions.
 
-    `inf-haskell-mode'
-      Interact with a GHCi process using comint-mode. Deprecated.
-
 Other modes:
 
     `haskell-decl-scan-mode', Graeme E Moss
@@ -875,6 +872,8 @@ As `haskell-mode' but for literate scripts.
 \(fn)" t nil)
 
 (add-to-list 'auto-mode-alist '("\\.[gh]s\\'" . haskell-mode))
+
+(add-to-list 'auto-mode-alist '("\\.hsig\\'" . haskell-mode))
 
 (add-to-list 'auto-mode-alist '("\\.l[gh]s\\'" . literate-haskell-mode))
 
@@ -1055,6 +1054,13 @@ within that region.
 ;;; Generated autoloads from haskell-string.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "haskell-string" '("haskell-")))
+
+;;;***
+
+;;;### (autoloads nil "haskell-svg" "haskell-svg.el" (0 0 0 0))
+;;; Generated autoloads from haskell-svg.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "haskell-svg" '("haskell-svg-")))
 
 ;;;***
 

@@ -68,7 +68,11 @@ Minor mode for interacting with a browser.
 Attach a browser to Emacs for a skewer JavaScript REPL. Uses
 `browse-url' to launch a browser.
 
-\(fn)" t nil)
+With a prefix arugment (C-u), it will ask the filename of the
+root document.  With two prefix arguments (C-u C-u), it will use
+the contents of the current buffer as the root document.
+
+\(fn &optional ARG)" t nil)
 
 (autoload 'skewer-run-phantomjs "skewer-mode" "\
 Connect an inferior PhantomJS process to Skewer, returning the process.

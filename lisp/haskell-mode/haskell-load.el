@@ -109,6 +109,10 @@ actual Emacs buffer of the module being loaded."
                 process
                 "Ok, \\(?:[0-9]+\\) modules? loaded\\.$")
                t)
+               ((haskell-process-consume
+                process
+                "Ok, \\(?:[a-z]+\\) module loaded\\.$") ;; for ghc 8.4
+               t)
               ((haskell-process-consume
                 process
                 "Failed, \\(?:[0-9]+\\) modules? loaded\\.$")
@@ -332,7 +336,7 @@ list of modules where missed IDENT was found."
 (defun haskell-process-extract-modules (buffer)
   "Extract the modules from the process buffer."
   (let* ((modules-string (match-string 1 buffer))
-         (modules (split-string modules-string ", ")))
+         (modules (and modules-string (split-string modules-string ", "))))
     (cons modules modules-string)))
 
 ;;;###autoload

@@ -28,6 +28,7 @@
 
 (require 'compile)
 (require 'haskell-cabal)
+(require 'ansi-color)
 
 ;;;###autoload
 (defgroup haskell-compile nil
@@ -77,6 +78,10 @@ The `%s' placeholder is replaced by the current buffer's filename."
     ("^    \\(?:Declared at:\\|            \\) \\(?1:[^ \t\r\n]+\\):\\(?2:[0-9]+\\):\\(?4:[0-9]+\\)$"
      1 2 4 0) ;; info locus
 
+    ;; failed tasty tests
+    (".*error, called at \\(.*\\.hs\\):\\([0-9]+\\):\\([0-9]+\\) in .*" 1 2 3 2 1)
+    (" +\\(.*\\.hs\\):\\([0-9]+\\):$" 1 2 nil 2 1)
+
     ;; this is the weakest pattern as it's subject to line wrapping et al.
     (" at \\(?1:[^ \t\r\n]+\\):\\(?2:[0-9]+\\):\\(?4:[0-9]+\\)\\(?:-\\(?5:[0-9]+\\)\\)?[)]?$"
      1 2 (4 . 5) 0)) ;; info locus
@@ -96,7 +101,10 @@ This is a child of `compilation-mode-map'.")
     (delete-matching-lines "^ *Loading package [^ \t\r\n]+ [.]+ linking [.]+ done\\.$"
                            (save-excursion (goto-char compilation-filter-start)
                                            (line-beginning-position))
-                           (point))))
+                           (point)))
+
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))
 
 (define-compilation-mode haskell-compilation-mode "HsCompilation"
   "Haskell/GHC specific `compilation-mode' derivative.
