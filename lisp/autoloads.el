@@ -144,8 +144,7 @@ Export current buffer to a single file HTML presentation file.
 \(fn &optional ASYNC SUBTREEP VISIBLE-ONLY BODY-ONLY EXT-PLIST)" t nil)
 
 (autoload 'org-sfhp-export-to-file-and-open "ox-sfhp" "\
-Export current buffer to a single file HTML presentation file
-and open it.
+Export current buffer with `ox-sfhp' and open it.
 
 \(fn &optional ASYNC SUBTREEP VISIBLE-ONLY BODY-ONLY EXT-PLIST)" t nil)
 
