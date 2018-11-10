@@ -109,6 +109,10 @@
 (eval-after-load 'org
   (lambda ()
     (my-ox-require-backends)
+    ;; add support for more languages with org-babel
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((js . t)))
     ;;; keybindings
     ;; make M-h behave just like everywhere else
     (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
