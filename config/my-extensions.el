@@ -54,11 +54,8 @@
    (add-to-list 'auto-mode-alist
                 (cons (format "\\.%s\\'" extension)
                       'web-mode)))
- '("phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "php"
-   "twig"))
-
-;; use `my-web-skewer-html-mode' for HTML files
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . my-web-skewer-html-mode))
+ '("html" "phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml"
+   "php" "twig"))
 
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
@@ -69,17 +66,6 @@
                            "clearInterval" "Promise" "fetch" "URL"))
 ;; JS2 indentation
 (setq js-switch-indent-offset 2)
-
-;; hook `skewer-mode' to `js2-mode'
-(add-hook 'js2-mode-hook #'skewer-mode)
-
-;; #!/bin/node turns on js2-mode with node context (and disables
-;; `skewer-mode', because it has no use for node.js)
-(add-to-list 'interpreter-mode-alist
-             '("node" . (lambda ()
-                          (my-js2-node-mode)
-                          (when skewer-mode
-                            (skewer-mode -1)))))
 
 ;; file extensions
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -100,6 +86,11 @@ like `js2-include-SYMBOL-externs'.")
 
 ;; define context modes
 (mapc #'my-js2-define-context-mode my-js2-contexts-list)
+
+;; #!/bin/node turns on js2-mode with node context
+(add-to-list 'interpreter-mode-alist
+             '("node" . (lambda ()
+                          (my-js2-node-mode))))
 
 ;;; `yaml-mode'
 (eval-after-load 'yaml-mode
