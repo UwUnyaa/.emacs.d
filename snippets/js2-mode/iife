@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: IIFE
+# key: iife
+# --
+
+(() => {
+$0
+})();

@@ -107,3 +107,37 @@ like `js2-include-SYMBOL-externs'.")
     (define-key yaml-mode-map (kbd "RET") #'newline-and-indent)))
 
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
+
+;;; `yasnippet'
+(setq yas-alias-to-yas/prefix-p nil)
+(eval-after-load 'yasnippet
+  (lambda ()
+    ;; load snippets (neccesary when using only the minor mode)
+    (yas-reload-all)
+    (setq yas-also-indent-empty-lines t
+          yas-also-auto-indent-first-line t)
+
+    ;; minor mode keys
+    ;; unbind TAB
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    ;; Bind `SPC' to `yas-expand' when snippet expansion available (it
+    ;; will still call `self-insert-command' otherwise).
+    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+    ;; Bind `C-c y' to `yas-expand' ONLY.
+    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
+
+    ;; keys for snippet edition
+    (define-key yas-keymap (kbd "RET") #'yas-next-field-or-maybe-expand)
+
+    (add-hook 'yas-after-exit-snippet-hook
+              (lambda ()
+                ;; dynamic scoping ugliness ahead, beware
+                (indent-region yas-snippet-beg yas-snippet-end)
+                (indent-for-tab-command)))))
+
+;; enable `yas-minor-mode' in given major modes
+(mapc
+ (lambda (hook)
+   (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
+ '(js2-mode))

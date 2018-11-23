@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: try (with empty catch clause)
+# key: try
+# --
+
+try {
+$0
+} catch (_) {}

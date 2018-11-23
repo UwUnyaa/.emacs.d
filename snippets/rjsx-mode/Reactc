@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: React.Component class
+# key: Reactc
+# --
+
+class $1 extends React.Component {
+  render() {
+    return (
+      $0
+    );
+  }
+}
