@@ -132,3 +132,8 @@ like `js2-include-SYMBOL-externs'.")
  (lambda (hook)
    (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
  '(js-mode))
+
+;;; `org-mode' export backends
+;; `ox-reveal'
+(setq org-reveal-root
+      "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/")

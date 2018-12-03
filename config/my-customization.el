@@ -89,7 +89,7 @@
       org-log-done 'time           ; insert a timestamp when a task is done
       org-src-fontify-natively t)  ; syntax highlighting in source code blocks
 
-(defvar my-ox-backends '(ox-md ox-sfhp)
+(defvar my-ox-backends '(ox-md ox-sfhp ox-reveal)
   "List of org export backends to be loaded by
 `my-ox-require-backends'.")
 
