@@ -54,8 +54,8 @@
    (add-to-list 'auto-mode-alist
                 (cons (format "\\.%s\\'" extension)
                       'web-mode)))
- '("html" "phtml" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml"
-   "php" "twig"))
+ '("html" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "twig"
+   "phtml"))
 
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
