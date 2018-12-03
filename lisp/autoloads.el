@@ -130,6 +130,38 @@ A simple mode for JSON editing.
 
 ;;;***
 
+;;;### (autoloads nil "ob-php" "ob-php.el" (0 0 0 0))
+;;; Generated autoloads from ob-php.el
+
+(autoload 'org-babel-execute:php "ob-php" "\
+Orgmode Babel PHP evaluate function for `BODY' with `PARAMS'.
+
+\(fn BODY PARAMS)" nil nil)
+
+(eval-after-load "org" '(add-to-list 'org-src-lang-modes '("php" . php)))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-php" '("ob-php:inf-php-buffer" "org-babel-default-header-args:php")))
+
+;;;***
+
+;;;### (autoloads nil "ox-reveal" "ox-reveal.el" (0 0 0 0))
+;;; Generated autoloads from ox-reveal.el
+
+(autoload 'org-reveal-publish-to-reveal "ox-reveal" "\
+Publish an org file to Html.
+
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory.
+
+Return output file name.
+
+\(fn PLIST FILENAME PUB-DIR)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-reveal" '("org-reveal-" "client-multiplex" "frag-" "if-format")))
+
+;;;***
+
 ;;;### (autoloads nil "ox-sfhp" "ox-sfhp.el" (0 0 0 0))
 ;;; Generated autoloads from ox-sfhp.el
 
