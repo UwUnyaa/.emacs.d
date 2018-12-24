@@ -217,6 +217,22 @@ instead.
 
 ;;;***
 
+;;;### (autoloads nil "rust-mode" "rust-mode.el" (0 0 0 0))
+;;; Generated autoloads from rust-mode.el
+
+(autoload 'rust-mode "rust-mode" "\
+Major mode for Rust code.
+
+\\{rust-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rust-mode" '("rust" "cargo-compilation-regexps")))
+
+;;;***
+
 ;;;### (autoloads nil "simple-httpd" "simple-httpd.el" (0 0 0 0))
 ;;; Generated autoloads from simple-httpd.el
 
