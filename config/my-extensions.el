@@ -106,13 +106,18 @@ like `js2-include-SYMBOL-externs'.")
     ;; load snippets (neccesary when using only the minor mode)
     (yas-reload-all)
     (setq yas-also-indent-empty-lines t
-          yas-also-auto-indent-first-line t)
+          yas-also-auto-indent-first-line t
+          ;; prevent expanding snippets in comments and fall back to default
+          ;; command when needed:
+          ;; https://emacs.stackexchange.com/a/46776/12563
+          yas-buffer-local-condition yas-not-string-or-comment-condition
+          yas-fallback-behavior 'call-other-command)
 
     ;; minor mode keys
     ;; unbind TAB
     (define-key yas-minor-mode-map (kbd "<tab>") nil)
     (define-key yas-minor-mode-map (kbd "TAB") nil)
-    ;; Bind `SPC' to `yas-expand' when snippet expansion available (it
+    ;; Bind `SPC' to `yas-maybe-expand' when snippet expansion available (it
     ;; will still call `self-insert-command' otherwise).
     (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
     ;; Bind `C-c y' to `yas-expand' ONLY.
