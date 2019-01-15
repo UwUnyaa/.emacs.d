@@ -78,6 +78,10 @@ directories.
 The =local= directory is intentionally untracked. Emacs lisp code can go there
 if needed.
 
+*** =snippets=
+This directory contains snippets for ~yasnippet~, each major mode gets its own
+directory, and file names reflect the key that triggers snippet expansion.
+
 * Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
 - [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure Emacs lisp
