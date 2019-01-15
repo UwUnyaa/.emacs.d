@@ -96,7 +96,7 @@ directory, and file names reflect the key that triggers snippet expansion.
 - [[https://github.com/hexmode/ox-reveal][ox-reveal]] ([[https://github.com/DoMiNeLa10/ox-reveal][my fork]]) :: exports ~org-mode~ files to [[https://revealjs.com/][reveal.js]] presentations
 - [[https://github.com/stardiviner/ob-php][ob-php]] :: PHP support for ~org-babel~
 - [[https://github.com/mooz/js2-mode][js2-mode]] :: improved JavaScript major mode
-- [[https://github.com/felipeochoa/rjsx-mode][rjsx-mode]] :: improved JSX syntax highligting for ~js2-mode~
+- [[https://github.com/felipeochoa/rjsx-mode][rjsx-mode]] :: improved JSX syntax highlighting for ~js2-mode~
 - [[https://github.com/haskell/haskell-mode][haskell-mode]] :: major mode for Haskell
 - [[https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode][d-mode]] :: major mode for D
 - [[https://github.com/rust-lang/rust-mode][rust-mode]] :: major mode for Rust
