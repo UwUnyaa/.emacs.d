@@ -85,6 +85,7 @@ directory, and file names reflect the key that triggers snippet expansion.
 * Links to extensions included in this config:
 - [[https://github.com/skeeto/impatient-mode][impatient-mode]] :: live preview of buffers in a browser
 - [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure Emacs lisp
+- [[https://github.com/ledger/ledger-mode][ledger-mode]] :: major mode for inteacting with [[https://www.ledger-cli.org/][ledger]] files
 - [[https://melpa.org/#/htmlize][htmlize]] :: turns Emacs buffers into HTML with syntax highlighting
 - [[https://github.com/joaotavora/yasnippet][yasnippet]] :: a snippet system
 - [[https://github.com/fxbois/web-mode][web-mode]] :: major mode for editing HTML files with syntax highlighting for
