@@ -54,7 +54,7 @@ variables (`sgml-basic-offset' et al) locally, like so:
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-mode" '("js2-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-mode" '(#("js2-" 0 4 (fontified nil)))))
 
 ;;;***
 
