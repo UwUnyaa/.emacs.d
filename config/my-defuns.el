@@ -125,3 +125,11 @@ backends is defined in `my-dired-org-export-backends-alist'."
            (cl-remove-if-not
             #'file-directory-p
             (directory-files-recursively topdir "" t))))))
+
+(defun my-simple-capitalize (str)
+  "Capitalizes the first letter and ignores the rest."
+  (if (= (length str) 0)
+      ""
+    (let ((first (substring str 0 1))
+          (rest  (substring str 1)))
+      (concat (upcase first) rest))))
