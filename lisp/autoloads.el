@@ -49,6 +49,20 @@ Major mode for editing OpenGLSL shader files.
 
 ;;;***
 
+;;;### (autoloads nil "graphql-mode" "graphql-mode.el" (0 0 0 0))
+;;; Generated autoloads from graphql-mode.el
+
+(autoload 'graphql-mode "graphql-mode" "\
+A major mode to edit GraphQL schemas.
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.graphql\\'" . graphql-mode))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "graphql-mode" '("graphql-")))
+
+;;;***
+
 ;;;### (autoloads nil "htmlize" "htmlize.el" (0 0 0 0))
 ;;; Generated autoloads from htmlize.el
 

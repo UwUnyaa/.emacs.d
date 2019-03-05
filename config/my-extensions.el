@@ -138,6 +138,9 @@ like `js2-include-SYMBOL-externs'.")
    (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
  '(js-mode))
 
+;;; `graphql-mode'
+(add-to-list 'auto-mode-alist '("\\.gql\\'" . graphql-mode))
+
 ;;; `org-mode' export backends
 ;; `ox-reveal'
 (setq org-reveal-root
