@@ -140,7 +140,7 @@ A simple mode for JSON editing.
 
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "json-mode" '(#("json-mode-" 0 10 (fontified nil)))))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "json-mode" '("json-mode-")))
 
 ;;;***
 
