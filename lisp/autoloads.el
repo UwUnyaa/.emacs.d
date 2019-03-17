@@ -227,7 +227,7 @@ instead.
 
 \(fn ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rjsx-mode" '(#("rjsx-" 0 5 (fontified nil)))))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rjsx-mode" '("rjsx-")))
 
 ;;;***
 
