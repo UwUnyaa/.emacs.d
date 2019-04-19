@@ -28,4 +28,6 @@
    ("DoMiNeLa10/web-mode-plus")
    ("DoMiNeLa10/json-mode")
    ("yoshiki/yaml-mode")
+   ("jrblevin/markdown-mode")
+   ("Fanael/edit-indirect")
    ("haskell/haskell-mode")))
