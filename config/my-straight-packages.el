@@ -16,6 +16,7 @@
  '(("joaotavora/yasnippet")
    ("DoMiNeLa10/ox-reveal")
    ("stardiviner/ob-php")
+   ("emacs-pe/docker-tramp.el" docker-tramp)
    ("skeeto/emacs-http-server" simple-httpd)
    ("DoMiNeLa10/ox-sfhp")
    ("ledger/ledger-mode")
