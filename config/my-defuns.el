@@ -2,14 +2,6 @@
 
 (require 'cl)
 
-(defun my-impatient-mode ()
-  "A function that automatically enables impatient-mode along
-with httpd server if it isn't running."
-  (interactive)
-  (unless (process-status "httpd")
-    (httpd-start))
-  (impatient-mode))
-
 (defun my-lhttpd (&optional port)
   "Start a local http server in the current directory on port
 8000 or the prefix argument."
