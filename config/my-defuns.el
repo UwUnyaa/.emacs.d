@@ -100,24 +100,6 @@ backends is defined in `my-dired-org-export-backends-alist'."
                (string-equal "org" (downcase extension)))))))
   (revert-buffer))
 
-(defun my-update-autoloads ()
-  "Generate autoload files for all directories inside
-\"~/.emacs.d/lisp\"."
-  (interactive)
-  (let ((topdir (file-truename "~/.emacs.d/lisp")))
-    (mapc
-     (lambda (dir)
-       (let* ((generated-autoload-file (concat dir "/autoloads.el"))
-              (autoload-buffer-existed-p
-               (get-file-buffer generated-autoload-file)))
-         (update-directory-autoloads dir)
-         (unless autoload-buffer-existed-p
-           (kill-buffer (get-file-buffer generated-autoload-file)))))
-     (cons topdir
-           (cl-remove-if-not
-            #'file-directory-p
-            (directory-files-recursively topdir "" t))))))
-
 (defun my-simple-capitalize (str)
   "Capitalizes the first letter and ignores the rest."
   (if (= (length str) 0)

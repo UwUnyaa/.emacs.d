@@ -1,6 +1,9 @@
 # Emacs backup files
 *~
 
+# straight.el's directory for packages
+/straight
+
 # special directories and files that shouldn't be tracked
 /config/my-local.el
 /lisp/local

@@ -12,11 +12,7 @@ this repository to avoid possible conflicts with extensions.
 * Untracked directories for local configuration
 I hold my settings specific to my Arch installation in
 =~/.emacs.d/config/my-local.el=. You can put your own customizations there if
-you want to use my config. Files in =~/.emacs.d/lisp/local/= are ignored too.
-
-Use =M-x my-update-autoloads= to build autoload files for them automatically.
-Extensions come with byte compiled files, so they can work faster and they're
-loaded using autoload files so that Emacs can start up faster.
+you want to use my config.
 
 * This config is used on these operating systems:
 - [[https://www.archlinux.org/][Arch GNU/Linux]]
@@ -50,6 +46,8 @@ because GitHub puts the name of the branch after the name of the repository.
      code that loads other files. No customizations should go in there.
 
 *** =config=
+- =my-straight-init.el= :: Contains the [[https://github.com/raxod502/straight.el][straight.el]] bootstrap snippet.
+- =my-straight-packages.el= :: Defines dependencies of this config.
 - =my-customization.el= :: Contains basic general Emacs customization, and
      customization for modes that come with it out of the box.
 - =my-extensions.el= :: Customization for added extensions.
@@ -67,39 +65,17 @@ might be added to it in the future.
 
 - =changed-keybindings.org= :: Tables listing changed keybindings.
 
-*** =lisp=
-This directory contains Emacs lisp source code files, byte-compiled versions
-of them. Some extensions have more than one file, and they go to their own
-directories.
-
-=autoloads.el= is created automatically in every directory with
-=my-update-autoloads=. These files exist to speed up startup of Emacs.
-
-The =local= directory is intentionally untracked. Emacs lisp code can go there
-if needed.
-
 *** =snippets=
 This directory contains snippets for ~yasnippet~, each major mode gets its own
 directory, and file names reflect the key that triggers snippet expansion.
 
-* Links to extensions included in this config:
-- [[https://github.com/skeeto/emacs-web-server][simple-httpd]] :: httpd in pure Emacs lisp
-- [[https://github.com/ledger/ledger-mode][ledger-mode]] :: major mode for inteacting with [[https://www.ledger-cli.org/][ledger]] files
-- [[https://melpa.org/#/htmlize][htmlize]] :: turns Emacs buffers into HTML with syntax highlighting
-- [[https://github.com/joaotavora/yasnippet][yasnippet]] :: a snippet system
-- [[https://github.com/fxbois/web-mode][web-mode]] :: major mode for editing HTML files with syntax highlighting for
-              inline CSS and JavaScript
-- [[https://github.com/emacs-php/php-mode][php-mode]] :: a major mode for editing PHP code
-- [[https://github.com/DoMiNeLa10/web-mode-plus][web-mode-plus]] :: set of additional commands for ~web-mode~ that didn't get
-                   merged into upstream
-- [[https://github.com/DoMiNeLa10/ox-sfhp][ox-sfhp]] :: exports ~org-mode~ files to simple single file HTML presentations
-- [[https://github.com/hexmode/ox-reveal][ox-reveal]] ([[https://github.com/DoMiNeLa10/ox-reveal][my fork]]) :: exports ~org-mode~ files to [[https://revealjs.com/][reveal.js]] presentations
-- [[https://github.com/stardiviner/ob-php][ob-php]] :: PHP support for ~org-babel~
-- [[https://github.com/mooz/js2-mode][js2-mode]] :: improved JavaScript major mode
-- [[https://github.com/felipeochoa/rjsx-mode][rjsx-mode]] :: improved JSX syntax highlighting for ~js2-mode~
-- [[https://github.com/haskell/haskell-mode][haskell-mode]] :: major mode for Haskell
-- [[https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode][d-mode]] :: major mode for D
-- [[https://github.com/rust-lang/rust-mode][rust-mode]] :: major mode for Rust
-- [[https://github.com/yoshiki/yaml-mode][yaml-mode]] :: major mode for YAML
-- [[https://github.com/DoMiNeLa10/json-mode][json-mode]] :: a basic mode for JSON editing with (flaky) minification,
-               pretty printing and folding by me
+* Information about deprecated parts of this config
+Since this configuration is version controlled via [[https://git-scm.com/][git]], you can check out old
+commits to see how this repository changed over time as well as seeing parts
+of it that were deprecated.
+
+Here are some possibly interesting commits in this repository:
+- [[https://github.com/DoMiNeLa10/.emacs.d/tree/fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a][fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a]] :: the last commit before I moved
+     to use =straight.el= as my package manager, contains code that
+     automagically sets up =load-path= as well as a simple function to
+     generate autoload files.
