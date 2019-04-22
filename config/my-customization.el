@@ -44,11 +44,11 @@
       sentence-end-double-space nil)
 
 ;; global minor modes
-(blink-cursor-mode)			; blink the cursor
-(display-time-mode)			; display time in mode line
-(show-paren-mode)			; highlight the matching paren
-(electric-pair-mode)			; automatically match parens
-(ido-mode 'buffers)			; switch buffers with `ido-mode'
+(blink-cursor-mode)                     ; blink the cursor
+(display-time-mode)                     ; display time in mode line
+(show-paren-mode)                       ; highlight the matching paren
+(electric-pair-mode)                    ; automatically match parens
+(ido-mode 'buffers)                     ; switch buffers with `ido-mode'
 (global-subword-mode)                   ; use subword-mode everywhere
 
 ;; hide the tool, scroll and menu bars
