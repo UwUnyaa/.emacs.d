@@ -72,7 +72,7 @@
 (defalias 'rs 'replace-string)
 (defalias 'yes-or-no-p 'y-or-n-p)       ; y/n instead of yes/no
 
-;; use auto-fill-mode in text-mode and org-mode
+;; use `auto-fill-mode' in `text-mode' and `org-mode'
 (add-hook 'text-mode-hook #'auto-fill-mode)
 
 ;;; indentation
@@ -80,7 +80,7 @@
       css-indent-offset 2)
 
 ;;; `org-mode'
-(setq org-startup-indented t       ; display org-mode buffers with indentation
+(setq org-startup-indented t       ; display `org-mode' buffers with indentation
       org-ellipsis "⤵"             ; custom ellipsis
       org-startup-folded nil       ; display files without folding them
       org-startup-truncated nil    ; wrap lines
