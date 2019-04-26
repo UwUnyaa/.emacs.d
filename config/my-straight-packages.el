@@ -28,6 +28,7 @@
    ("fxbois/web-mode")
    ("DoMiNeLa10/web-mode-plus")
    ("DoMiNeLa10/json-mode")
+   ("spotify/dockerfile-mode")
    ("yoshiki/yaml-mode")
    ("jrblevin/markdown-mode")
    ("Fanael/edit-indirect")
