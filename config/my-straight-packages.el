@@ -1,7 +1,7 @@
 ;; configure straight.el
 (setq
  ;; avoid checking packages on startup to speed it up
- straight-check-for-modifications '(find-when-checking check-on-save)
+ straight-check-for-modifications '(check-on-save)
  ;; put all autoloads into a single file
  straight-cache-autoloads t)
 
