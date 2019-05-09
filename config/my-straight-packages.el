@@ -1,10 +1,3 @@
-;; configure straight.el
-(setq
- ;; avoid checking packages on startup to speed it up
- straight-check-for-modifications '(check-on-save)
- ;; put all autoloads into a single file
- straight-cache-autoloads t)
-
 ;; require all packages via straight.el
 (mapc
  (lambda (repo-info)
