@@ -7,6 +7,7 @@
      (straight-use-package
       `(,package-name :type git :host github :repo ,repo-name))))
  '(("joaotavora/yasnippet")
+   ("hniksic/emacs-htmlize" htmlize)
    ("DoMiNeLa10/ox-reveal")
    ("stardiviner/ob-php")
    ("emacs-pe/docker-tramp.el" docker-tramp)
