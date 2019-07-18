@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: comp
+# key: comp
+# --
+
+import React, { memo } from 'react';
+
+const $1 = (props) => {
+  return (
+    <$0/>
+  );
+};
+
+export default memo($1);
