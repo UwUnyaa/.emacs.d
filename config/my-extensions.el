@@ -1,6 +1,24 @@
 ;;; this file contains configuration for extensions that don't come with GNU
 ;;; Emacs
 
+;;; `tide-mode'
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1))
+
+(setq-default typescript-indent-level 2)
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing
       web-mode-enable-css-colorization t          ; CSS colorization
@@ -44,7 +62,16 @@
                 (cons (format "\\.%s\\'" extension)
                       'web-mode)))
  '("html" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "twig"
-   "phtml"))
+   "phtml" "tsx"))
+
+;; `tide-mode' setup for TSX
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(require 'flycheck)
+(flycheck-add-mode 'typescript-tslint 'web-mode)
 
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas

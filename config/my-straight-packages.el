@@ -17,6 +17,7 @@
    ("ledger/ledger-mode")
    ("mooz/js2-mode")
    ("felipeochoa/rjsx-mode")
+   ("ananthakumaran/tide")
    ("emacs-php/php-mode")
    ("rust-lang/rust-mode")
    ("Emacs-D-Mode-Maintainers/Emacs-D-Mode" d-mode)
