@@ -166,6 +166,12 @@ by `my-dired-do-org-export'.")
     (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
     (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer)))
 
+;; disable `auto-fill-mode' (this mode doesn't derive from `prog-mode' for
+;; some reason)
+(add-hook 'nxml-mode-hook
+          (lambda ()
+            (auto-fill-mode -1)))
+
 ;;; `c-mode'
 (setq c-default-style "k&r"
       c-basic-offset 2)
