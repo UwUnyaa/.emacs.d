@@ -1,4 +1,4 @@
-#+TITLE: DoMiNeLa10's .emacs
+#+TITLE: UwUnyaa's .emacs
 
 * About this .emacs
 This is my config for GNU Emacs. It won't work with GNU Emacs 24 and older
@@ -24,7 +24,7 @@ you want to use my config.
 On Unix-like operating systems such as GNU/Linux and on Termux:
 #+BEGIN_EXAMPLE
 cd ~
-git clone https://github.com/DoMiNeLa10/.emacs.d.git
+git clone https://github.com/UwUnyaa/.emacs.d.git
 #+END_EXAMPLE
 You can update this config with =git pull=.
 
@@ -75,7 +75,7 @@ commits to see how this repository changed over time as well as seeing parts
 of it that were deprecated.
 
 Here are some possibly interesting commits in this repository:
-- [[https://github.com/DoMiNeLa10/.emacs.d/tree/fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a][fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a]] :: the last commit before I moved
+- [[https://github.com/UwUnyaa/.emacs.d/tree/fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a][fd2a7db84e315ed3980fe3ce86535e36aa6c7b0a]] :: the last commit before I moved
      to use =straight.el= as my package manager, contains code that
      automagically sets up =load-path= as well as a simple function to
      generate autoload files.
