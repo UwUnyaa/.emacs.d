@@ -161,3 +161,7 @@ like `js2-include-SYMBOL-externs'.")
 ;; `ox-reveal'
 (setq org-reveal-root
       "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/")
+
+;;; `dimmer'
+(require 'dimmer)
+(dimmer-mode +1)

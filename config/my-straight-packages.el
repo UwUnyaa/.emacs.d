@@ -7,6 +7,7 @@
      (straight-use-package
       `(,package-name :type git :host github :repo ,repo-name))))
  '(("joaotavora/yasnippet")
+   ("gonewest818/dimmer.el" dimmer)
    ("hniksic/emacs-htmlize" htmlize)
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
