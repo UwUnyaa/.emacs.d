@@ -39,6 +39,10 @@ If you can't use git for some reason, you can use GitHub's “download ZIP”
 feature. You'll have to rename the folder that will be in the zip file,
 because GitHub puts the name of the branch after the name of the repository.
 
+The default font is set to [[https://dejavu-fonts.github.io/][DejaVu Sans Mono]], it tends to come with modern
+versions of Windows and might be preinstalled in your distro. Emacs should
+fall back to something sane, but installing it is highly recommended.
+
 * Structure of directories in this repo
 ** this directory
 - =README.org= :: This file.
