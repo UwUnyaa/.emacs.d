@@ -39,6 +39,11 @@ comment."
     (insert "/*  */")
     (backward-char 3)))
 
+(defun my-js2-set-indent (level)
+  "Set indent level in `js2-mode' to LEVEL."
+  (interactive "nNew indent level: ")
+  (setq-local js2-basic-offset level))
+
 (defun my-js2-unicode-escape-region (beg end)
   "Escapes non-ASCII characters as JavaScript unicode escapes.
 Doesn't handle all characters as of now."
