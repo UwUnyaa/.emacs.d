@@ -26,6 +26,9 @@
            (member "DejaVu Sans Mono" (font-family-list)))
   (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9")))
 
+;; set the font for server frames
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9"))
+
 ;;; Other customizations
 (setq visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
