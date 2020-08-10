@@ -12,7 +12,7 @@
 (global-set-key (kbd "C-x C-h") #'mark-paragraph)
 ;; other keybindings
 (global-set-key (kbd "C-c C-i") #'my-indent-buffer)
-(global-set-key (kbd "C-c C-i") #'my-delete-trailing-whitespace-buffer)
+(global-set-key (kbd "C-c w") #'my-delete-trailing-whitespace-buffer)
 (global-set-key (kbd "C-c l") #'my-lhttpd)
 (global-set-key (kbd "C-c f") #'find-file-at-point)
 
