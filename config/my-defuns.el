@@ -112,3 +112,9 @@ backends is defined in `my-dired-org-export-backends-alist'."
     (let ((first (substring str 0 1))
           (rest  (substring str 1)))
       (concat (upcase first) rest))))
+
+(defun my-delete-trailing-whitespace-buffer ()
+  "Deletes trailing whitespace in current buffer."
+  (interactive)
+  (save-excursion
+    (delete-trailing-whitespace (point-min) (point-max))))

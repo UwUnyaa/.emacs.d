@@ -8,12 +8,13 @@
 | =C-x C-h=  | ~mark-paragraph~       | moved =M-h=                             |
 
 * =C-c= keybindings:
-| Keybinding | Function             | Description                      |
-|------------+----------------------+----------------------------------|
-| =C-c TAB=  | ~my-indent-buffer~   | Just like in web-mode            |
-| =C-c f=    | ~find-file-at-point~ | Convenience                      |
-| =C-c l=    | ~lhttpd~             | ↑                                |
-| =C-c y=    | ~yas-expand~         | Explicit command for ~yasnippet~ |
+| Keybinding | Function                               | Description                                    |
+|------------+----------------------------------------+------------------------------------------------|
+| =C-c TAB=  | ~my-indent-buffer~                     | Just like in web-mode                          |
+| =C-c f=    | ~find-file-at-point~                   | Convenience                                    |
+| =C-c l=    | ~lhttpd~                               | ↑                                              |
+| =C-c y=    | ~yas-expand~                           | Explicit command for ~yasnippet~               |
+| =C-c w=    | ~my-delete-trailing-whitespace-buffer~ | Strips traiilng whitespace from current buffer |
 
 * ~org-mode~:
 | Keybinding    | Function             | Description             |
