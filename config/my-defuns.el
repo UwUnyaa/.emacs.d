@@ -1,6 +1,6 @@
 ;; this file should load after extensions
 
-(require 'cl)
+(require 'cl-macs)
 
 (defun my-lhttpd (&optional port)
   "Start a local http server in the current directory on port
