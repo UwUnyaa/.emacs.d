@@ -172,6 +172,9 @@ like `js2-include-SYMBOL-externs'.")
 ;;; `graphql-mode'
 (add-to-list 'auto-mode-alist '("\\.gql\\'" . graphql-mode))
 
+;;; `haxe-mode'
+(add-to-list 'auto-mode-alist '("\\.hx\\'" . haxe-mode))
+
 ;;; `org-mode' export backends
 ;; `ox-reveal'
 (setq org-reveal-root

@@ -29,4 +29,5 @@
    ("yoshiki/yaml-mode")
    ("jrblevin/markdown-mode")
    ("Fanael/edit-indirect")
-   ("haskell/haskell-mode")))
+   ("haskell/haskell-mode")
+   ("emacsorphanage/haxe-mode")))
