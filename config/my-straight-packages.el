@@ -11,7 +11,6 @@
    ("hniksic/emacs-htmlize" htmlize)
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
-   ("stardiviner/ob-php")
    ("emacs-pe/docker-tramp.el" docker-tramp)
    ("skeeto/emacs-http-server" simple-httpd)
    ("UwUnyaa/ox-sfhp")
