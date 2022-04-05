@@ -69,7 +69,10 @@
 ;; `tide-mode' setup for TSX
 (add-hook 'web-mode-hook
           (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+            (when
+                (and
+                 (buffer-file-name)
+                 (string-equal "tsx" (file-name-extension (buffer-file-name))))
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
 (require 'flycheck)
@@ -99,9 +102,10 @@
 ;; set up globals for jest test files
 (add-hook 'js2-mode-hook
           (lambda ()
-            (when (string-match
-                   "\\.\\(test\\|spec\\)\\.js$"
-                   (buffer-file-name))
+            (when (and (buffer-file-name)
+                       (string-match
+                        "\\.\\(test\\|spec\\)\\.js$"
+                        (buffer-file-name)))
               (make-local-variable 'js2-global-externs)
               (mapc
                (lambda (global)
