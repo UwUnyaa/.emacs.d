@@ -1,3 +1,6 @@
+;;; straight.el configuration
+(setq straight-cache-autoloads t)
+
 ;; require all packages via straight.el
 (mapc
  (lambda (repo-info)
