@@ -1,14 +1,21 @@
 ;;; straight.el configuration
 (setq straight-cache-autoloads t)
 
-;; require all packages via straight.el
-(mapc
- (lambda (repo-info)
-   (let* ((repo-name (car repo-info))
+(defun my-straight-require-from-github (repo-info)
+  "Use a package from github described by REPO-INFO.
+
+REPO-INFO must be a list, which should contain the name of the
+repository in question, and optionally the package name, which
+should map to the matching feature in it."
+  (let* ((repo-name (car repo-info))
           (package-name (or (cadr repo-info)
                             (intern (cadr (split-string repo-name "/"))))))
      (straight-use-package
       `(,package-name :type git :host github :repo ,repo-name))))
+
+;; require all packages via straight.el
+(mapc
+ #'my-straight-require-from-github
  '(("joaotavora/yasnippet")
    ("gonewest818/dimmer.el" dimmer)
    ("hniksic/emacs-htmlize" htmlize)
