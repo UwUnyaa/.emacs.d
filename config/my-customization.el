@@ -41,6 +41,7 @@
       frame-resize-pixelwise t          ; resize graphical frames by pixels
       ido-default-buffer-method 'selected-window
       use-short-answers t
+      shr-use-fonts nil                 ; no proportional fonts in `eww'
       ;; variables that were set by custom-set-variables before
       custom-enabled-themes '(wombat)
       default-input-method "japanese"
