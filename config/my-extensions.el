@@ -15,10 +15,8 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook #'tide-format-before-save)
-
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing
       web-mode-enable-css-colorization t          ; CSS colorization
