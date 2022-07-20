@@ -97,12 +97,12 @@
     (define-key js2-mode-map (kbd "C-M-;") #'my-js2-comment-block)
     (define-key js2-mode-map (kbd "C-c C-u") #'my-js2-unicode-escape-region)))
 
-;; set up globals for jest test files
+;; set up globals for jest and cypress test files
 (add-hook 'js2-mode-hook
           (lambda ()
             (when (and (buffer-file-name)
                        (string-match
-                        "\\.\\(test\\|spec\\)\\.js$"
+                        "\\.\\(test\\|spec\\|cy\\)\\.js$"
                         (buffer-file-name)))
               (make-local-variable 'js2-global-externs)
               (mapc
@@ -110,6 +110,16 @@
                  (push global js2-global-externs))
                '("afterAll" "afterEach4" "beforeAll" "beforeEach" "describe"
                  "expect" "it" "jest" "test")))))
+
+;; add cy to cypress variables
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (when (and (buffer-file-name)
+                       (string-match
+                        "\\.cy\\.js$"
+                        (buffer-file-name)))
+              (make-local-variable 'js2-global-externs)
+              (push "cy" js2-global-externs))))
 
 (defvar my-js2-contexts-list
   '("browser" "node" "rhino")
