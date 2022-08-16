@@ -108,7 +108,7 @@
               (mapc
                (lambda (global)
                  (push global js2-global-externs))
-               '("afterAll" "afterEach4" "beforeAll" "beforeEach" "describe"
+               '("afterAll" "after" "before" "beforeAll" "beforeEach" "describe"
                  "expect" "it" "jest" "test")))))
 
 ;; add cy to cypress variables
