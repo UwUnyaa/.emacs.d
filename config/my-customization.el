@@ -31,7 +31,8 @@
 (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-9"))
 
 ;;; Other customizations
-(setq visible-bell nil                  ; no sounds
+(setq ring-bell-function #'ignore
+      visible-bell nil                  ; no sounds
       inhibit-startup-message t         ; no startup message
       initial-scratch-message nil       ; empty scratch buffer
       frame-title-format (if (daemonp)  ; frame title
