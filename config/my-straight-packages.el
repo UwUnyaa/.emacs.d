@@ -21,7 +21,6 @@ should map to the matching feature in it."
    ("hniksic/emacs-htmlize" htmlize)
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
-   ("emacs-pe/docker-tramp.el" docker-tramp)
    ("skeeto/emacs-http-server" simple-httpd)
    ("UwUnyaa/ox-sfhp")
    ("ledger/ledger-mode")
