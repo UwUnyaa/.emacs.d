@@ -1,6 +1,10 @@
 ;;; this file contains configuration for extensions that don't come with GNU
 ;;; Emacs
 
+;;; `exec-path-from-shell'
+(when (or (memq window-system '(mac ns x)) (daemonp))
+  (exec-path-from-shell-initialize))
+
 ;;; `tide-mode'
 (defun setup-tide-mode ()
   (interactive)

@@ -37,5 +37,6 @@ should map to the matching feature in it."
    ("yoshiki/yaml-mode")
    ("jrblevin/markdown-mode")
    ("Fanael/edit-indirect")
+   ("purcell/exec-path-from-shell")
    ("haskell/haskell-mode")
    ("emacsorphanage/haxe-mode")))
