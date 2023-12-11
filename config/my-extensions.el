@@ -66,7 +66,7 @@
                 (cons (format "\\.%s\\'" extension)
                       'web-mode)))
  '("html" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "twig"
-   "phtml" "tsx" "vue"))
+   "phtml" "vue"))
 
 ;; `tide-mode' setup for TSX
 (add-hook 'web-mode-hook
