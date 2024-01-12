@@ -19,6 +19,9 @@
 ;; use `ibuffer' instead of `list-buffers'
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
+;; make `dabbrev' case sensitive
+(setq dabbrev-case-fold-search nil)
+
 ;; load wombat theme
 (load-theme 'wombat t)
 
