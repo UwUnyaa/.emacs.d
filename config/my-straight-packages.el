@@ -19,6 +19,7 @@ should map to the matching feature in it."
  '(("joaotavora/yasnippet")
    ("gonewest818/dimmer.el" dimmer)
    ("hniksic/emacs-htmlize" htmlize)
+   ("Fuco1/smartparens")
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
    ("skeeto/emacs-http-server" simple-httpd)

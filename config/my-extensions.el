@@ -5,6 +5,29 @@
 (when (or (memq window-system '(mac ns x)) (daemonp))
   (exec-path-from-shell-initialize))
 
+;;; `smartparens'
+(require 'smartparens-config)
+(smartparens-global-mode)
+(show-smartparens-global-mode)
+
+(setq sp-highlight-pair-overlay nil     ; disable highlighting
+      sp-highlight-wrap-overlay nil
+      sp-highlight-wrap-tag-overlay nil
+      ;; permit using smartparens in minibuffers
+      sp-ignore-modes-list '(minibuffer-inactive-mode))
+
+;; use smartparens in `eval-expression'
+(add-hook 'eval-expression-minibuffer-setup-hook 'turn-on-smartparens-strict-mode)
+
+;; define `org-mode' pairs
+(mapc
+ (lambda (pair-char)
+   (sp-local-pair 'org-mode pair-char pair-char))
+ '("=" "~" "*" "/" "_" "+"))
+
+;; `typescript-ts-mode'
+(sp-local-pair 'typescript-ts-mode "<" ">" :actions '(wrap))
+
 ;;; `tide-mode'
 (defun setup-tide-mode ()
   (interactive)

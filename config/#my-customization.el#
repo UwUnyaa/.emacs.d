@@ -56,7 +56,7 @@
 ;; global minor modes
 (blink-cursor-mode)                     ; blink the cursor
 (display-time-mode)                     ; display time in mode line
-(show-paren-mode)                       ; highlight the matching paren
+(show-paren-mode -1)                       ; highlight the matching paren
 (ido-mode 'buffers)                     ; switch buffers with `ido-mode'
 (global-subword-mode)                   ; use subword-mode everywhere
 
