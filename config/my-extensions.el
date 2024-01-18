@@ -28,6 +28,9 @@
 ;; `typescript-ts-mode'
 (sp-local-pair 'typescript-ts-mode "<" ">" :actions '(wrap))
 
+;; `minibuffer-mode'
+(sp-local-pair 'minibuffer-mode "'" "'" :actions nil)
+
 ;;; `tide-mode'
 (defun setup-tide-mode ()
   (interactive)
