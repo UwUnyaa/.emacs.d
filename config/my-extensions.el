@@ -19,6 +19,9 @@
 ;; use smartparens in `eval-expression'
 (add-hook 'eval-expression-minibuffer-setup-hook 'turn-on-smartparens-strict-mode)
 
+;; add extra newlines and indent {}
+(sp-pair "{" "}" :post-handlers '(("||\n[i]" "RET")))
+
 ;; define `org-mode' pairs
 (mapc
  (lambda (pair-char)
