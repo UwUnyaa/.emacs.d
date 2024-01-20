@@ -2,7 +2,7 @@
 ;;; Emacs
 
 ;;; `exec-path-from-shell'
-(when (or (memq window-system '(mac ns x)) (daemonp))
+(when (or (memq window-system '(mac ns x pgtk)) (daemonp))
   (exec-path-from-shell-initialize))
 
 ;;; `smartparens'
