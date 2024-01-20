@@ -17,7 +17,9 @@
       sp-ignore-modes-list '(minibuffer-inactive-mode))
 
 ;; use smartparens in `eval-expression'
-(add-hook 'eval-expression-minibuffer-setup-hook 'turn-on-smartparens-strict-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook
+          (lambda ()
+            (smartparens-mode t)))
 
 ;; add extra newlines and indent {}
 (sp-pair "{" "}" :post-handlers '(("||\n[i]" "RET")))
