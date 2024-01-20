@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: export ES6 function
+# key: efunc
+# --
+
+export const $1 = ($2) => $0;

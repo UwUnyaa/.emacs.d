@@ -219,7 +219,7 @@ like `js2-include-SYMBOL-externs'.")
 (mapc
  (lambda (hook)
    (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
- '(js-mode))
+ '(js-mode typescript-ts-mode))
 
 ;;; `haxe-mode'
 (add-to-list 'auto-mode-alist '("\\.hx\\'" . haxe-mode))

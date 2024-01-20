@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cb
+# key: cb
+# --
+const $1 = useCallback(($2) => $3, [$4]);

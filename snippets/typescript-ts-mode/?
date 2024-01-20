@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ternary operator
+# key: ?
+# --
+
+? $1
+: $0
