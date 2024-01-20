@@ -41,7 +41,10 @@
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
-  (tide-hl-identifier-mode +1))
+  (tide-hl-identifier-mode +1)
+  (when (fboundp #'my-company-tide-capf)
+    (make-local-variable 'completion-at-point-functions)
+    (push #'my-company-tide-capf completion-at-point-functions)))
 
 (setq-default typescript-indent-level 2)
 
@@ -109,6 +112,12 @@
 ;; enable typescript-tslint checker
 (require 'flycheck)
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+;; hack `company' to provide a CAPF in `tide'
+(require 'company)
+(eval-after-load 'tide
+  (lambda ()
+    (defalias 'my-company-tide-capf (cape-company-to-capf #'company-tide))))
 
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas

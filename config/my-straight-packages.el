@@ -19,6 +19,8 @@ should map to the matching feature in it."
  '(("joaotavora/yasnippet")
    ("gonewest818/dimmer.el" dimmer)
    ("hniksic/emacs-htmlize" htmlize)
+   ("company-mode/company-mode" company)
+   ("minad/cape")
    ("Fuco1/smartparens")
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
