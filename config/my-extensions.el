@@ -35,7 +35,7 @@
 (sp-local-pair 'minibuffer-mode "'" "'" :actions nil)
 
 ;;; `tide-mode'
-(defun setup-tide-mode ()
+(defun my-setup-tide-mode ()
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
@@ -48,8 +48,8 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-mode-hook #'my-setup-tide-mode)
+(add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
 
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing
@@ -105,7 +105,7 @@
                 (and
                  (buffer-file-name)
                  (string-equal "tsx" (file-name-extension (buffer-file-name))))
-              (setup-tide-mode))))
+              (my-setup-tide-mode))))
 ;; enable typescript-tslint checker
 (require 'flycheck)
 (flycheck-add-mode 'typescript-tslint 'web-mode)
