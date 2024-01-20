@@ -22,12 +22,6 @@
 ;; add extra newlines and indent {}
 (sp-pair "{" "}" :post-handlers '(("||\n[i]" "RET")))
 
-;; define `org-mode' pairs
-(mapc
- (lambda (pair-char)
-   (sp-local-pair 'org-mode pair-char pair-char))
- '("=" "~" "*" "/" "_" "+"))
-
 ;; `typescript-ts-mode'
 (sp-local-pair 'typescript-ts-mode "<" ">" :actions '(wrap))
 
