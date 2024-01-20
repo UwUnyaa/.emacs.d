@@ -49,6 +49,7 @@
 (setq company-tooltip-align-annotations t)
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+(add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
 
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing

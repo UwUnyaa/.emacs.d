@@ -166,6 +166,9 @@ by `my-dired-do-org-export'.")
     (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
     (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer)))
 
+;; `typescript-ts-mode'
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+
 ;; disable `auto-fill-mode' (this mode doesn't derive from `prog-mode' for
 ;; some reason)
 (add-hook 'nxml-mode-hook
