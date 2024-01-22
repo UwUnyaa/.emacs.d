@@ -169,6 +169,9 @@ by `my-dired-do-org-export'.")
 ;; `typescript-ts-mode'
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 
+;; `tsx-ts-mode'
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
 ;; disable `auto-fill-mode' (this mode doesn't derive from `prog-mode' for
 ;; some reason)
 (add-hook 'nxml-mode-hook

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ES6 function shorthand
+# key: func
+# --
+
+const $1 = ($2) => $0;

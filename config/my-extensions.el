@@ -44,11 +44,8 @@
 
 (setq-default typescript-indent-level 2)
 
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-
-(add-hook 'typescript-mode-hook #'my-setup-tide-mode)
 (add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
+(add-hook 'tsx-ts-mode #'my-setup-tide-mode)
 
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing
@@ -96,18 +93,6 @@
                       'web-mode)))
  '("html" "tpl\\.php" "[agj]sp" "as[cp]x" "erb" "mustache" "djhtml" "twig"
    "phtml" "vue"))
-
-;; `tide-mode' setup for TSX
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when
-                (and
-                 (buffer-file-name)
-                 (string-equal "tsx" (file-name-extension (buffer-file-name))))
-              (my-setup-tide-mode))))
-;; enable typescript-tslint checker
-(require 'flycheck)
-(flycheck-add-mode 'typescript-tslint 'web-mode)
 
 ;; hack `company' to provide a CAPF in `tide'
 (require 'company)
