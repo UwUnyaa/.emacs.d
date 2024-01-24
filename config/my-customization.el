@@ -185,6 +185,7 @@ by `my-dired-do-org-export'.")
 ;;; change displayed major mode names
 (mapc #'my-change-major-mode-name
       '((js2-mode              . "JS2")
+        (typescript-ts-mode    . "TS")
         (emacs-lisp-mode       . "Elisp")
         (lisp-interaction-mode . "Elisp interaction")
         (completion-list-mode  . "Completions")))
