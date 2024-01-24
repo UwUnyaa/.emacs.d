@@ -22,6 +22,7 @@ should map to the matching feature in it."
    ("company-mode/company-mode" company)
    ("minad/cape")
    ("Fuco1/smartparens")
+   ("magit/magit")
    ("UwUnyaa/presentation-mode")
    ("UwUnyaa/ox-reveal")
    ("skeeto/emacs-http-server" simple-httpd)
