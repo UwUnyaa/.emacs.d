@@ -4,12 +4,13 @@
 (prefer-coding-system 'utf-8)
 
 ;;; Custom keybindings
-;; use C-h like readlne
-(global-set-key (kbd "C-h") #'delete-backward-char)
-(global-set-key (kbd "M-h") #'backward-kill-word)
-(global-set-key (kbd "C-?") #'help-command) ; new binding for help prefix
-;; Use C-x C-h for marking paragraphs
-(global-set-key (kbd "C-x C-h") #'mark-paragraph)
+(when (or (display-graphic-p) (daemonp))      ; don't rebind in a terminal
+  ;; use C-h like readlne
+  (global-set-key (kbd "C-h") #'delete-backward-char)
+  (global-set-key (kbd "M-h") #'backward-kill-word)
+  (global-set-key (kbd "C-?") #'help-command) ; new binding for help prefix
+  ;; Use C-x C-h for marking paragraphs
+  (global-set-key (kbd "C-x C-h") #'mark-paragraph))
 ;; other keybindings
 (global-set-key (kbd "C-c C-i") #'my-indent-buffer)
 (global-set-key (kbd "C-c w") #'my-delete-trailing-whitespace-buffer)
