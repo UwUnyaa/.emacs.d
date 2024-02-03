@@ -84,6 +84,11 @@ A list of contexts should be defined in `my-js2-contexts-list'."
 loaded."
   (mapc #'require my-ox-backends))
 
+(defun my-dired-xdg-open ()
+  "Open the file at point with xdg-open."
+  (interactive)
+  (browse-url-xdg-open (dired-get-file-for-visit)))
+
 (defun my-dired-do-org-export (backend)
   "Exports marked files or file at point with a backend read from
 a minibuffer. Files without .org extension are ignored. Alist of

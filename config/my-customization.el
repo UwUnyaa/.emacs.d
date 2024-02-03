@@ -150,7 +150,8 @@ by `my-dired-do-org-export'.")
     ;;; keybindings
     (define-key dired-mode-map (kbd "E") #'my-dired-do-org-export)
     (define-key dired-mode-map (kbd "r") (my-dired-switch-toggler "R"))
-    (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))))
+    (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))
+    (define-key dired-mode-map (kbd "f") #'my-dired-xdg-open)))
 
 ;; use human readable file sizes in if they'll work
 (when (or (member system-type '(ms-dos windows-nt haiku)) ; ls in elisp
