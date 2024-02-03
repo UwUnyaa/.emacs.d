@@ -214,6 +214,9 @@ like `js2-include-SYMBOL-externs'.")
 (setq org-reveal-root
       "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/")
 
+;;; `dotenv-mode'
+(add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
+
 ;;; `dimmer'
 (require 'dimmer)
 (dimmer-mode +1)

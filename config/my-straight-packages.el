@@ -43,4 +43,5 @@ should map to the matching feature in it."
    ("Fanael/edit-indirect")
    ("purcell/exec-path-from-shell")
    ("haskell/haskell-mode")
+   ("preetpalS/emacs-dotenv-mode" dotenv-mode)
    ("emacsorphanage/haxe-mode")))
