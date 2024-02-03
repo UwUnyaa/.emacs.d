@@ -217,6 +217,14 @@ like `js2-include-SYMBOL-externs'.")
 ;;; `dotenv-mode'
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 
+;;; `csv-mode'
+(setq csv-invisibility-default nil)
+;; monkey patch a basic type error, GNU elpa sucks and there's no proper bug
+;; tracker
+(add-hook 'csv-mode-hook
+          (lambda ()
+            (setq-local buffer-invisibility-spec nil)))
+
 ;;; `dimmer'
 (require 'dimmer)
 (dimmer-mode +1)

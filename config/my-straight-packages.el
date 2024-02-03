@@ -45,3 +45,6 @@ should map to the matching feature in it."
    ("haskell/haskell-mode")
    ("preetpalS/emacs-dotenv-mode" dotenv-mode)
    ("emacsorphanage/haxe-mode")))
+
+;; elpa packages
+(straight-use-package '(csv-mode))
