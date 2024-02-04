@@ -1,16 +1,23 @@
-;;; This file contains customizations of Emacs and modes that are built into it
+;;; This file contains customization of things that come with Emacs
 
-;; coding system
+;;; coding system
 (prefer-coding-system 'utf-8)
 
+;; load wombat theme
+(load-theme 'wombat t)
+
+(defconst my-can-use-fancy-bindings (or (display-graphic-p) (daemonp))
+  "Can binds that aren't terminal friendly be used.")
+
 ;;; Custom keybindings
-(when (or (display-graphic-p) (daemonp))      ; don't rebind in a terminal
+(when my-can-use-fancy-bindings         ; don't rebind in a terminal
   ;; use C-h like readlne
   (global-set-key (kbd "C-h") #'delete-backward-char)
   (global-set-key (kbd "M-h") #'backward-kill-word)
   (global-set-key (kbd "C-?") #'help-command) ; new binding for help prefix
   ;; Use C-x C-h for marking paragraphs
   (global-set-key (kbd "C-x C-h") #'mark-paragraph))
+
 ;; other keybindings
 (global-set-key (kbd "C-c C-i") #'my-indent-buffer)
 (global-set-key (kbd "C-c w") #'delete-trailing-whitespace)
@@ -22,9 +29,6 @@
 
 ;; make `dabbrev' case sensitive
 (setq dabbrev-case-fold-search nil)
-
-;; load wombat theme
-(load-theme 'wombat t)
 
 ;; try configuring fonts to my preferences
 (when (and (display-graphic-p)
@@ -54,31 +58,31 @@
       read-quoted-char-radix 16
       sentence-end-double-space nil)
 
-;; global minor modes
+;;; global minor modes
 (blink-cursor-mode)                     ; blink the cursor
 (display-time-mode)                     ; display time in mode line
 (show-paren-mode)                       ; highlight the matching paren
 (ido-mode 'buffers)                     ; switch buffers with `ido-mode'
 (global-subword-mode)                   ; use subword-mode everywhere
 
-;; hide the tool, scroll and menu bars
+;;; hide the tool, scroll and menu bars
 (mapc
  (lambda (feature-sym)
    (when (featurep feature-sym)
      (funcall (intern (format "%s-mode" feature-sym)) -1)))
  '(tool-bar scroll-bar menu-bar))
 
-;; default variables
+;;; default variables
 (setq-default fill-column 78            ; fill-column
               indent-tabs-mode nil)     ; don't indent with tabs
 
-;; disable warnings
+;;; disable warnings
 (mapc
  (lambda (warning)
    (put warning 'disabled nil))
  '(set-goal-column narrow-to-region downcase-region upcase-region))
 
-;; aliases
+;;; aliases
 (defalias 'rs 'replace-string)
 
 ;; use `auto-fill-mode' in `text-mode' and `org-mode'
@@ -101,7 +105,6 @@
   "List of org export backends to be loaded by
 `my-ox-require-backends'.")
 
-;; my mode hook
 (add-hook 'org-mode-hook
           (lambda ()
             (toggle-truncate-lines 1)))       ; don't wrap lines
@@ -114,7 +117,8 @@
    '((js . t)))
 ;;; keybindings
   ;; make M-h behave just like everywhere else
-  (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
+  (when my-can-use-fancy-bindings
+    (define-key org-mode-map (kbd "M-h") #'backward-kill-word))
   ;; use C-x C-h for marking paragraphs
   (define-key org-mode-map (kbd "C-x C-h") #'org-mark-element)
   ;; use meta shift f/b/n/p instead of meta arrow keys
@@ -123,10 +127,11 @@
   (define-key org-mode-map (kbd "M-P") #'org-metaup)
   (define-key org-mode-map (kbd "M-N") #'org-metadown)
   ;; use control meta shift f/b/n/p instead of meta shift arrow keys
-  (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
-  (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
-  (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
-  (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup)
+  (when my-can-use-fancy-bindings
+    (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
+    (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
+    (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
+    (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup))
   ;; move by paragraphs with M-n and M-p
   (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
   (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph))
@@ -152,7 +157,7 @@ by `my-dired-do-org-export'.")
   (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))
   (define-key dired-mode-map (kbd "f") #'my-dired-xdg-open))
 
-;; use human readable file sizes in if they'll work
+;;; use human readable file sizes in if they'll work
 (when (or (member system-type '(ms-dos windows-nt haiku)) ; ls in elisp
           (eq 0 (call-process insert-directory-program ; check if ls -h works
                               nil nil nil "-h")))
@@ -162,21 +167,22 @@ by `my-dired-do-org-export'.")
 (setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
 (with-eval-after-load 'nxml-mode
-  (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
+  (when my-can-use-fancy-bindings
+    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word))
   (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
   (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer))
-
-;; `typescript-ts-mode'
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-
-;; `tsx-ts-mode'
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 ;; disable `auto-fill-mode' (this mode doesn't derive from `prog-mode' for
 ;; some reason)
 (add-hook 'nxml-mode-hook
           (lambda ()
             (auto-fill-mode -1)))
+
+;; `typescript-ts-mode'
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+
+;; `tsx-ts-mode'
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 ;;; `c-mode'
 (setq c-default-style "k&r"

@@ -109,8 +109,7 @@
 (setq js-switch-indent-offset 2)
 
 ;; file extensions
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.m?js\\'" . js2-mode))
 
 (with-eval-after-load 'js2-mode
 ;;; keybindings
@@ -199,9 +198,6 @@ like `js2-include-SYMBOL-externs'.")
  (lambda (hook)
    (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
  '(js-mode typescript-ts-mode))
-
-;;; `haxe-mode'
-(add-to-list 'auto-mode-alist '("\\.hx\\'" . haxe-mode))
 
 ;;; `org-mode' export backends
 ;; `ox-reveal'
