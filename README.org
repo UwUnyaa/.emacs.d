@@ -49,17 +49,15 @@ fall back to something sane, but installing it is highly recommended.
      code that loads other files. No customizations should go in there.
 
 *** =config=
-- =my-straight-init.el= :: Contains the [[https://github.com/raxod502/straight.el][straight.el]] bootstrap snippet.
-- =my-straight-packages.el= :: Defines dependencies of this config.
-- =my-customization.el= :: Contains basic general Emacs customization, and
-     customization for modes that come with it out of the box.
-- =my-extensions.el= :: Customization for added extensions.
 - =my-defuns.el= :: Definitions of custom functions (in this case ones that
      use default dynamic scoping.)
 - =my-defuns-lexical.el= :: Definitions of functions that rely on lexical
      scoping. Mostly functions that generate closures.
-- =my-safe-local-variables.el= :: Defines safe file local variables and their
-     values.
+- =my-customization.el= :: Contains basic general Emacs customization, and
+     customization for modes that come with it out of the box.
+- =my-straight-init.el= :: Contains the [[https://github.com/raxod502/straight.el][straight.el]] bootstrap snippet.
+- =my-straight-packages.el= :: Defines dependencies of this config.
+- =my-extensions.el= :: Customization for added extensions.
 - =my-local.el= :: Untracked file for installation-specific settings.
 
 *** =documentation=

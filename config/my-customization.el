@@ -9,6 +9,14 @@
 (defconst my-can-use-fancy-bindings (or (display-graphic-p) (daemonp))
   "Can binds that aren't terminal friendly be used.")
 
+;;; safe local variables
+(setq safe-local-variable-values
+      '((project-vc-merge-submodules)
+        (js2-include-browser-externs . t) ; js2
+        (js2-include-jslint-globals . t)
+        (js2-include-node-externs . t)
+        (js2-include-rhino-externs . t)))
+
 ;;; Custom keybindings
 (when my-can-use-fancy-bindings         ; don't rebind in a terminal
   ;; use C-h like readlne
