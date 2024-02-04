@@ -2,6 +2,18 @@
 
 (require 'cl-macs)
 
+(defun my-straight-require-from-github (repo-info)
+  "Use a package from github described by REPO-INFO.
+
+REPO-INFO must be a list, which should contain the name of the
+repository in question, and optionally the package name, which
+should map to the matching feature in it."
+  (let* ((repo-name (car repo-info))
+          (package-name (or (cadr repo-info)
+                            (intern (cadr (split-string repo-name "/"))))))
+     (straight-use-package
+      `(,package-name :type git :host github :repo ,repo-name))))
+
 (defun my-lhttpd (&optional port)
   "Start a local http server in the current directory on port
 8000 or the prefix argument."
@@ -36,6 +48,18 @@ Doesn't handle all characters as of now."
             (format "\\u%04X" char)
           (char-to-string char)))
       string ""))))
+
+(defun my-setup-tide-mode ()
+  "Setup tide-mode."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (when (fboundp #'my-company-tide-capf)
+    (make-local-variable 'completion-at-point-functions)
+    (push #'my-company-tide-capf completion-at-point-functions)))
 
 (defun my-js2-change-context (context)
   "Switch current `js2-mode' buffer to specified context.

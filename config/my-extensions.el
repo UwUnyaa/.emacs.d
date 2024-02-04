@@ -31,17 +31,6 @@
 (sp-local-pair 'minibuffer-mode "'" "'" :actions nil)
 
 ;;; `tide-mode'
-(defun my-setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (when (fboundp #'my-company-tide-capf)
-    (make-local-variable 'completion-at-point-functions)
-    (push #'my-company-tide-capf completion-at-point-functions)))
-
 (add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
 (add-hook 'tsx-ts-mode #'my-setup-tide-mode)
 
