@@ -42,8 +42,6 @@
     (make-local-variable 'completion-at-point-functions)
     (push #'my-company-tide-capf completion-at-point-functions)))
 
-(setq-default typescript-indent-level 2)
-
 (add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
 (add-hook 'tsx-ts-mode #'my-setup-tide-mode)
 
