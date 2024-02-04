@@ -214,6 +214,13 @@ like `js2-include-SYMBOL-externs'.")
 (setq org-reveal-root
       "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/")
 
+;;; `ob-restclient'
+(eval-after-load 'org-mode
+  (lambda ()
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((restclient . t)))))
+
 ;;; `dotenv-mode'
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
 

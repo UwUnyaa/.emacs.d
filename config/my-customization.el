@@ -94,7 +94,8 @@
       org-startup-folded nil       ; display files without folding them
       org-startup-truncated nil    ; wrap lines
       org-log-done 'time           ; insert a timestamp when a task is done
-      org-src-fontify-natively t)  ; syntax highlighting in source code blocks
+      org-src-fontify-natively t   ; syntax highlighting in source code blocks
+      org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
 
 (defvar my-ox-backends '(ox-md ox-sfhp ox-reveal)
   "List of org export backends to be loaded by

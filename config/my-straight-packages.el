@@ -38,6 +38,8 @@ should map to the matching feature in it."
    ("UwUnyaa/web-mode-plus")
    ("UwUnyaa/json-mode")
    ("ljos/jq-mode")
+   ("pashky/restclient.el" restclient)
+   ("alf/ob-restclient.el" ob-restclient)
    ("spotify/dockerfile-mode")
    ("yoshiki/yaml-mode")
    ("jrblevin/markdown-mode")

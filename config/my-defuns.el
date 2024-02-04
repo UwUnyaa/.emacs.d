@@ -110,6 +110,11 @@ backends is defined in `my-dired-org-export-backends-alist'."
                (string-equal "org" (downcase extension)))))))
   (revert-buffer))
 
+(defun my-org-confirm-babel-evaluate (lang body)
+  "Skip prompts for executing code blocks in certain languages."
+  (ignore body)
+  (memq lang '(restclient)))
+
 (defun my-simple-capitalize (str)
   "Capitalizes the first letter and ignores the rest."
   (if (= (length str) 0)
