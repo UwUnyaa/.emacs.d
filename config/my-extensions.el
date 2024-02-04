@@ -60,8 +60,6 @@
         web-mode-enable-auto-quoting t))
 
 (with-eval-after-load 'web-mode
-  ;; remove pair that conflicts with `electric-pair-mode' for vue templates
-  (setf (alist-get "vue" web-mode-engines-auto-pairs) '())
   ;; set up `web-mode-plus'
   (web-mode-plus-bind-keys)
   (web-mode-plus-set-html-snippets)
