@@ -101,8 +101,8 @@
       css-indent-offset 2)
 
 ;;; `org-mode'
-(setq org-startup-indented t       ; display `org-mode' buffers with indentation
-      org-ellipsis "⤵"             ; custom ellipsis
+(setq org-startup-indented t     ; display `org-mode' buffers with indentation
+      org-ellipsis (when (char-displayable-p ?⤵) "⤵") ; custom ellipsis
       org-startup-folded nil       ; display files without folding them
       org-startup-truncated nil    ; wrap lines
       org-log-done 'time           ; insert a timestamp when a task is done
