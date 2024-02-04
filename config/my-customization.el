@@ -106,31 +106,30 @@
           (lambda ()
             (toggle-truncate-lines 1)))       ; don't wrap lines
 
-(eval-after-load 'org
-  (lambda ()
-    (my-ox-require-backends)
-    ;; add support for more languages with org-babel
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((js . t)))
-    ;;; keybindings
-    ;; make M-h behave just like everywhere else
-    (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
-    ;; use C-x C-h for marking paragraphs
-    (define-key org-mode-map (kbd "C-x C-h") #'org-mark-element)
-    ;; use meta shift f/b/n/p instead of meta arrow keys
-    (define-key org-mode-map (kbd "M-F") #'org-metaright)
-    (define-key org-mode-map (kbd "M-B") #'org-metaleft)
-    (define-key org-mode-map (kbd "M-P") #'org-metaup)
-    (define-key org-mode-map (kbd "M-N") #'org-metadown)
-    ;; use control meta shift f/b/n/p instead of meta shift arrow keys
-    (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
-    (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
-    (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
-    (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup)
-    ;; move by paragraphs with M-n and M-p
-    (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
-    (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph)))
+(with-eval-after-load 'org
+  (my-ox-require-backends)
+  ;; add support for more languages with org-babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((js . t)))
+;;; keybindings
+  ;; make M-h behave just like everywhere else
+  (define-key org-mode-map (kbd "M-h") #'backward-kill-word)
+  ;; use C-x C-h for marking paragraphs
+  (define-key org-mode-map (kbd "C-x C-h") #'org-mark-element)
+  ;; use meta shift f/b/n/p instead of meta arrow keys
+  (define-key org-mode-map (kbd "M-F") #'org-metaright)
+  (define-key org-mode-map (kbd "M-B") #'org-metaleft)
+  (define-key org-mode-map (kbd "M-P") #'org-metaup)
+  (define-key org-mode-map (kbd "M-N") #'org-metadown)
+  ;; use control meta shift f/b/n/p instead of meta shift arrow keys
+  (define-key org-mode-map (kbd "C-M-S-f") #'org-shiftmetaright)
+  (define-key org-mode-map (kbd "C-M-S-b") #'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "C-M-S-n") #'org-shiftmetadown)
+  (define-key org-mode-map (kbd "C-M-S-p") #'org-shiftmetaup)
+  ;; move by paragraphs with M-n and M-p
+  (define-key org-mode-map (kbd "M-n") #'org-forward-paragraph)
+  (define-key org-mode-map (kbd "M-p") #'org-backward-paragraph))
 
 ;;; `dired'
 (setq dired-dwim-target t
@@ -145,14 +144,13 @@
   "Alist of org export formats and functions used by them. Used
 by `my-dired-do-org-export'.")
 
-(eval-after-load 'dired
-  (lambda ()
-    (my-ox-require-backends)
-    ;;; keybindings
-    (define-key dired-mode-map (kbd "E") #'my-dired-do-org-export)
-    (define-key dired-mode-map (kbd "r") (my-dired-switch-toggler "R"))
-    (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))
-    (define-key dired-mode-map (kbd "f") #'my-dired-xdg-open)))
+(with-eval-after-load 'dired
+  (my-ox-require-backends)
+;;; keybindings
+  (define-key dired-mode-map (kbd "E") #'my-dired-do-org-export)
+  (define-key dired-mode-map (kbd "r") (my-dired-switch-toggler "R"))
+  (define-key dired-mode-map (kbd "h") (my-dired-switch-toggler "A"))
+  (define-key dired-mode-map (kbd "f") #'my-dired-xdg-open))
 
 ;; use human readable file sizes in if they'll work
 (when (or (member system-type '(ms-dos windows-nt haiku)) ; ls in elisp
@@ -163,11 +161,10 @@ by `my-dired-do-org-export'.")
 ;;; `nxml-mode'
 (setq nxml-slash-auto-complete-flag t)  ; close tags after typing "</"
 
-(eval-after-load 'nxml-mode
-  (lambda ()
-    (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
-    (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
-    (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer)))
+(with-eval-after-load 'nxml-mode
+  (define-key nxml-mode-map (kbd "M-h") #'backward-kill-word)
+  (define-key nxml-mode-map (kbd "C-x C-h") #'nxml-mark-paragraph)
+  (define-key nxml-mode-map (kbd "C-c C-i") #'my-indent-buffer))
 
 ;; `typescript-ts-mode'
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))

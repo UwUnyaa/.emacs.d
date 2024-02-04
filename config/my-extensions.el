@@ -72,18 +72,17 @@
         web-mode-enable-auto-opening t
         web-mode-enable-auto-quoting t))
 
-(eval-after-load 'web-mode
-  (lambda ()
-    ;; remove pair that conflicts with `electric-pair-mode' for vue templates
-    (setf (alist-get "vue" web-mode-engines-auto-pairs) '())
-    ;; set up `web-mode-plus'
-    (web-mode-plus-bind-keys)
-    (web-mode-plus-set-html-snippets)
-    ;; bind HTML hierarchy motion
-    (define-key web-mode-map (kbd "C-M-u") #'web-mode-element-parent)
-    (define-key web-mode-map (kbd "C-M-d") #'web-mode-element-child)
-    (define-key web-mode-map (kbd "C-M-n") #'web-mode-element-next)
-    (define-key web-mode-map (kbd "C-M-p") #'web-mode-element-previous)))
+(with-eval-after-load 'web-mode
+  ;; remove pair that conflicts with `electric-pair-mode' for vue templates
+  (setf (alist-get "vue" web-mode-engines-auto-pairs) '())
+  ;; set up `web-mode-plus'
+  (web-mode-plus-bind-keys)
+  (web-mode-plus-set-html-snippets)
+  ;; bind HTML hierarchy motion
+  (define-key web-mode-map (kbd "C-M-u") #'web-mode-element-parent)
+  (define-key web-mode-map (kbd "C-M-d") #'web-mode-element-child)
+  (define-key web-mode-map (kbd "C-M-n") #'web-mode-element-next)
+  (define-key web-mode-map (kbd "C-M-p") #'web-mode-element-previous))
 
 ;; file extensions
 (mapc
@@ -96,9 +95,8 @@
 
 ;; hack `company' to provide a CAPF in `tide'
 (require 'company)
-(eval-after-load 'tide
-  (lambda ()
-    (defalias 'my-company-tide-capf (cape-company-to-capf #'company-tide))))
+(with-eval-after-load 'tide
+  (defalias 'my-company-tide-capf (cape-company-to-capf #'company-tide)))
 
 ;;; `js2-mode'
 (setq js2-strict-trailing-comma-warning nil ; ignores trailing commas
@@ -114,11 +112,10 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
-(eval-after-load 'js2-mode
-  (lambda ()
-    ;;; keybindings
-    (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
-    (define-key js2-mode-map (kbd "C-c C-u") #'my-js2-unicode-escape-region)))
+(with-eval-after-load 'js2-mode
+;;; keybindings
+  (define-key js2-mode-map (kbd "C-c C-n") #'js2-next-error)
+  (define-key js2-mode-map (kbd "C-c C-u") #'my-js2-unicode-escape-region))
 
 ;; set up globals for jest and cypress test files
 (add-hook 'js2-mode-hook
@@ -160,44 +157,42 @@ like `js2-include-SYMBOL-externs'.")
                           (my-js2-node-mode))))
 
 ;;; `yaml-mode'
-(eval-after-load 'yaml-mode
-  (lambda ()
-    (define-key yaml-mode-map (kbd "RET") #'newline-and-indent)))
+(with-eval-after-load 'yaml-mode
+  (define-key yaml-mode-map (kbd "RET") #'newline-and-indent))
 
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 
 ;;; `yasnippet'
 (setq yas-alias-to-yas/prefix-p nil)
-(eval-after-load 'yasnippet
-  (lambda ()
-    ;; load snippets (neccesary when using only the minor mode)
-    (yas-reload-all)
-    (setq yas-also-indent-empty-lines t
-          yas-also-auto-indent-first-line t
-          ;; prevent expanding snippets in comments and fall back to default
-          ;; command when needed:
-          ;; https://emacs.stackexchange.com/a/46776/12563
-          yas-buffer-local-condition yas-not-string-or-comment-condition
-          yas-fallback-behavior 'call-other-command)
+(with-eval-after-load 'yasnippet
+  ;; load snippets (neccesary when using only the minor mode)
+  (yas-reload-all)
+  (setq yas-also-indent-empty-lines t
+        yas-also-auto-indent-first-line t
+        ;; prevent expanding snippets in comments and fall back to default
+        ;; command when needed:
+        ;; https://emacs.stackexchange.com/a/46776/12563
+        yas-buffer-local-condition yas-not-string-or-comment-condition
+        yas-fallback-behavior 'call-other-command)
 
-    ;; minor mode keys
-    ;; unbind TAB
-    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-    (define-key yas-minor-mode-map (kbd "TAB") nil)
-    ;; Bind `SPC' to `yas-maybe-expand' when snippet expansion available (it
-    ;; will still call `self-insert-command' otherwise).
-    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
-    ;; Bind `C-c y' to `yas-expand' ONLY.
-    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
+  ;; minor mode keys
+  ;; unbind TAB
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; Bind `SPC' to `yas-maybe-expand' when snippet expansion available (it
+  ;; will still call `self-insert-command' otherwise).
+  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+  ;; Bind `C-c y' to `yas-expand' ONLY.
+  (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
 
-    ;; keys for snippet edition
-    (define-key yas-keymap (kbd "RET") #'yas-next-field-or-maybe-expand)
+  ;; keys for snippet edition
+  (define-key yas-keymap (kbd "RET") #'yas-next-field-or-maybe-expand)
 
-    (add-hook 'yas-after-exit-snippet-hook
-              (lambda ()
-                ;; dynamic scoping ugliness ahead, beware
-                (indent-region yas-snippet-beg yas-snippet-end)
-                (indent-for-tab-command)))))
+  (add-hook 'yas-after-exit-snippet-hook
+            (lambda ()
+              ;; dynamic scoping ugliness ahead, beware
+              (indent-region yas-snippet-beg yas-snippet-end)
+              (indent-for-tab-command))))
 
 ;; enable `yas-minor-mode' in given major modes
 (mapc
@@ -214,11 +209,10 @@ like `js2-include-SYMBOL-externs'.")
       "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/")
 
 ;;; `ob-restclient'
-(eval-after-load 'org-mode
-  (lambda ()
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((restclient . t)))))
+(with-eval-after-load 'org-mode
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
 
 ;;; `dotenv-mode'
 (add-to-list 'auto-mode-alist '("\\.env\\..*\\'" . dotenv-mode))
