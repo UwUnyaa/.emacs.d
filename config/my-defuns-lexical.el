@@ -3,7 +3,7 @@
 ;; this file contains code that relies on lexical binding
 
 (defun my-change-major-mode-name (mode &optional name)
-  "Changes the displayed major mode name.
+  "Change the displayed major mode name.
 
 MODE-OR-PAIR can be a symbol with the major mode or a cons with
 that symbol and the desired name. In that case NAME can be
@@ -19,7 +19,7 @@ ommited.
               (setq mode-name name))))
 
 (defun my-js2-define-context-mode (context)
-  "Defines context modes for `js2-mode'. CONTEXT is a string with
+  "Define context modes for `js2-mode'. CONTEXT is a string with
 the name of a context."
   (fset (intern (format "my-js2-%s-mode" context))
         (lambda ()
@@ -28,7 +28,7 @@ the name of a context."
           (my-js2-change-context context))))
 
 (defun my-dired-switch-toggler (switch)
-  "Returns a closure that toggles switch SWITCH in dired."
+  "Return a closure that toggles switch SWITCH in dired."
   (lambda ()
     (interactive)
     (let ((case-fold-search nil)

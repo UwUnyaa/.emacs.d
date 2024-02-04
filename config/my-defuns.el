@@ -18,34 +18,13 @@
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
-(defun my-js2-comment-block (&optional beg end)
-  "Inserts a block comment at point or wraps region in a block
-comment."
-  ;; this code is bad, but it's a quick hack for now
-  (interactive
-   (when (use-region-p)
-     (list (region-beginning) (region-end))))
-  (if beg                               ; if region is active
-      (let ((current-point (point)))
-        (goto-char beg)
-        (insert "/* ")
-        (goto-char (+ end 3))
-        (insert " */")
-        (goto-char
-         (+ current-point
-            (if (> beg end)
-                3
-              6))))
-    (insert "/*  */")
-    (backward-char 3)))
-
 (defun my-js2-set-indent (level)
   "Set indent level in `js2-mode' to LEVEL."
   (interactive "nNew indent level: ")
   (setq-local js2-basic-offset level))
 
 (defun my-js2-unicode-escape-region (beg end)
-  "Escapes non-ASCII characters as JavaScript unicode escapes.
+  "Escape non-ASCII characters as JavaScript unicode escapes.
 Doesn't handle all characters as of now."
   (interactive "r")
   (let ((string (buffer-substring-no-properties beg end)))
@@ -59,7 +38,7 @@ Doesn't handle all characters as of now."
       string ""))))
 
 (defun my-js2-change-context (context)
-  "Switches current `js2-mode' buffer to specified context.
+  "Switch current `js2-mode' buffer to specified context.
 
 A list of contexts should be defined in `my-js2-contexts-list'."
   (interactive
@@ -80,7 +59,7 @@ A list of contexts should be defined in `my-js2-contexts-list'."
       (js2-reparse))))
 
 (defun my-ox-require-backends ()
-  "Makes sure all ox backends defined in `my-ox-backends' are
+  "Make sure all ox backends defined in `my-ox-backends' are
 loaded."
   (mapc #'require my-ox-backends))
 
@@ -116,15 +95,9 @@ backends is defined in `my-dired-org-export-backends-alist'."
   (memq lang '(restclient)))
 
 (defun my-simple-capitalize (str)
-  "Capitalizes the first letter and ignores the rest."
-  (if (= (length str) 0)
+  "Capitalize the first letter and ignores the rest."
+  (if (string-empty-p str)
       ""
-    (let ((first (substring str 0 1))
-          (rest  (substring str 1)))
-      (concat (upcase first) rest))))
-
-(defun my-delete-trailing-whitespace-buffer ()
-  "Deletes trailing whitespace in current buffer."
-  (interactive)
-  (save-excursion
-    (delete-trailing-whitespace (point-min) (point-max))))
+      (let ((first (substring str 0 1))
+            (rest  (substring str 1)))
+        (concat (upcase first) rest))))
