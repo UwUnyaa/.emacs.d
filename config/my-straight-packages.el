@@ -37,6 +37,7 @@ should map to the matching feature in it."
    ("fxbois/web-mode")
    ("UwUnyaa/web-mode-plus")
    ("UwUnyaa/json-mode")
+   ("ljos/jq-mode")
    ("spotify/dockerfile-mode")
    ("yoshiki/yaml-mode")
    ("jrblevin/markdown-mode")
