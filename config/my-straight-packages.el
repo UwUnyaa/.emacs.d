@@ -35,7 +35,5 @@
    ("purcell/exec-path-from-shell")
    ("haskell/haskell-mode")
    ("preetpalS/emacs-dotenv-mode" dotenv-mode)
+   ("emacsmirror/csv-mode")
    ("emacsorphanage/haxe-mode")))
-
-;; elpa packages
-(straight-use-package '(csv-mode))
