@@ -109,7 +109,7 @@
       org-src-fontify-natively t   ; syntax highlighting in source code blocks
       org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
 
-(defvar my-ox-backends '(ox-md ox-sfhp ox-reveal)
+(defvar my-ox-backends '(ox-md ox-sfhp ox-reveal ox-gfm)
   "List of org export backends to be loaded by
 `my-ox-require-backends'.")
 
