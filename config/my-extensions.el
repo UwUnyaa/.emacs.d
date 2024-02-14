@@ -30,6 +30,9 @@
 ;; `minibuffer-mode'
 (sp-local-pair 'minibuffer-mode "'" "'" :actions nil)
 
+;; `org-mode'
+(sp-local-pair 'org-mode "+" "+" :unless '(sp-point-after-word-p) :post-handlers '(("[d1]" "SPC")))
+
 ;;; `tide-mode'
 (add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
 (add-hook 'tsx-ts-mode #'my-setup-tide-mode)
