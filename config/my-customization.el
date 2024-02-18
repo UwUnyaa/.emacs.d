@@ -186,6 +186,9 @@ by `my-dired-do-org-export'.")
           (lambda ()
             (auto-fill-mode -1)))
 
+;; `doc-view'
+(setq doc-view-resolution 300)
+
 ;; `typescript-ts-mode'
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 
