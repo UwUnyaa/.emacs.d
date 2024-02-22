@@ -7,6 +7,7 @@
  '(("joaotavora/yasnippet")
    ("gonewest818/dimmer.el" dimmer)
    ("hniksic/emacs-htmlize" htmlize)
+   ("bbatsov/projectile")
    ("company-mode/company-mode" company)
    ("minad/cape")
    ("Fuco1/smartparens")

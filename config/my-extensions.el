@@ -149,6 +149,10 @@ like `js2-include-SYMBOL-externs'.")
 
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 
+;;; `projectile'
+(projectile-mode)
+(define-key projectile-mode-map (kbd "C-c g") 'projectile-command-map)
+
 ;;; `yasnippet'
 (setq yas-alias-to-yas/prefix-p nil)
 (with-eval-after-load 'yasnippet
