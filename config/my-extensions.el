@@ -189,7 +189,7 @@ like `js2-include-SYMBOL-externs'.")
 (mapc
  (lambda (hook)
    (add-hook (intern (format "%s-hook" hook)) #'yas-minor-mode))
- '(js-mode typescript-ts-mode))
+ '(js-mode typescript-ts-mode tsx-ts-mode rjsx-mode))
 
 ;;; `org-mode' export backends
 ;; `ox-reveal'
