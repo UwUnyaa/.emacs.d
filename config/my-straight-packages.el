@@ -38,4 +38,5 @@
    ("haskell/haskell-mode")
    ("preetpalS/emacs-dotenv-mode" dotenv-mode)
    ("emacsmirror/csv-mode")
+   ("ZachMassia/PlatformIO-Mode" platformio-mode)
    ("emacsorphanage/haxe-mode")))
