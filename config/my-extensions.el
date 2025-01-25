@@ -153,6 +153,13 @@ like `js2-include-SYMBOL-externs'.")
 (projectile-mode)
 (define-key projectile-mode-map (kbd "C-c g") 'projectile-command-map)
 
+;;; `platformio-mode'
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (unless (featurep 'platformio-mode)
+              (require 'platformio-mode))
+            (platformio-conditionally-enable)))
+
 ;;; `yasnippet'
 (setq yas-alias-to-yas/prefix-p nil)
 (with-eval-after-load 'yasnippet
