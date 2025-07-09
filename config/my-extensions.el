@@ -36,6 +36,12 @@
 ;;; `tide-mode'
 (add-hook 'typescript-ts-mode-hook #'my-setup-tide-mode)
 (add-hook 'tsx-ts-mode #'my-setup-tide-mode)
+(with-eval-after-load 'tide-mode
+  (define-key tide-mode-map (kbd "C-c C-r") #'tide-rename-symbol)
+  (define-key tide-mode-map (kbd "C-c C-f") #'tide-fix)
+  (define-key tide-mode-map (kbd "C-c C-n") #'tide-find-next-error)
+  (define-key tide-mode-map (kbd "C-c C-p") #'tide-find-previous-error)
+  (define-key tide-mode-map (kbd "C-c C-k") #'tide-restart-server))
 
 ;;; `web-mode'
 (setq web-mode-enable-auto-pairing t              ; auto-pairing
