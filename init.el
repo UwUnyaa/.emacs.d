@@ -5,7 +5,7 @@
         "~/.emacs.d/config/my-customization.el"
         "~/.emacs.d/config/my-straight-init.el"
         "~/.emacs.d/config/my-straight-packages.el"
-        "~/.emacs.d/config/my-extensx0bions.el"
+        "~/.emacs.d/config/my-extensions.el"
         "~/.emacs.d/config/my-ai.el"))
 
 ;; load additional config files if they exist
