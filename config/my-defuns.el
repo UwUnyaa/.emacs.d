@@ -1,3 +1,4 @@
+;;; ...  -*- lexical-binding: nil -*-
 ;; this file should load after extensions
 
 (require 'cl-macs)

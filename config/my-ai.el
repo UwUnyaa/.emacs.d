@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; I don't want this config to default to being on, so I'm gating it behind a
 ;; variable meant to be set from my-local.el
 
@@ -30,5 +31,6 @@
 ;;; `ai-code' configuration
 (when my-ai-enable
   (require 'ai-code)
-  (ai-code-set-backend 'github-copilot-cli)
+  ;; (ai-code-set-backend 'github-copilot-cli)
+  (ai-code-set-backend 'opencode)
   (global-set-key (kbd "C-c a") #'ai-code-menu))

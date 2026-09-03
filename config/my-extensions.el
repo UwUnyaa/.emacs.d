@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; this file contains configuration for extensions that don't come with GNU
 ;;; Emacs
 

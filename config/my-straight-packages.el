@@ -1,3 +1,4 @@
+;;; ...  -*- lexical-binding: t -*-
 ;;; `straight' configuration
 (setq straight-cache-autoloads t)
 

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding:t -*-
 ;; configure straight.el
 (setq
  ;; avoid checking packages on startup to speed it up

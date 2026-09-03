@@ -1,3 +1,4 @@
+;;; ...  -*- lexical-binding: t -*-
 ;;; This file contains customization of things that come with Emacs
 
 ;;; coding system
